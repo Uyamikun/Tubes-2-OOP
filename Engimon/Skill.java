@@ -43,12 +43,12 @@ public class Skill {
         return (this.skillName == otherSkill.getSkillName() && this.masteryLevel == otherSkill.getMasteryLevel());
     }
     public void printSkillDetail(){
-        System.out.println("================= SKILL DETAIL =================");
         System.out.println("Skill name : " + this.skillName);
         System.out.println("Base power : " + this.basePower);
         System.out.println("Mastery level : " + this.masteryLevel);
         System.out.println("Skill elements : ");
         this.elements.forEach((element) -> System.out.println("- " + element));
+        System.out.println();
     }
 }
 

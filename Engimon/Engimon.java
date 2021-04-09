@@ -2,7 +2,7 @@ package Engimon;
 import java.util.*;
 
 public abstract class Engimon {
-    protected static int numOfEngimon = 0;
+    private static int numOfEngimon = 0;
     protected int id;
     protected String name;
     protected String species;
@@ -23,29 +23,17 @@ public abstract class Engimon {
 
 //================= CTOR DEFAULT && USER DEFINE =======
     public Engimon(){
-        // this.name = name;
-        // this.species = species;
-        // this.level = level;
         this.exp = 0;
         this.cumulativeExp = 0;
-        // this.ParentInfo = new ArrayList<String>();
-        // this.elements = new ArrayList<String>();
-        // this.engimonskill = new ArrayList<Skill>();
+        this.level = 1;
         this.id = numOfEngimon;
         numOfEngimon += 1;        
     }
-    public Engimon(String name, String species, ArrayList<String> _ParentInfo, ArrayList<String> _elements, ArrayList<Skill> _engimonskill, int level){
+    public Engimon(String name, int level){
         this.name = name;
-        this.species = species;
         this.level = level;
         this.exp = 0;
         this.cumulativeExp = 0;
-        this.ParentInfo = new ArrayList<String>();
-        this.ParentInfo.addAll(_ParentInfo);
-        this.elements = new ArrayList<String>();
-        this.elements.addAll(_elements);
-        this.engimonskill = new ArrayList<Skill>();
-        this.engimonskill.addAll(_engimonskill);
         this.id = numOfEngimon;
         numOfEngimon += 1;
     }
@@ -137,10 +125,33 @@ public abstract class Engimon {
         }
     }
 
-
+    // Dibuat hanya untuk testing
+    public void printDetail(){
+        System.out.println("ID : " + this.id);
+        System.out.println("Nama : " + this.name);
+        System.out.println("Spesies : " + this.species);
+        System.out.println("Level " + this.level);
+        System.out.println("Exp : " + this.exp);
+        System.out.println("CumExp : " + this.cumulativeExp);
+        System.out.println("===========================");
+        System.out.println("Parent info : ");
+        int i = 0;
+        int parent = 1;
+        while(i < 3){
+            System.out.println("Parent " + parent + " : " + this.ParentInfo.get(i));
+            System.out.println("Species "+ parent + " : " + this.ParentInfo.get(i+1));
+            i += 2;
+            parent += 1;
+        }
+        System.out.println("================= SKILL DETAIL =================");
+        this.engimonskill.forEach((sk) -> sk.printSkillDetail());
+        System.out.println("================= Element =================");
+        this.elements.forEach((element) -> System.out.println("- " + element));
+        // Tambah sound
+    }
 //================= ABSTRACT METHOD ====================
     // Print
-    public abstract void printDetail();
+
     // Sound
     public abstract String getSound();
 }
