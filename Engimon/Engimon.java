@@ -6,6 +6,7 @@ public abstract class Engimon {
     protected int id;
     protected String name;
     protected String species;
+    protected int life;
     protected int level;
     protected int exp;
     protected int cumulativeExp;
@@ -23,6 +24,7 @@ public abstract class Engimon {
 
 //================= CTOR DEFAULT && USER DEFINE =======
     public Engimon(){
+        this.life = 3;
         this.exp = 0;
         this.cumulativeExp = 0;
         this.level = 1;
@@ -32,6 +34,7 @@ public abstract class Engimon {
     public Engimon(String name, int level){
         this.name = name;
         this.level = level;
+        this.life = 3;
         this.exp = 0;
         this.cumulativeExp = 0;
         this.id = numOfEngimon;
@@ -61,6 +64,15 @@ public abstract class Engimon {
     }
     public String getSpecies(){
         return this.species;
+    }
+
+    // Life
+    public void setLife(int newLife){
+        this.life = newLife;
+    }
+
+    public int getLife(){
+        return this.life;
     }
 
     // Parent Info
@@ -130,10 +142,11 @@ public abstract class Engimon {
         System.out.println("ID : " + this.id);
         System.out.println("Nama : " + this.name);
         System.out.println("Spesies : " + this.species);
+        System.out.println("Life : " + this.life);
         System.out.println("Level " + this.level);
         System.out.println("Exp : " + this.exp);
         System.out.println("CumExp : " + this.cumulativeExp);
-        System.out.println("===========================");
+        System.out.println("==========================================");
         System.out.println("Parent info : ");
 
         System.out.println("Parent 1 : " + this.ParentInfo.get(0));
@@ -141,7 +154,7 @@ public abstract class Engimon {
         System.out.println("Parent 2 : " + this.ParentInfo.get(2));
         System.out.println("Species 2 : "+ this.ParentInfo.get(3));
         
-        System.out.println("================= SKILL DETAIL =================");
+        System.out.println("================= SKILL DETAIL ============");
         this.engimonskill.forEach((sk) -> sk.printSkillDetail());
         System.out.println("================= Element =================");
         this.elements.forEach((element) -> System.out.println("- " + element));
