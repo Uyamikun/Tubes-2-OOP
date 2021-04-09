@@ -17,6 +17,13 @@ public class Skill {
         this.elements.addAll(NewElements);
     }
 
+    // public Skill(Skill _skill){
+    //     this.skillName = _skill.skillName;
+    //     this.basePower = _skill.basePower;
+    //     this.masteryLevel = _skill.masteryLevel;
+    //     this.elements = new ArrayList<String>();
+    //     this.elements.addAll(_skill.elements);
+    //}
     public String getSkillName(){
         return this.skillName;
     }
