@@ -23,14 +23,14 @@ public abstract class Engimon {
 
 //================= CTOR DEFAULT && USER DEFINE =======
     public Engimon(){
-        this.name = name;
-        this.species = species;
-        this.level = level;
+        // this.name = name;
+        // this.species = species;
+        // this.level = level;
         this.exp = 0;
         this.cumulativeExp = 0;
-        this.ParentInfo = new ArrayList<String>();
-        this.elements = new ArrayList<String>();
-        this.engimonskill = new ArrayList<Skill>();
+        // this.ParentInfo = new ArrayList<String>();
+        // this.elements = new ArrayList<String>();
+        // this.engimonskill = new ArrayList<Skill>();
         this.id = numOfEngimon;
         numOfEngimon += 1;        
     }
@@ -88,7 +88,8 @@ public abstract class Engimon {
         return this.engimonskill;
     }
     public void setAllSkill(ArrayList<Skill> newSkill){
-        this.engimonskill = newSkill;
+        this.engimonskill.clear();
+        this.engimonskill.addAll(newSkill);
     }
         // Jika skill sudah penuh, ganti skill pertama menjadi new SKill
     public void setEngimonSkill(Skill newSkill){
