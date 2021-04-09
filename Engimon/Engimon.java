@@ -13,14 +13,6 @@ public abstract class Engimon {
     ArrayList<String> ParentInfo;// Pasangan parent 1 spesies 1, parent 2 spesies 2
     ArrayList<Skill> engimonskill;
     ArrayList<String> elements;
-    // numOfEngimon++;
-    // this->name = "N/A";
-    // this->species = "N/A";
-    // this->level = 1;
-    // this->exp = 0;
-    // this->cumulativeExp = 0;
-    // this->ParentInfo = make_tuple(make_tuple("N/A", "N/A"), make_tuple("N/A", "N/A"));
-    // this->sound = "";
 
 //================= CTOR DEFAULT && USER DEFINE =======
     public Engimon(){
@@ -137,6 +129,7 @@ public abstract class Engimon {
         }
     }
 
+//================= METHOD OVERLOAD ====================
     // Dibuat hanya untuk testing
     public void printDetail(){
         System.out.println("ID : " + this.id);
@@ -161,7 +154,6 @@ public abstract class Engimon {
         // Tambah sound
     }
 //================= ABSTRACT METHOD ====================
-    // Print
 
     // Sound
     public abstract String getSound();
