@@ -10,8 +10,8 @@ public abstract class Engimon {
     protected int exp;
     protected int cumulativeExp;
     ArrayList<String> ParentInfo;// Pasangan parent 1 spesies 1, parent 2 spesies 2
-    ArrayList<Skill> elements;// Elemen yang dimiliki engimon bisa lebih dari 1
-
+    ArrayList<Skill> engimonskill;
+    ArrayList<String> elements;
     // numOfEngimon++;
     // this->name = "N/A";
     // this->species = "N/A";
@@ -29,11 +29,12 @@ public abstract class Engimon {
         this.exp = 0;
         this.cumulativeExp = 0;
         this.ParentInfo = new ArrayList<String>();
-        this.elements = new ArrayList<Skill>();
+        this.elements = new ArrayList<String>();
+        this.engimonskill = new ArrayList<Skill>();
         this.id = numOfEngimon;
         numOfEngimon += 1;        
     }
-    public Engimon(String name, String species, ArrayList<String> _ParentInfo, ArrayList<Skill> _elements, int level){
+    public Engimon(String name, String species, ArrayList<String> _ParentInfo, ArrayList<String> _elements, ArrayList<Skill> _engimonskill, int level){
         this.name = name;
         this.species = species;
         this.level = level;
@@ -41,8 +42,10 @@ public abstract class Engimon {
         this.cumulativeExp = 0;
         this.ParentInfo = new ArrayList<String>();
         this.ParentInfo.addAll(_ParentInfo);
-        this.elements = new ArrayList<Skill>();
+        this.elements = new ArrayList<String>();
         this.elements.addAll(_elements);
+        this.engimonskill = new ArrayList<Skill>();
+        this.engimonskill.addAll(_engimonskill);
         this.id = numOfEngimon;
         numOfEngimon += 1;
     }
@@ -73,18 +76,36 @@ public abstract class Engimon {
     }
 
     // Parent Info
-    public ArrayList<String> getParentInfo(){}
-    public void setParentInfo(ArrayList<String> _ParentInfo){}
+    public ArrayList<String> getParentInfo(){
+        return this.ParentInfo;
+    }
+    public void setParentInfo(ArrayList<String> _ParentInfo){
+        this.ParentInfo = _ParentInfo;
+    }
     
     // Skill
-    public ArrayList<Skill> getEngimonSkill(){}
-    public void setAllSkill(ArrayList<Skill> newSkill){}
+    public ArrayList<Skill> getEngimonSkill(){
+        return this.engimonskill;
+    }
+    public void setAllSkill(ArrayList<Skill> newSkill){
+        this.engimonskill = newSkill;
+    }
         // Jika skill sudah penuh, ganti skill pertama menjadi new SKill
-    public void setEngimonSkill(Skill newSkill){}
+    public void setEngimonSkill(Skill newSkill){
+        if (this.engimonskill.size() > 4)
+        {
+            this.engimonskill.remove(0);
+        }
+        this.engimonskill.add(newSkill);
+    }
 
     // Elements Getter
-    public ArrayList<String> getElements(){}
-    public void setELements(ArrayList<String> newElements){}
+    public ArrayList<String> getElements(){
+        return this.elements;
+    }
+    public void setELements(ArrayList<String> newElements){
+        this.elements = newElements;
+    }
 
     // Level
     public int getLevel(){
