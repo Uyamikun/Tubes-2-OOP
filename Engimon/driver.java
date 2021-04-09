@@ -10,6 +10,10 @@ public class driver {
 
         Skill S = new Skill("Searing chain", 30, 1, al);
         S.printSkillDetail();
+
+        Ganyu a = new Ganyu();
+        a.printDetail();
+        System.out.println(a.getSound());
     }
 
 }

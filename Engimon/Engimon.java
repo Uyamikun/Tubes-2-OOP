@@ -23,14 +23,25 @@ public abstract class Engimon {
 
 //================= CTOR DEFAULT && USER DEFINE =======
     public Engimon(){
-        this.name = name;
-        this.species = species;
-        this.level = level;
+        // this.name = "N/A";
+        // this.species = "N/A";
+        // this.level = 0;
+        // this.exp = 0;
+        // this.cumulativeExp = 0;
+        // this.ParentInfo = new ArrayList<String>();
+        // this.elements = new ArrayList<String>();
+        // this.engimonskill = new ArrayList<Skill>();
+        // this.id = numOfEngimon;
+        // numOfEngimon += 1;
+        //================
+        // this.name = name;
+        // this.species = species;
+        // this.level = level;
         this.exp = 0;
         this.cumulativeExp = 0;
-        this.ParentInfo = new ArrayList<String>();
-        this.elements = new ArrayList<String>();
-        this.engimonskill = new ArrayList<Skill>();
+        // this.ParentInfo = new ArrayList<String>();
+        // this.elements = new ArrayList<String>();
+        // this.engimonskill = new ArrayList<Skill>();
         this.id = numOfEngimon;
         numOfEngimon += 1;        
     }
