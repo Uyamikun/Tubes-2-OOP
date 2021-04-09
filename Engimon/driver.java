@@ -17,16 +17,26 @@ public class driver {
         ArrayList<Skill> listSkill = new ArrayList<Skill>();
         listSkill.add(S);
         listSkill.add(Sk);
+
+
         Blastoise b = new Blastoise();
-        b.setAllSkill(listSkill);
+        Cyndaquil c = new Cyndaquil();
+        Amaura a = new Amaura();
+        Earthshaker e = new Earthshaker();
+
         b.printDetail();
+        System.out.println();
+        c.printDetail();
+        System.out.println();
+        a.printDetail();
+        System.out.println();
+        e.printDetail();
 
-
-        Blastoise bl = new Blastoise("Quipper", 20);
-        bl.setExp(300);
-        bl.setCumExp(2000);
-        bl.setName("Quippers Nick");
-        bl.printDetail();
+        // Blastoise bl = new Blastoise("Quipper", 20);
+        // bl.setExp(300);
+        // bl.setCumExp(2000);
+        // bl.setName("Quippers Nick");
+        // bl.printDetail();
     }
 
 }

@@ -135,14 +135,12 @@ public abstract class Engimon {
         System.out.println("CumExp : " + this.cumulativeExp);
         System.out.println("===========================");
         System.out.println("Parent info : ");
-        int i = 0;
-        int parent = 1;
-        while(i < 3){
-            System.out.println("Parent " + parent + " : " + this.ParentInfo.get(i));
-            System.out.println("Species "+ parent + " : " + this.ParentInfo.get(i+1));
-            i += 2;
-            parent += 1;
-        }
+
+        System.out.println("Parent 1 : " + this.ParentInfo.get(0));
+        System.out.println("Species 1 : "+ this.ParentInfo.get(1));
+        System.out.println("Parent 2 : " + this.ParentInfo.get(2));
+        System.out.println("Species 2 : "+ this.ParentInfo.get(3));
+        
         System.out.println("================= SKILL DETAIL =================");
         this.engimonskill.forEach((sk) -> sk.printSkillDetail());
         System.out.println("================= Element =================");

@@ -10,10 +10,11 @@ public class Blastoise extends Engimon {
         this.engimonskill = new ArrayList<Skill>();
 
         // Add parent info
-        this.ParentInfo.add("Blastoise");
         this.ParentInfo.add("Blasto");
         this.ParentInfo.add("Blastoise");
         this.ParentInfo.add("Blasto");
+        this.ParentInfo.add("Blastoise");
+
         // Add element 
         this.elements.add("Water");
 
@@ -32,10 +33,10 @@ public class Blastoise extends Engimon {
         this.engimonskill = new ArrayList<Skill>();
 
         // Add parent info
-        this.ParentInfo.add("Blastoise");
         this.ParentInfo.add("Blasto");
         this.ParentInfo.add("Blastoise");
         this.ParentInfo.add("Blasto");
+        this.ParentInfo.add("Blastoise");
         // Add element 
         this.elements.add("Water");
 
