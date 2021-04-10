@@ -1,7 +1,7 @@
 package Engimon;
 import java.util.*;
 
-public abstract class Engimon {
+public abstract class Engimon implements Comparable<Engimon> {
     private static int numOfEngimon = 0;
     protected int id;
     protected String name;
@@ -129,8 +129,14 @@ public abstract class Engimon {
         }
     }
 
+    // Override comparator 
+    // Sorted descendant
+    @Override
+    public int compareTo(Engimon other) {
+        return Integer.compare(getLevel(), other.getLevel());
+    }
+
 //================= METHOD OVERLOAD ====================
-    // Dibuat hanya untuk testing
     public String printDetail(){ 
         StringBuilder str = new StringBuilder();
         str.append(("\"" + this.getSound()+ "\"\n"));

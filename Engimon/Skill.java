@@ -2,7 +2,7 @@ package Engimon;
 
 import java.util.*;
 
-public class Skill {
+public class Skill implements Comparable<Skill> {
     // Atribut
     protected String skillName;
     protected int basePower;
@@ -24,13 +24,17 @@ public class Skill {
         this.elements = new ArrayList<String>();
         this.elements.addAll(_skill.elements);
     }
-    
+
     public String getSkillName(){
         return this.skillName;
     }
 
     public int getBasePower(){
         return this.basePower;
+    }
+
+    public void setBasePower(int newBase){
+        this.basePower = newBase;
     }
 
     public int getMasteryLevel(){
@@ -59,12 +63,12 @@ public class Skill {
         this.elements.forEach((element) -> str.append("- " + element + "\n"));
         str.append("\n");
         return str.toString();
-        // System.out.println("Skill name : " + this.skillName);
-        // System.out.println("Base power : " + this.basePower);
-        // System.out.println("Mastery level : " + this.masteryLevel);
-        // System.out.println("Skill elements : ");
-        // this.elements.forEach((element) -> System.out.println("- " + element));
-        // System.out.println();
+    }
+
+    // Compare for sorting, descendant
+    @Override
+    public int compareTo(Skill other) {
+        return Integer.compare(getBasePower(), other.getBasePower());
     }
 }
 

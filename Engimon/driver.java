@@ -10,11 +10,11 @@ public class driver {
         Skill Sk = new Skill("Fire gun", 30, 1, al);
             //S.printSkillDetail();
         ArrayList<Skill> listSkill = new ArrayList<Skill>();
-        listSkill.add(S);
-        listSkill.add(Sk);
+        // listSkill.add(S);
+        // listSkill.add(Sk);
         // String stringSk = Sk.printSkillDetail();
         // System.out.println(stringSk);
-        Skill a = Breeding.getMaxMasterySkill(listSkill);
+        // Skill k = Breeding.getMaxMasterySkill(listSkill);
         //TESTING SPESIES
         // Blastoise b = new Blastoise();
         // Cyndaquil c = new Cyndaquil();
@@ -44,6 +44,37 @@ public class driver {
         // System.out.println();
 
         
+       // TEST SORTING
+        // Blastoise b = new Blastoise();
+        // b.setLevel(10);
+        // Cyndaquil c = new Cyndaquil();
+        // c.setLevel(15);
+        // Amaura a = new Amaura();
+        // a.setLevel(7);
+        // Earthshaker e = new Earthshaker();
+        // e.setLevel(13);
+        // List<Engimon> listEngimon = new ArrayList<>();
+        // listEngimon.add(b);
+        // listEngimon.add(c);
+        // listEngimon.add(a);
+        // listEngimon.add(e);
+        // Collections.sort(listEngimon);
+
+        // for(Engimon engi : listEngimon){
+        //     System.out.println(engi.getName());
+        // }
+        
+        // TEST SKILL SORT
+        // S.setBasePower(70);
+        // Sk.setBasePower(40);
+        // listSkill.add(S);
+        // listSkill.add(Sk);
+        // Collections.sort(listSkill);
+        // // Supaya ascendant
+        // Collections.reverse(listSkill);
+        // for(Skill skill : listSkill){
+        //     System.out.println(skill.getSkillName());
+        // }
     }
 
 }
