@@ -3,11 +3,13 @@ import java.io.*;
 
 public class Map
 {
-    public static void main(String[] args) {
+    private ArrayList<ArrayList<String>> map_matrix;
+    public Map()
+    {
         try {
             // read in the data
-            ArrayList<ArrayList<String>> map = new ArrayList<ArrayList<String>>();
-            Scanner input = new Scanner(new File("map.txt"));
+            this.map_matrix = new ArrayList<ArrayList<String>>();
+            Scanner input = new Scanner(new File("map_matrix.txt"));
             while(input.hasNextLine())
             {
                 Scanner colReader = new Scanner(input.nextLine());
@@ -16,24 +18,23 @@ public class Map
                 {
                     col.add(colReader.next());
                 }
-                map.add(col);
+                this.map_matrix.add(col);
             }
-            for (ArrayList<String> arg: map)
-            {
-                for(String arg2:arg)
-                {
-                    System.out.printf("%s",arg2);
-                }
-                System.out.printf("\n");
-            }
+            // for (ArrayList<String> arg: this.map_matrix)
+            // {
+            //     for(String arg2:arg)
+            //     {
+            //         System.out.printf("%s",arg2);
+            //     }
+            //     System.out.printf("\n");
+            // }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public Map()
-    {
-       
+    public ArrayList<ArrayList<String>> getMap(){
+        return this.map_matrix;
     }
 }
 

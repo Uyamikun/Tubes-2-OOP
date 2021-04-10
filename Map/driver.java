@@ -14,5 +14,14 @@ public class driver {
         for (Cell c : arr){
             c.print();
         }
+
+        //Matriks peta
+        Map peta = new Map();
+        ArrayList<ArrayList<String>> matriks = peta.getMap();
+        
+
+        //cek GUI
+        FrameUtama objFrameUtama = new FrameUtama();
+        objFrameUtama.setVisible(true);
     }
 }
