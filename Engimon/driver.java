@@ -3,13 +3,13 @@ import java.util.*;
 public class driver {
     public static void main(String[] args) {
         //TESTING SKILL
-        ArrayList<String> al = new ArrayList<String>();
-        al.add("Fire");
-        al.add("Water");
-        Skill S = new Skill("Searing chain", 30, 1, al);
-        Skill Sk = new Skill("Fire gun", 30, 1, al);
-            //S.printSkillDetail();
-        ArrayList<Skill> listSkill = new ArrayList<Skill>();
+        // ArrayList<String> al = new ArrayList<String>();
+        // al.add("Fire");
+        // al.add("Water");
+        // Skill S = new Skill("Searing chain", 30, 1, al);
+        // Skill Sk = new Skill("Fire gun", 30, 1, al);
+        //     //S.printSkillDetail();
+        // ArrayList<Skill> listSkill = new ArrayList<Skill>();
         // listSkill.add(S);
         // listSkill.add(Sk);
         // String stringSk = Sk.printSkillDetail();
@@ -28,8 +28,12 @@ public class driver {
         // System.out.println();
         // e.printDetail();
 
-        // Pikachu p = new Pikachu();
-        // Wynter w = new Wynter();
+        Pikachu p = new Pikachu();
+        Wynter w = new Wynter();
+        p.setLevel(5);
+        w.setLevel(5);
+        Engimon c = Breeding.startBreeding(p,w);
+        System.out.println(c.getSound());
         // KataraToph kt = new KataraToph();
         // Hu_Tao ht = new Hu_Tao();
         

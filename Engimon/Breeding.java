@@ -57,5 +57,20 @@ public class Breeding {
  
     // ArrayList<String> InheritElements(ArrayList<String> ElementA, ArrayList<String> ElementB);
  
-    // Engimon startBreeding(Engimon A, Engimon B);
+    public static Engimon startBreeding(Engimon A, Engimon B){
+        if(A.getLevel() < 4 || B.getLevel() < 4){
+            //throw Exception; 
+        }
+        else{
+            //LEVEL PARENT BERKURANG 3
+            A.setLevel(A.getLevel()-3);
+            B.setLevel(B.getLevel()-3);
+
+            //INHERIT SKILL
+
+            //INHERIT ELEMENT
+        
+        }
+        return new Pikachu();
+    }
 }
