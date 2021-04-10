@@ -52,9 +52,13 @@ public class Amaura extends Engimon {
         return s;
     }
 
-    @Override
-    public void printDetail(){
-        System.out.println("\"" + this.getSound()+ "\"");
-        super.printDetail();
-    }
+    // @Override
+    // public String printDetail(){
+    //     StringBuilder str = new StringBuilder();
+    //     // str.append(("\"" + this.getSound()+ "\"\n"));
+    //     str.append(super.printDetail());
+    //     // System.out.println("\"" + this.getSound()+ "\"");
+    //     // super.printDetail();
+    //     return str.toString();
+    // }
 }

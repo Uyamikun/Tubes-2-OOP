@@ -12,6 +12,8 @@ public class driver {
         ArrayList<Skill> listSkill = new ArrayList<Skill>();
         listSkill.add(S);
         listSkill.add(Sk);
+        String stringSk = Sk.printSkillDetail();
+        System.out.println(stringSk);
 
         //TESTING SPESIES
         // Blastoise b = new Blastoise();
@@ -31,14 +33,15 @@ public class driver {
         KataraToph kt = new KataraToph();
         Hu_Tao ht = new Hu_Tao();
         
-        p.printDetail();
+        String str = p.printDetail();
+        System.out.println(str);
         System.out.println();
-        w.printDetail();
-        System.out.println();
-        kt.printDetail();
-        System.out.println();
-        ht.printDetail();
-        System.out.println();
+        // w.printDetail();
+        // System.out.println();
+        // kt.printDetail();
+        // System.out.println();
+        // ht.printDetail();
+        // System.out.println();
 
         
     }

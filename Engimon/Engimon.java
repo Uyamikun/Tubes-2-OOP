@@ -131,30 +131,48 @@ public abstract class Engimon {
 
 //================= METHOD OVERLOAD ====================
     // Dibuat hanya untuk testing
-    public void printDetail(){
-        System.out.println("ID : " + this.id);
-        System.out.println("Nama : " + this.name);
-        System.out.println("Spesies : " + this.species);
-        System.out.println("Life : " + this.life);
-        System.out.println("Level " + this.level);
-        System.out.println("Exp : " + this.exp);
-        System.out.println("CumExp : " + this.cumulativeExp);
-        System.out.println("==========================================");
-        System.out.println("Parent info : ");
+    public String printDetail(){ 
+        StringBuilder str = new StringBuilder();
+        str.append(("\"" + this.getSound()+ "\"\n"));
+        str.append("ID : " + this.id + "\n");
+        str.append("Nama : " + this.name + "\n");
+        str.append("Spesies : " + this.species + "\n");
+        str.append("Life : " + this.life + "\n");
+        str.append("Level " + this.level + "\n");
+        str.append("Exp : " + this.exp + "\n");
+        str.append("CumExp : " + this.cumulativeExp + "\n");
+        str.append("==========================================" + "\n");
+        str.append("Parent 1 : " + this.ParentInfo.get(0)  + "\n");
+        str.append("Species 1 : "+ this.ParentInfo.get(1)  + "\n");
+        str.append("Parent 2 : " + this.ParentInfo.get(2)  + "\n");
+        str.append("Parent 2 : " + this.ParentInfo.get(3)  + "\n");
+        str.append("================= SKILL DETAIL ============\n");
+        this.engimonskill.forEach((sk) -> str.append(sk.printSkillDetail()));
+        str.append("================= Element =================\n");
+        this.elements.forEach((element) -> str.append("- " + element + "\n"));
+        return str.toString();
+        // System.out.println("ID : " + this.id);
+        // System.out.println("Nama : " + this.name);
+        // System.out.println("Spesies : " + this.species);
+        // System.out.println("Life : " + this.life);
+        // System.out.println("Level " + this.level);
+        // System.out.println("Exp : " + this.exp);
+        // System.out.println("CumExp : " + this.cumulativeExp);
+        // System.out.println("==========================================");
+        // System.out.println("Parent info : ");
 
-        System.out.println("Parent 1 : " + this.ParentInfo.get(0));
-        System.out.println("Species 1 : "+ this.ParentInfo.get(1));
-        System.out.println("Parent 2 : " + this.ParentInfo.get(2));
-        System.out.println("Species 2 : "+ this.ParentInfo.get(3));
+        // System.out.println("Parent 1 : " + this.ParentInfo.get(0));
+        // System.out.println("Species 1 : "+ this.ParentInfo.get(1));
+        // System.out.println("Parent 2 : " + this.ParentInfo.get(2));
+        // System.out.println("Species 2 : "+ this.ParentInfo.get(3));
         
-        System.out.println("================= SKILL DETAIL ============");
-        this.engimonskill.forEach((sk) -> sk.printSkillDetail());
-        System.out.println("================= Element =================");
-        this.elements.forEach((element) -> System.out.println("- " + element));
-        // Tambah sound
+        // System.out.println("================= SKILL DETAIL ============");
+        // this.engimonskill.forEach((sk) -> sk.printSkillDetail());
+        // System.out.println("================= Element =================");
+        // this.elements.forEach((element) -> System.out.println("- " + element));
+
     }
 //================= ABSTRACT METHOD ====================
-
     // Sound
     public abstract String getSound();
 }

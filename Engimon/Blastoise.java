@@ -52,9 +52,9 @@ public class Blastoise extends Engimon {
         return s;
     }
 
-    @Override
-    public void printDetail(){
-        System.out.println("\"" + this.getSound()+ "\"");
-        super.printDetail();
-    }
+    // @Override
+    // public void printDetail(){
+    //     System.out.println("\"" + this.getSound()+ "\"");
+    //     super.printDetail();
+    // }
 }

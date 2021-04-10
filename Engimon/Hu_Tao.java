@@ -11,10 +11,10 @@ public class Hu_Tao extends Engimon {
         this.engimonskill = new ArrayList<Skill>();
 
         // Add parent info
-        this.ParentInfo.add("Hu_Tao"); //Species Parent 1
         this.ParentInfo.add("Xin"); // Parent 1 Name
-        this.ParentInfo.add("Hu_Tao"); // Species Parent 2
+        this.ParentInfo.add("Hu_Tao"); //Species Parent 1
         this.ParentInfo.add("Xin"); // Parent 2 Name
+        this.ParentInfo.add("Hu_Tao"); // Species Parent 2
         // Add element 
         this.elements.add("Fire");
         this.elements.add("Electric");
@@ -34,10 +34,11 @@ public class Hu_Tao extends Engimon {
         this.engimonskill = new ArrayList<Skill>();
 
         // Add parent info
-        this.ParentInfo.add("Hu_Tao"); //Species Parent 1
         this.ParentInfo.add("Xin"); // Parent 1 Name
-        this.ParentInfo.add("Hu_Tao"); // Species Parent 2
+        this.ParentInfo.add("Hu_Tao"); //Species Parent 1
         this.ParentInfo.add("Xin"); // Parent 2 Name
+        this.ParentInfo.add("Hu_Tao"); // Species Parent 2
+
         // Add element 
         this.elements.add("Fire");
         this.elements.add("Electric");
@@ -55,9 +56,9 @@ public class Hu_Tao extends Engimon {
         return s;
     }
 
-    @Override
-    public void printDetail(){
-        System.out.println("\"" + this.getSound()+ "\"");
-        super.printDetail();
-    }
+    // @Override
+    // public void printDetail(){
+    //     System.out.println("\"" + this.getSound()+ "\"");
+    //     super.printDetail();
+    // }
 }

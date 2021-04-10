@@ -58,10 +58,10 @@ public class Wynter extends Engimon{
         return s;
     }
 
-    @Override
-    public void printDetail(){
-        System.out.println("\"" + this.getSound()+ "\"");
-        super.printDetail();
-    }
+    // @Override
+    // public void printDetail(){
+    //     System.out.println("\"" + this.getSound()+ "\"");
+    //     super.printDetail();
+    // }
 
 }

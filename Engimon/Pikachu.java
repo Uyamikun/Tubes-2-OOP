@@ -37,10 +37,10 @@ public class Pikachu extends Engimon {
         this.engimonskill = new ArrayList<Skill>();
 
         // Add parent info
-        this.ParentInfo.add("Pikachu"); //Species Parent 1
         this.ParentInfo.add("PikaPika"); // Parent 1 Name
-        this.ParentInfo.add("Pikachu"); // Species Parent 2
+        this.ParentInfo.add("Pikachu"); //Species Parent 1
         this.ParentInfo.add("PikaPika"); // Parent 2 Name
+        this.ParentInfo.add("Pikachu"); // Species Parent 2
         // Add element 
         this.elements.add("Electric");
 
@@ -57,9 +57,9 @@ public class Pikachu extends Engimon {
         return s;
     }
 
-    @Override
-    public void printDetail(){
-        System.out.println("\"" + this.getSound()+ "\"");
-        super.printDetail();
-    }
+    // @Override
+    // public void printDetail(){
+    //     System.out.println("\"" + this.getSound()+ "\"");
+    //     super.printDetail();
+    // }
 }

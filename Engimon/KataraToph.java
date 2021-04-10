@@ -11,10 +11,11 @@ public class KataraToph extends Engimon {
         this.engimonskill = new ArrayList<Skill>();
 
         // Add parent info
-        this.ParentInfo.add("KataraToph"); //Species Parent 1
         this.ParentInfo.add("Kaldr"); // Parent 1 Name
-        this.ParentInfo.add("KataraToph"); // Species Parent 2
+        this.ParentInfo.add("KataraToph"); //Species Parent 1
         this.ParentInfo.add("Kaldr"); // Parent 2 Name
+        this.ParentInfo.add("KataraToph"); // Species Parent 2
+
         // Add element 
         this.elements.add("Water");
         this.elements.add("Ground");
@@ -35,10 +36,10 @@ public class KataraToph extends Engimon {
         this.engimonskill = new ArrayList<Skill>();
 
         // Add parent info
-        this.ParentInfo.add("KataraToph"); //Species Parent 1
         this.ParentInfo.add("Kaldr"); // Parent 1 Name
-        this.ParentInfo.add("KataraToph"); // Species Parent 2
+        this.ParentInfo.add("KataraToph"); //Species Parent 1
         this.ParentInfo.add("Kaldr"); // Parent 2 Name
+        this.ParentInfo.add("KataraToph"); // Species Parent 2
         // Add element 
         this.elements.add("Water");
         this.elements.add("Ground");
@@ -56,11 +57,11 @@ public class KataraToph extends Engimon {
         return s;
     }
 
-    @Override
-    public void printDetail(){
-        System.out.println("\"" + this.getSound()+ "\"");
-        super.printDetail();
-    }
+    // @Override
+    // public void printDetail(){
+    //     System.out.println("\"" + this.getSound()+ "\"");
+    //     super.printDetail();
+    // }
 
 }
 
