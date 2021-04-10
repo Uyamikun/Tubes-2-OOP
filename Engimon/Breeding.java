@@ -1,14 +1,22 @@
 package Engimon;
 import java.util.*;
 public class Breeding {
+    private static Double[][] matrixAdvantage = {{1.0,0.0,1.0,0.5,2.0},{2.0,1.0,0.0,1.0,1.0},{1.0,2.0,1.0,0.0,1.5},{1.5,1.0,2.0,1.0,0.0},{0.0,1.0,0.5,2.0,1.0}};
 
 //================= METHOD ========================
     // Mengembalikan index dari skill yang memiliki mastery level tertinggi
-    public static Skill getMaxMasterySkill(ArrayList<Skill> ESkill){
+    public Skill getMaxMasterySkill(ArrayList<Skill> ESkill){
+        int max = ESkill.get(0).getMasteryLevel();
+        int ml;
         Skill s = new Skill(ESkill.get(0));
-        // for (Skill item : ESkill){
-        //     System.out.println(item.printSkillDetail()); 
-        // }
+        for (Skill item : ESkill){
+            ml = item.getMasteryLevel();
+            if (ml > max)
+            {
+                max = ml;
+                s = item;
+            }
+        }
         return s;
     }
  
