@@ -31,10 +31,24 @@ public class Breeding {
     int getIndexElement(String elemen){
         return Breeding.arrayElemenString.indexOf(elemen);
     }
-    Double getAdvantage(String A, String B){
+    String CompareElementByAdvantage(String A, String B){
         int elemen1 = getIndexElement(A);
         int elemen2 = getIndexElement(B);
-        return Breeding.matrixAdvantage[elemen1][elemen2];
+        Double advantage = Breeding.matrixAdvantage[elemen1][elemen2];
+        int result;
+        if(advantage>1.0){
+            result = elemen1;
+        }
+        if(advantage < 1.0){
+                result = elemen2;
+        }
+        else{
+            Random random = new Random();
+            int index = random.nextInt(2);
+            if(index == 0) result = elemen1;
+            else result = elemen2; 
+        }
+        return Breeding.arrayElemenString.get(result);
     } // Mengembalikan advantage A terhadap B
     
     // bool IsElementCompatible(ArrayList<String> ElementA, ArrayList<ArrayList<String>> all); // mengecek apakah list string ada pada combinasi dual yang mungkin
