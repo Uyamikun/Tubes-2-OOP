@@ -1,39 +1,48 @@
+
+
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
 import java.util.*;
 import java.io.*;
 
 public class Map
 {
-    private ArrayList<ArrayList<String>> map_matrix;
-    public Map()
+    private ArrayList<ArrayList<Cell>> map_matrix;
+    public Map(String file)
     {
         try {
             // read in the data
-            this.map_matrix = new ArrayList<ArrayList<String>>();
-            Scanner input = new Scanner(new File("map_matrix.txt"));
+            this.map_matrix = new ArrayList<>();
+            Scanner input = new Scanner(new File(file));
+            int i = 0;
             while(input.hasNextLine())
             {
-                Scanner colReader = new Scanner(input.nextLine());
-                ArrayList<String> col = new ArrayList<String>();
-                while(colReader.hasNext())
+                System.out.println(input.nextLine());
+
+                ArrayList<Cell> col = new ArrayList<>();
+                int j = 0;
+                CharacterIterator it = new StringCharacterIterator(input.nextLine());
+                while(it.current() != CharacterIterator.DONE)
                 {
-                    col.add(colReader.next());
+                    switch (it.current()) {
+                        case 'M' -> col.add(new MountainsCell(i, j));
+                        case 'G' -> col.add(new GrasslandCell(i, j));
+                        case 'S' -> col.add(new SeaCell(i, j));
+                        case 'T' -> col.add(new TundraCell(i, j));
+                    }
+                    j++;
+                    it.next();
                 }
+                System.out.println();
                 this.map_matrix.add(col);
+                i++;
             }
-            // for (ArrayList<String> arg: this.map_matrix)
-            // {
-            //     for(String arg2:arg)
-            //     {
-            //         System.out.printf("%s",arg2);
-            //     }
-            //     System.out.printf("\n");
-            // }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public ArrayList<ArrayList<String>> getMap(){
+    public ArrayList<ArrayList<Cell>> getMap(){
         return this.map_matrix;
     }
 }
