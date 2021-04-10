@@ -4,7 +4,13 @@ public class Breeding {
 
 //================= METHOD ========================
     // Mengembalikan index dari skill yang memiliki mastery level tertinggi
-    Skill getMaxMasterySkill(ArrayList<Skill> ESkill){}
+    public static Skill getMaxMasterySkill(ArrayList<Skill> ESkill){
+        Skill s = new Skill(ESkill.get(0));
+        // for (Skill item : ESkill){
+        //     System.out.println(item.printSkillDetail()); 
+        // }
+        return s;
+    }
  
     // ArrayList<Skill> InheritSkill(ArrayList<Skill> ASkill, ArrayList<Skill> BSkill){}
  

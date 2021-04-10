@@ -12,9 +12,9 @@ public class driver {
         ArrayList<Skill> listSkill = new ArrayList<Skill>();
         listSkill.add(S);
         listSkill.add(Sk);
-        String stringSk = Sk.printSkillDetail();
-        System.out.println(stringSk);
-
+        // String stringSk = Sk.printSkillDetail();
+        // System.out.println(stringSk);
+        Skill a = Breeding.getMaxMasterySkill(listSkill);
         //TESTING SPESIES
         // Blastoise b = new Blastoise();
         // Cyndaquil c = new Cyndaquil();
@@ -28,14 +28,14 @@ public class driver {
         // System.out.println();
         // e.printDetail();
 
-        Pikachu p = new Pikachu();
-        Wynter w = new Wynter();
-        KataraToph kt = new KataraToph();
-        Hu_Tao ht = new Hu_Tao();
+        // Pikachu p = new Pikachu();
+        // Wynter w = new Wynter();
+        // KataraToph kt = new KataraToph();
+        // Hu_Tao ht = new Hu_Tao();
         
-        String str = p.printDetail();
-        System.out.println(str);
-        System.out.println();
+        // String str = p.printDetail();
+        // System.out.println(str);
+        // System.out.println();
         // w.printDetail();
         // System.out.println();
         // kt.printDetail();
