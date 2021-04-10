@@ -28,12 +28,10 @@ public class driver {
         // System.out.println();
         // e.printDetail();
 
-        Pikachu p = new Pikachu();
-        Wynter w = new Wynter();
-        p.setLevel(5);
-        w.setLevel(5);
-        Engimon c = Breeding.startBreeding(p,w);
-        System.out.println(c.getSound());
+        // Pikachu p = new Pikachu();
+        // Wynter w = new Wynter();
+        // p.setLevel(5);
+        // w.setLevel(5);
         // KataraToph kt = new KataraToph();
         // Hu_Tao ht = new Hu_Tao();
         
@@ -78,6 +76,46 @@ public class driver {
         // Collections.reverse(listSkill);
         // for(Skill skill : listSkill){
         //     System.out.println(skill.getSkillName());
+        // }
+            
+        //TEST INHERIT ELEMENT
+        //ELEMENT SAMA HASILNYA SAMA KAYAK PARENT
+        // ArrayList<String> parent1 = new ArrayList<String>(){{add("Fire");}};
+        // ArrayList<String> parent2 = new ArrayList<String>(){{add("Fire");}};
+        // ArrayList<String> asd = Breeding.InheritElements(parent1, parent2);
+        // for(String item : asd){
+        //     System.out.println(item);
+        // }
+        // //HASIL DAH BENER
+        // //===============
+        // //ELEMENT BEDA ADVANTAGE BEDA JUGA HASIL HARUSNYA ADVANTAGE YANG LEBIH TINGGI
+        // ArrayList<String> parent3 = new ArrayList<String>(){{add("Fire");}};
+        // ArrayList<String> parent4 = new ArrayList<String>(){{add("Water");}};
+        // ArrayList<String> asdf = Breeding.InheritElements(parent3, parent4);
+        // for(String item : asdf){
+        //     System.out.println(item);
+        // }
+        // //HASIL DAH BENER
+        // //=============
+        // //ELEMENT BEDA ADVANTAGE SAMA HASIL HARUSNYA RANDOM
+        // ArrayList<String> parent5 = new ArrayList<String>(){{add("Fire");}};
+        // ArrayList<String> parent6 = new ArrayList<String>(){{add("Electric");}};
+        // ArrayList<String> asdfg = Breeding.InheritElements(parent5, parent6);
+        // for(String item : asdfg){
+        //     System.out.println(item);
+        // }
+        //HASIL DAH BENER RANDOM KALAU DI RUN 2x 
+        // ArrayList<String> parent7 = new ArrayList<String>(){{add("Fire");add("Electric");}};
+        // ArrayList<String> parent8 = new ArrayList<String>(){{add("Water");}};
+        // ArrayList<String> asdfgh = Breeding.InheritElements(parent7, parent8);
+        // for(String item : asdfgh){
+        //     System.out.println(item);
+        // }
+        // ArrayList<String> parent9 = new ArrayList<String>(){{add("Fire");add("Electric");}};
+        // ArrayList<String> parent10 = new ArrayList<String>(){{add("Water");add("Ice");}};
+        // ArrayList<String> asdfghj = Breeding.InheritElements(parent9, parent10);
+        // for(String item : asdfghj){
+        //     System.out.println(item);
         // }
     }
 
