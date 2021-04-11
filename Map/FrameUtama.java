@@ -13,7 +13,7 @@ public class FrameUtama extends JFrame {
         //ukuran 
         int lebarPeta = peta.getMap().get(0).size();
         int panjangPeta = peta.getMap().size();
-        setSize((lebarPeta)*Tile.SIZE+16,(panjangPeta+1)*Tile.SIZE+20);
+        setSize((lebarPeta)*Tile.SIZE+16,(panjangPeta+1)*Tile.SIZE+8);
         setTitle("Game Wankymon");
         //setBounds(70,70,0,0);
         setResizable(false);

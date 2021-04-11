@@ -4,7 +4,7 @@ public class Tile extends Rectangle {
 
 	private static final long serialVersionUID = 1L;
 	
-	public static final int SIZE = 16;
+	public static final int SIZE = 32;
 	
 	private byte tileID;
 	private boolean wall;

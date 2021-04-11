@@ -26,6 +26,7 @@ public class BoardPanel extends JPanel{
                 //1 Mountain, 2 Tundra, 3 Grass, 4 Sea
                 switch ((c.getType()).toString()) {
                     case "MOUNTAINS": 
+                        g.drawImage(Resources.TEXTURES.get(2),cellX*Tile.SIZE,cellY*Tile.SIZE,null);
                         g.drawImage(Resources.TEXTURES.get(1),cellX*Tile.SIZE,cellY*Tile.SIZE,null);
                         break;
                     case "TUNDRA": 
@@ -50,16 +51,16 @@ public class BoardPanel extends JPanel{
         int key = e.getKeyCode();
         //JOptionPane.showMessageDialog(null, "Arrow Key ditekan");
         //jika panah atas ditekan
-        if (key==KeyEvent.VK_UP) {
+        if (key==KeyEvent.VK_UP || key==KeyEvent.VK_W) {
             playerUI.atas();
             repaint();
-        } else if (key==KeyEvent.VK_DOWN) {
+        } else if (key==KeyEvent.VK_DOWN || key==KeyEvent.VK_S) {
             playerUI.bawah();
             repaint();
-        } else if (key==KeyEvent.VK_RIGHT) {
+        } else if (key==KeyEvent.VK_RIGHT || key==KeyEvent.VK_D) {
             playerUI.kanan();
             repaint();
-        } else if (key==KeyEvent.VK_LEFT) {
+        } else if (key==KeyEvent.VK_LEFT || key==KeyEvent.VK_A) {
             playerUI.kiri();
             repaint();
         }
