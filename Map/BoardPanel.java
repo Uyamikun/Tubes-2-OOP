@@ -1,39 +1,67 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.*;
 
 public class BoardPanel extends JPanel{
-    // private Orang objOrang;
+    private PlayerUI playerUI;
+    private Map peta;
 
-    public BoardPanel(){
-        // objOrang = new Orang();
+    public BoardPanel(PlayerUI player,Map peta){
+        this.playerUI = player;
+        this.peta = peta;
     }
 
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         //create gambar component
+        
+        //peta
+        ArrayList<ArrayList<Cell>> matriks = peta.getMap();
+        for (ArrayList<Cell> ac :matriks){
+            for (Cell c : ac){
+                int cellX = c.getPosisi().get_y();
+                int cellY = c.getPosisi().get_x();
+                //1 Mountain, 2 Tundra, 3 Grass, 4 Sea
+                switch ((c.getType()).toString()) {
+                    case "MOUNTAINS": 
+                        g.drawImage(Resources.TEXTURES.get(1),cellX*Tile.SIZE,cellY*Tile.SIZE,null);
+                        break;
+                    case "TUNDRA": 
+                        g.drawImage(Resources.TEXTURES.get(2),cellX*Tile.SIZE,cellY*Tile.SIZE,null);
+                        break;
+                    case "GRASSLAND": 
+                        g.drawImage(Resources.TEXTURES.get(3),cellX*Tile.SIZE,cellY*Tile.SIZE,null);
+                        break;
+                    case "SEA": 
+                        g.drawImage(Resources.TEXTURES.get(4),cellX*Tile.SIZE,cellY*Tile.SIZE,null);
+                        break;
+                    default:
+                }
+            }
+        }
         //gambar orang
-        // g.drawImage(objOrang.getObjImage(),objOrang.getPosX(),objOrang.getPosY(),null);
-        // //teks
-        // g.drawString(String.format("Kesehatan: %d",objOrang.getKesehatan()),200,200);
+        //Player ID= 0
+        g.drawImage(Resources.TEXTURES.get(0),playerUI.getPosX(),playerUI.getPosY(),null);
     }
 
     public void keypress(KeyEvent e) {
         int key = e.getKeyCode();
+        //JOptionPane.showMessageDialog(null, "Arrow Key ditekan");
         //jika panah atas ditekan
-        // if (key==KeyEvent.VK_UP) {
-        //     objOrang.atas();
-        //     repaint();
-        // } else if (key==KeyEvent.VK_DOWN) {
-        //     objOrang.bawah();
-        //     repaint();
-        // } else if (key==KeyEvent.VK_RIGHT) {
-        //     objOrang.kanan();
-        //     repaint();
-        // } else if (key==KeyEvent.VK_LEFT) {
-        //     objOrang.kiri();
-        //     repaint();
-        // }
+        if (key==KeyEvent.VK_UP) {
+            playerUI.atas();
+            repaint();
+        } else if (key==KeyEvent.VK_DOWN) {
+            playerUI.bawah();
+            repaint();
+        } else if (key==KeyEvent.VK_RIGHT) {
+            playerUI.kanan();
+            repaint();
+        } else if (key==KeyEvent.VK_LEFT) {
+            playerUI.kiri();
+            repaint();
+        }
     }
 }

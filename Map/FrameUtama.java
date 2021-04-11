@@ -7,10 +7,13 @@ public class FrameUtama extends JFrame {
 
     private BoardPanel objBoardPanel;
 
-    public FrameUtama() throws HeadlessException {
-        objBoardPanel = new BoardPanel();
+    public FrameUtama(PlayerUI player, Map peta) throws HeadlessException {
+        objBoardPanel = new BoardPanel(player,peta);
         add(objBoardPanel); //tambah panel ke frame
-        setSize(600,400);
+        //ukuran 
+        int lebarPeta = peta.getMap().get(0).size();
+        int panjangPeta = peta.getMap().size();
+        setSize((lebarPeta)*Tile.SIZE+16,(panjangPeta+1)*Tile.SIZE+20);
         setTitle("Game Wankymon");
         //setBounds(70,70,0,0);
         setResizable(false);
