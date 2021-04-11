@@ -9,9 +9,10 @@ public class BoardPanel extends JPanel{
         // objOrang = new Orang();
     }
 
+    @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        //create gambar componenr
+        //create gambar component
         //gambar orang
         // g.drawImage(objOrang.getObjImage(),objOrang.getPosX(),objOrang.getPosY(),null);
         // //teks

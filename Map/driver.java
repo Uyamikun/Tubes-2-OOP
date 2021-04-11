@@ -17,7 +17,7 @@ public class driver {
         
 
         //cek GUI
-//        FrameUtama objFrameUtama = new FrameUtama();
-//        objFrameUtama.setVisible(true);
+        FrameUtama objFrameUtama = new FrameUtama();
+        objFrameUtama.setVisible(true);
     }
 }

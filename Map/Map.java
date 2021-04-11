@@ -25,10 +25,19 @@ public class Map
                 while(it.current() != CharacterIterator.DONE)
                 {
                     switch (it.current()) {
-                        case 'M' -> col.add(new MountainsCell(i, j));
-                        case 'G' -> col.add(new GrasslandCell(i, j));
-                        case 'S' -> col.add(new SeaCell(i, j));
-                        case 'T' -> col.add(new TundraCell(i, j));
+                        case 'M': 
+                            col.add(new MountainsCell(i, j));
+                            break;
+                        case 'G': 
+                            col.add(new GrasslandCell(i, j));
+                            break;
+                        case 'S': 
+                            col.add(new SeaCell(i, j));
+                            break;
+                        case 'T': 
+                            col.add(new TundraCell(i, j));
+                            break;
+                        default:
                     }
                     j++;
                     it.next();

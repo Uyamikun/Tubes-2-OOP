@@ -11,7 +11,9 @@ public class FrameUtama extends JFrame {
         objBoardPanel = new BoardPanel();
         add(objBoardPanel); //tambah panel ke frame
         setSize(600,400);
-        setTitle("Percobaan GUI");
+        setTitle("Game Wankymon");
+        //setBounds(70,70,0,0);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         addKeyListener(new TAdapter());
