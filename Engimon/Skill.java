@@ -42,7 +42,11 @@ public class Skill implements Comparable<Skill> {
     }
 
     public void setMasteryLevel(int newMasteryLevel){
-        this.masteryLevel = newMasteryLevel;
+        if(newMasteryLevel > 3){
+            this.masteryLevel = 3;
+        } else{
+            this.masteryLevel = newMasteryLevel;
+        }
     }
 
     public ArrayList<String> getElements(){
@@ -51,8 +55,9 @@ public class Skill implements Comparable<Skill> {
         return temp;
     }
 
+    // equal berdasarkan nama saja
     public boolean IsEqual (Skill otherSkill){
-        return (this.skillName == otherSkill.getSkillName() && this.masteryLevel == otherSkill.getMasteryLevel());
+        return (this.skillName.equals(otherSkill.getSkillName()));
     }
     public String printSkillDetail(){
         StringBuilder str = new StringBuilder();
@@ -65,7 +70,7 @@ public class Skill implements Comparable<Skill> {
         return str.toString();
     }
 
-    // Compare for sorting, descendant
+    // Compare for sorting berdasarkan basePower, descendant
     @Override
     public int compareTo(Skill other) {
         return Integer.compare(getBasePower(), other.getBasePower());
