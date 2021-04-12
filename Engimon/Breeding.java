@@ -2,7 +2,14 @@ package Engimon;
 import java.util.*;
 public class Breeding {
     //MATRIX ADVANTAGE [FIRE,WATER,ELECTRIC,GROUND,ICE] sama kebawahnya juga gini
-    private static Double[][] matrixAdvantage = {{1.0,0.0,1.0,0.5,2.0},{2.0,1.0,0.0,1.0,1.0},{1.0,2.0,1.0,0.0,1.5},{1.5,1.0,2.0,1.0,0.0},{0.0,1.0,0.5,2.0,1.0}};
+    private static Double[][] matrixAdvantage = 
+    {
+        {1.0,0.0,1.0,0.5,2.0},
+        {2.0,1.0,0.0,1.0,1.0},
+        {1.0,2.0,1.0,0.0,1.5},
+        {1.5,1.0,2.0,1.0,0.0},
+        {0.0,1.0,0.5,2.0,1.0}
+    };
     private static ArrayList<String> arrayElemenString = new ArrayList<String>(){{add("Fire");add("Water");add("Electric");add("Ground");add("Ice");}};
 //================= METHOD ========================
 
@@ -244,24 +251,27 @@ public class Breeding {
         return Breeding.arrayElemenString.indexOf(elemen);
     }
         //MENGEMBALIKAN STRING/ELEMENT SESUAI ADVANTAGE
-    public static String CompareElementByAdvantage(String A, String B){
+    public static ArrayList<String> CompareElementByAdvantage(String A, String B){
         int elemen1 = getIndexElement(A);
         int elemen2 = getIndexElement(B);
         Double advantage = Breeding.matrixAdvantage[elemen1][elemen2];
-        int result;
+        ArrayList<String> result = new ArrayList<String>();
         if(advantage>1.0){
-            result = elemen1;
+            
+            result.add(Breeding.arrayElemenString.get(elemen1));
         }
         if(advantage < 1.0){
-                result = elemen2;
+            result.add(Breeding.arrayElemenString.get(elemen2));
         }
         else{
-            Random random = new Random();
-            int index = random.nextInt(2);
-            if(index == 0) result = elemen1;
-            else result = elemen2; 
+            if(A.equals(B)){
+                result.add(Breeding.arrayElemenString.get(elemen1));
+                result.add(Breeding.arrayElemenString.get(elemen2));
+            }else{
+                result.add(Breeding.arrayElemenString.get(elemen1));
+            }
         }
-        return Breeding.arrayElemenString.get(result);
+        return result; 
     } 
     
     public static Boolean isElementCompatible(ArrayList<String> tempElement, ArrayList<ArrayList<String>> all){
@@ -308,19 +318,24 @@ public class Breeding {
             }
         };
         ArrayList<String> tempElement = new ArrayList<String>();
-        String result;
-
+        ArrayList<String> temp = new ArrayList<String>();
         if(ElementA.size() == 1 && ElementB.size() == 1){
-            tempElement.add(CompareElementByAdvantage(ElementA.get(0), ElementB.get(0)));
+            temp = CompareElementByAdvantage(ElementA.get(0), ElementB.get(0));
+            for(String item : temp){
+                tempElement.add(item);
+            }
         }
         if(ElementA.size() > 1 || ElementB.size() > 1){
             //MEMASUKKAN ELEMENT PARENT KE TEMPORARY LIST ELEMENT
             for(String elA : ElementA){
                 for(String elB : ElementB){
-                    result = CompareElementByAdvantage(elA, elB);
-                    if(!tempElement.contains(result)){
-                        tempElement.add(result);
+                    temp = CompareElementByAdvantage(elA, elB);
+                    for(String item : temp){
+                        if(!tempElement.contains(item)){
+                            tempElement.add(item);
+                        }
                     }
+                    
                 }
             }
 
@@ -333,9 +348,12 @@ public class Breeding {
             // HANDLE ELEMENTNYA COMPATIBLE TIDAK
             else if(tempElement.size() == 2){
                 if(!isElementCompatible(tempElement, all)){
-                    String hasil = CompareElementByAdvantage(tempElement.get(0), tempElement.get(1));
+                    ArrayList<String> temphasil = new ArrayList<String>();
+                    temphasil = CompareElementByAdvantage(tempElement.get(0), tempElement.get(1));
                     tempElement.clear();
-                    tempElement.add(hasil);
+                    for(String item : temphasil){
+                        tempElement.add(item);
+                    }
                 }
             }
         }
