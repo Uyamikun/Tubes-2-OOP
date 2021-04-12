@@ -266,9 +266,10 @@ public class Breeding {
         else{
             if(A.equals(B)){
                 result.add(Breeding.arrayElemenString.get(elemen1));
-                result.add(Breeding.arrayElemenString.get(elemen2));
+                
             }else{
                 result.add(Breeding.arrayElemenString.get(elemen1));
+                result.add(Breeding.arrayElemenString.get(elemen2));
             }
         }
         return result; 
