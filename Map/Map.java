@@ -17,7 +17,7 @@ public class Map
             int i = 0;
             while(input.hasNextLine())
             {
-                System.out.println(input.nextLine());
+                //System.out.println(input.readline());
 
                 ArrayList<Cell> col = new ArrayList<>();
                 int j = 0;
