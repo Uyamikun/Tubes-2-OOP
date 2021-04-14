@@ -19,8 +19,12 @@ public class driver {
         System.out.println(peta.getMap().size());
 
         //cek GUI
+        //Game utama hidden
         PlayerUI playerUI = new PlayerUI(peta);
         FrameUtama objFrameUtama = new FrameUtama(playerUI,peta);
-        objFrameUtama.setVisible(true);
+        objFrameUtama.setVisible(false);
+        //Main Menu
+        FrameMenu objFrameMenu = new FrameMenu(objFrameUtama);
+        objFrameMenu.setVisible(true);
     }
 }
