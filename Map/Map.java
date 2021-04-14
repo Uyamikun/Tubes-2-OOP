@@ -1,5 +1,7 @@
 
 
+import Engimon.Engimon;
+
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.*;
@@ -8,6 +10,12 @@ import java.io.*;
 public class Map
 {
     private ArrayList<ArrayList<Cell>> map_matrix;
+    private Point PlayerPos;
+    private  Point ActivePos;
+    private static int maxEngimon = 6;
+    private static  int minSpawnLevel = 1;
+
+
     public Map(String file)
     {
         try {
@@ -44,6 +52,8 @@ public class Map
                 this.map_matrix.add(col);
                 i++;
             }
+            this.PlayerPos = new Point(5,5);
+            this.ActivePos = new Point(4,5);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -55,6 +65,17 @@ public class Map
 
     public Cell getCell(int x, int y) {return this.map_matrix.get(x).get(y);}
 
+    public Cell getCell(Engimon e) {
+        for (ArrayList<Cell> ac : this.map_matrix){
+            for (Cell c : ac){
+                if (c.getEngimon() == e){
+                    return c;
+                }
+            }
+        }
+        return null;
+    }
+
     public void spawnEngimon(){
         Random rand = new Random();
         Cell c;
@@ -65,9 +86,25 @@ public class Map
         }while (c.isBlocked());
         c.spawnEngimon();
         //set level engimon
-        //c.getEngimon().setLevel();
-
+        int bound = (int) (minSpawnLevel*1.5);
+        int level = rand.nextInt(bound);
+        c.getEngimon().setLevel(minSpawnLevel + level);
     }
+
+    public static void setMaxEngimon(int x){
+        maxEngimon = x;
+    }
+
+    public static void setMinSpawnLevel(int x){
+        minSpawnLevel = x;
+    }
+
+    public void removeEngimon(Engimon e){
+        Cell C = getCell(e);
+        C.removeEngimon();
+    }
+
+
 }
 
 // Vector<Vector<String>> vector2D = new Vector<Vector<String>>(10);

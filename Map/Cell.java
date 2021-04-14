@@ -4,19 +4,25 @@ import java.awt.*;
 
 public abstract class Cell {
     enum CellType{
-        MOUNTAINS, SEA, GRASSLAND, TUNDRA, PLAYER, ACTIVE 
+        MOUNTAINS, SEA, GRASSLAND, TUNDRA
     }
     protected Point posisi;
     protected Engimon engimon;
     protected CellType type;
+    protected boolean player;
+    protected  boolean active;
 
     public Cell(Point input_posisi){
         this.posisi = input_posisi;
          this.engimon = null;
+         this.player = false;
+         this.active = false;
     }
     public Cell(int input_x, int input_y){
         this.posisi = new Point(input_x, input_y);
-         this.engimon = null;
+        this.engimon = null;
+        this.player = false;
+        this.active = false;
     }
     public Point getPosisi(){
         return this.posisi;
@@ -27,8 +33,17 @@ public abstract class Cell {
     public CellType getType(){
         return this.type;
     }
-     public boolean isBlocked(){
-         return this.engimon != null;
+    public boolean isBlocked(){
+         return this.engimon != null || player;
+     }
+     public boolean isActive(){
+        return active;
+     }
+     public void setPlayer(boolean b){
+        this.player = b;
+     }
+     public void setActive(boolean b){
+        this.active = b;
      }
      public void addEngimon(Engimon e){
          this.engimon = e;
