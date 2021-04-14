@@ -12,6 +12,9 @@ public class Map
     private ArrayList<ArrayList<Cell>> map_matrix;
     private Point PlayerPos;
     private  Point ActivePos;
+    private  int EngimonCount = 0;
+    private  int turnCounter = 0;
+    private  int movementTurn = 5;
     private static int maxEngimon = 6;
     private static  int minSpawnLevel = 1;
 
@@ -64,7 +67,12 @@ public class Map
     }
 
     public Cell getCell(int x, int y) {
-        return this.map_matrix.get(this.map_matrix.size() - y-1).get(x);}
+        return this.map_matrix.get(this.map_matrix.size() - y-1).get(x);
+    }
+
+    public Cell getCell(Point p){
+        return  getCell(p.get_x(), p.get_y());
+    }
 
     public Cell getCell(Engimon e) {
         for (ArrayList<Cell> ac : this.map_matrix){
@@ -90,6 +98,7 @@ public class Map
         int bound = (int) (minSpawnLevel*1.5);
         int level = rand.nextInt(bound);
         c.getEngimon().setLevel(minSpawnLevel + level);
+        EngimonCount++;
     }
 
     public static void setMaxEngimon(int x){
@@ -103,9 +112,9 @@ public class Map
     public void removeEngimon(Engimon e){
         Cell C = getCell(e);
         C.removeEngimon();
+        EngimonCount--;
     }
 
 
 }
 
-// Vector<Vector<String>> vector2D = new Vector<Vector<String>>(10);
