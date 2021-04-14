@@ -1,11 +1,13 @@
 import Engimon.*;
 
+import java.awt.*;
+
 public abstract class Cell {
     enum CellType{
         MOUNTAINS, SEA, GRASSLAND, TUNDRA, PLAYER, ACTIVE 
     }
     protected Point posisi;
-     protected Engimon engimon;
+    protected Engimon engimon;
     protected CellType type;
 
     public Cell(Point input_posisi){
@@ -13,8 +15,7 @@ public abstract class Cell {
          this.engimon = null;
     }
     public Cell(int input_x, int input_y){
-        Point p = new Point(input_x, input_y);
-        this.posisi = p;
+        this.posisi = new Point(input_x, input_y);
          this.engimon = null;
     }
     public Point getPosisi(){
@@ -39,6 +40,9 @@ public abstract class Cell {
          return this.engimon;
      }
      public void spawnEngimon(){
+
+     }
+     public void paint(Graphics g){
 
      }
 

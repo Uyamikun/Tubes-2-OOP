@@ -10,13 +10,14 @@ public class driver {
         ArrayList<ArrayList<Cell>> matriks = peta.getMap();
         for (ArrayList<Cell> ac :matriks){
             for (Cell c : ac){
-                c.print();
+                System.out.print(c.getPosisi().get_x() + "," + c.getPosisi().get_y());
                 System.out.print(" ");
             }
             System.out.println();
         }
         System.out.println(peta.getMap().get(0).size());
         System.out.println(peta.getMap().size());
+        System.out.println(peta.getCell(0,5).getPosisi().get_x());
 
         //cek GUI
         PlayerUI playerUI = new PlayerUI(peta);

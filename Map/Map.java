@@ -17,7 +17,6 @@ public class Map
             int i = 0;
             while(input.hasNextLine())
             {
-                //System.out.println(input.readline());
 
                 ArrayList<Cell> col = new ArrayList<>();
                 int j = 0;
@@ -42,7 +41,6 @@ public class Map
                     j++;
                     it.next();
                 }
-                System.out.println();
                 this.map_matrix.add(col);
                 i++;
             }
@@ -53,6 +51,22 @@ public class Map
 
     public ArrayList<ArrayList<Cell>> getMap(){
         return this.map_matrix;
+    }
+
+    public Cell getCell(int x, int y) {return this.map_matrix.get(x).get(y);}
+
+    public void spawnEngimon(){
+        Random rand = new Random();
+        Cell c;
+        do{
+            int x = rand.nextInt(this.map_matrix.size());
+            int y = rand.nextInt(this.map_matrix.get(0).size());
+            c = this.getCell(x,y);
+        }while (c.isBlocked());
+        c.spawnEngimon();
+        //set level engimon
+        //c.getEngimon().setLevel();
+
     }
 }
 
