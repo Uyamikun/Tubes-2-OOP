@@ -27,7 +27,7 @@ public class GrasslandCell extends Cell{
     }
 
     public void paint(Graphics g){
-        g.drawImage(Resources.TEXTURES.get(3),this.posisi.get_y()*Tile.SIZE,this.posisi.get_x()*Tile.SIZE,null);
+        g.drawImage(Resources.TEXTURES.get(3),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
     }
 
 }

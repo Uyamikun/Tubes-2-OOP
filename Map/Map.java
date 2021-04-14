@@ -22,12 +22,12 @@ public class Map
             // read in the data
             this.map_matrix = new ArrayList<>();
             Scanner input = new Scanner(new File(file));
-            int i = 0;
+            int j = 0;
             while(input.hasNextLine())
             {
 
                 ArrayList<Cell> col = new ArrayList<>();
-                int j = 0;
+                int i = 0;
                 CharacterIterator it = new StringCharacterIterator(input.nextLine());
                 while(it.current() != CharacterIterator.DONE)
                 {
@@ -46,11 +46,11 @@ public class Map
                             break;
                         default:
                     }
-                    j++;
+                    i++;
                     it.next();
                 }
-                this.map_matrix.add(col);
-                i++;
+                this.map_matrix.add(0, col);
+                j++;
             }
             this.PlayerPos = new Point(5,5);
             this.ActivePos = new Point(4,5);
@@ -63,7 +63,8 @@ public class Map
         return this.map_matrix;
     }
 
-    public Cell getCell(int x, int y) {return this.map_matrix.get(x).get(y);}
+    public Cell getCell(int x, int y) {
+        return this.map_matrix.get(this.map_matrix.size() - y-1).get(x);}
 
     public Cell getCell(Engimon e) {
         for (ArrayList<Cell> ac : this.map_matrix){

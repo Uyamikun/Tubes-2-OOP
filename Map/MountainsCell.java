@@ -22,7 +22,7 @@ public class MountainsCell extends Cell{
     }
 
     public void paint(Graphics g){
-        g.drawImage(Resources.TEXTURES.get(2),this.posisi.get_y()*Tile.SIZE,this.posisi.get_x()*Tile.SIZE,null);
-        g.drawImage(Resources.TEXTURES.get(1),this.posisi.get_y()*Tile.SIZE,this.posisi.get_x()*Tile.SIZE,null);
+        g.drawImage(Resources.TEXTURES.get(2),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+        g.drawImage(Resources.TEXTURES.get(1),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
     }
 }

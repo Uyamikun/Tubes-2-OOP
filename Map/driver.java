@@ -17,7 +17,8 @@ public class driver {
         }
         System.out.println(peta.getMap().get(0).size());
         System.out.println(peta.getMap().size());
-        System.out.println(peta.getCell(0,5).getPosisi().get_x());
+        System.out.println(peta.getCell(3,4).getPosisi().get_x());
+        System.out.println(peta.getCell(3,4).getPosisi().get_y());
 
         //cek GUI
         //Game utama hidden
