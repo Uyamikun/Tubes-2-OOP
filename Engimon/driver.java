@@ -105,10 +105,12 @@ public class driver {
         // TEST BREEDING 
         
         // 1 element test
-        // Cyndaquil p1 = new Cyndaquil("CyndaParent1", 5);
-        // Cyndaquil p2 = new Cyndaquil("CyndaParent2", 5);
-        // Engimon e =  Breeding.startBreeding(p1, p2);
-        // System.out.println(e.printDetail());
+        try{
+            Cyndaquil p1 = new Cyndaquil("CyndaParent1", 5);
+            Cyndaquil p2 = new Cyndaquil("CyndaParent2", 3);
+            Engimon e =  Breeding.startBreeding(p1, p2);
+            System.out.println(e.printDetail());    
+        }catch(BreedingInvalidException ex){}
         
         // System.out.println("Parent : ");
         // System.out.println(p1.printDetail());

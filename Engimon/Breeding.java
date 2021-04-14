@@ -361,10 +361,10 @@ public class Breeding {
         return tempElement;
     }
  
-    public static Engimon startBreeding(Engimon A, Engimon B){
+    public static Engimon startBreeding(Engimon A, Engimon B) throws BreedingInvalidException{
         if(A.getLevel() < 4 || B.getLevel() < 4){
             //throw Exception; 
-            return new Pikachu();
+            throw new BreedingInvalidException();
         }
         else{
             //LEVEL PARENT BERKURANG 3 dan cumulative exp berkurang 3 * 100
