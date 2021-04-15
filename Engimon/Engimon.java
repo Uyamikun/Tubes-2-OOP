@@ -113,8 +113,19 @@ public abstract class Engimon implements Comparable<Engimon> {
     public int getExp(){
         return this.exp;
     }
+
+    // newexp = exp yang diset baru
     public void setExp(int newExp){
         this.exp = newExp;
+    }
+
+    // added exp = exp yang ditambahkan
+    public void changeExp (int addedExp){
+        int incrLevel = addedExp / 100;
+        int sisaExp = addedExp % 100;
+        this.level+=incrLevel;
+        this.exp = sisaExp;
+        this.cumulativeExp += addedExp;
     }
 
     // Cumulative Exp
@@ -136,7 +147,6 @@ public abstract class Engimon implements Comparable<Engimon> {
         return Integer.compare(getLevel(), other.getLevel());
     }
 
-//================= METHOD OVERLOAD ====================
     public String printDetail(){ 
         StringBuilder str = new StringBuilder();
         str.append(("\"" + this.getSound()+ "\"\n"));
@@ -145,7 +155,7 @@ public abstract class Engimon implements Comparable<Engimon> {
         str.append("Spesies : " + this.species + "\n");
         str.append("Life : " + this.life + "\n");
         str.append("Level " + this.level + "\n");
-        str.append("Exp : " + this.exp + "\n");
+        str.append("Exp : " + this.exp + "/100\n");
         str.append("CumExp : " + this.cumulativeExp + "\n");
         str.append("==========================================" + "\n");
         str.append("Parent 1 : " + this.ParentInfo.get(0)  + "\n");
@@ -157,25 +167,6 @@ public abstract class Engimon implements Comparable<Engimon> {
         str.append("================= Element =================\n");
         this.elements.forEach((element) -> str.append("- " + element + "\n"));
         return str.toString();
-        // System.out.println("ID : " + this.id);
-        // System.out.println("Nama : " + this.name);
-        // System.out.println("Spesies : " + this.species);
-        // System.out.println("Life : " + this.life);
-        // System.out.println("Level " + this.level);
-        // System.out.println("Exp : " + this.exp);
-        // System.out.println("CumExp : " + this.cumulativeExp);
-        // System.out.println("==========================================");
-        // System.out.println("Parent info : ");
-
-        // System.out.println("Parent 1 : " + this.ParentInfo.get(0));
-        // System.out.println("Species 1 : "+ this.ParentInfo.get(1));
-        // System.out.println("Parent 2 : " + this.ParentInfo.get(2));
-        // System.out.println("Species 2 : "+ this.ParentInfo.get(3));
-        
-        // System.out.println("================= SKILL DETAIL ============");
-        // this.engimonskill.forEach((sk) -> sk.printSkillDetail());
-        // System.out.println("================= Element =================");
-        // this.elements.forEach((element) -> System.out.println("- " + element));
 
     }
 //================= ABSTRACT METHOD ====================
