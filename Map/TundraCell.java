@@ -24,4 +24,8 @@ public class TundraCell extends Cell{
     public void paint(Graphics g){
         g.drawImage(Resources.TEXTURES.get(2),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
     }
+
+    public boolean canMove(Engimon e){
+        return e.getSpecies().equals("Amaura") || e.getSpecies().equals("Wynter");
+    }
 }

@@ -14,6 +14,9 @@ public class Point {
         return this.y;
     }
 
+    public static Point add(Point p1, Point p2){
+        return  new Point((p1.get_x()+p2.get_x()), (p1.get_y()+p2.get_y()));
+    }
 
     private int x;
     private int y;

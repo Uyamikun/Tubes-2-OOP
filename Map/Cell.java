@@ -60,5 +60,8 @@ public abstract class Cell {
      public void paint(Graphics g){
 
      }
+     public boolean canMove(Engimon e){
+        return false;
+     }
 
 }

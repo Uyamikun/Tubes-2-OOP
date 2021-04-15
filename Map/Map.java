@@ -110,9 +110,67 @@ public class Map
     }
 
     public void removeEngimon(Engimon e){
-        Cell C = getCell(e);
+        Cell C = this.getCell(e);
         C.removeEngimon();
         EngimonCount--;
+    }
+
+    public void movePlayer(Point dest){
+        Cell c = this.getCell(dest);
+        if (!c.isBlocked()){
+            this.ActivePos = this.PlayerPos;
+            this.PlayerPos = dest;
+            this.nextTurn();
+        }
+    }
+
+    public void moveEngimon(Cell c, Point dest){
+        Cell c1 = this.getCell(dest);
+        if (!c1.isBlocked() && !c1.active && c1.canMove(c.getEngimon())){
+            c1.addEngimon(c.getEngimon());
+            c.removeEngimon();
+        }
+    }
+
+    public ArrayList<Cell> getWildCells(){
+        ArrayList<Cell> arr = new ArrayList<>();
+        for (ArrayList<Cell> ac : this.map_matrix){
+            for (Cell c : ac){
+                if (c.getEngimon() != null){
+                    arr.add(c);
+                }
+            }
+        }
+        return arr;
+    }
+
+    public void moveWildEngimons(ArrayList<Cell> wildCells){
+        Point[] direction = {new Point(0,1), new Point(1,0), new Point(0,-1), new Point(-1, 0)};
+        Random rand = new Random();
+        for (Cell c : wildCells){
+            Point p = direction[rand.nextInt(4)];
+            this.moveEngimon(c, Point.add(c.getPosisi(), p));
+        }
+    }
+
+    public void levelUpEngimons(ArrayList<Cell> wildCells){
+        for (Cell c : wildCells){
+            c.getEngimon().setLevel(c.getEngimon().getLevel()+1);
+        }
+    }
+
+    public void nextTurn(){
+        if (turnCounter == 0){
+            ArrayList<Cell> wildCells = this.getWildCells();
+            moveWildEngimons(wildCells);
+            levelUpEngimons(wildCells);
+            if (EngimonCount < maxEngimon){
+                this.spawnEngimon();
+            }
+            turnCounter = movementTurn;
+        }else{
+            turnCounter--;
+        }
     }
 
 

@@ -1,7 +1,4 @@
-import Engimon.Earthshaker;
-import Engimon.Hu_Tao;
-import Engimon.KataraToph;
-import Engimon.Pikachu;
+import Engimon.*;
 
 import java.awt.*;
 import java.util.Random;
@@ -28,6 +25,10 @@ public class GrasslandCell extends Cell{
 
     public void paint(Graphics g){
         g.drawImage(Resources.TEXTURES.get(3),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+    }
+
+    public boolean canMove(Engimon e){
+        return e.getSpecies().equals("Pikachu") || e.getSpecies().equals("Earthshaker") || e.getSpecies().equals("KataraToph") || e.getSpecies().equals("Hu_Tao");
     }
 
 }
