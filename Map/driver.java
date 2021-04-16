@@ -2,12 +2,25 @@ import java.util.*;
 
 
 public class driver {
+    public static void printPeta(ArrayList<ArrayList<Cell>> matriks){
+        for (ArrayList<Cell> ac :matriks){
+            for (Cell c : ac){
+                System.out.println(c.getType());
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+
     public static void main(String[] args) {
 
         Loader.load();
         //Matriks peta
         Map peta = new Map("Map/map.txt");
         ArrayList<ArrayList<Cell>> matriks = peta.getMap();
+
+        printPeta(matriks);
+
         for (ArrayList<Cell> ac :matriks){
             for (Cell c : ac){
                 System.out.print(c.getPosisi().get_x() + "," + c.getPosisi().get_y());
@@ -15,6 +28,7 @@ public class driver {
             }
             System.out.println();
         }
+
         System.out.println(peta.getMap().get(0).size());
         System.out.println(peta.getMap().size());
         System.out.println(peta.getCell(3,4).getPosisi().get_x());

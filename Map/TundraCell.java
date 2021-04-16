@@ -16,8 +16,8 @@ public class TundraCell extends Cell{
         Random rand = new Random();
         int x = rand.nextInt(2);
         switch (x) {
-            case 0 -> this.engimon = new Amaura();
-            default -> this.engimon = new Wynter();
+            case 0 : this.engimon = new Amaura();
+            default : this.engimon = new Wynter();
         }
     }
 

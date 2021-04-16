@@ -20,9 +20,9 @@ public class SeaCell extends Cell{
         Random rand = new Random();
         int x = rand.nextInt(3);
         switch (x) {
-            case 0 -> this.engimon = new Blastoise();
-            case 1 -> this.engimon = new Wynter();
-            default -> this.engimon = new Hu_Tao();
+            case 0 : this.engimon = new Blastoise();
+            case 1 : this.engimon = new Wynter();
+            default : this.engimon = new Hu_Tao();
         }
     }
 

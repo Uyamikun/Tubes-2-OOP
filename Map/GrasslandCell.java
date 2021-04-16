@@ -16,10 +16,10 @@ public class GrasslandCell extends Cell{
         Random rand = new Random();
         int x = rand.nextInt(4);
         switch (x) {
-            case 0 -> this.engimon = new Pikachu();
-            case 1 -> this.engimon = new Earthshaker();
-            case 2 -> this.engimon = new KataraToph();
-            default -> this.engimon = new Hu_Tao();
+            case 0 : this.engimon = new Pikachu();
+            case 1 : this.engimon = new Earthshaker();
+            case 2 : this.engimon = new KataraToph();
+            default : this.engimon = new Hu_Tao();
         }
     }
 

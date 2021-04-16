@@ -115,6 +115,14 @@ public class Map
         EngimonCount--;
     }
 
+    public Point getPlayerPos(){
+        return PlayerPos;
+    }
+
+    public Point getActivePos() {
+        return ActivePos;
+    }
+
     public void movePlayer(Point dest){
         Cell c = this.getCell(dest);
         if (!c.isBlocked()){
@@ -154,8 +162,10 @@ public class Map
     }
 
     public void levelUpEngimons(ArrayList<Cell> wildCells){
-        for (Cell c : wildCells){
-            c.getEngimon().setLevel(c.getEngimon().getLevel()+1);
+        if (wildCells != null){
+            for (Cell c : wildCells){
+                c.getEngimon().setLevel(c.getEngimon().getLevel()+1);
+            }
         }
     }
 

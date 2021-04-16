@@ -33,18 +33,28 @@ public class BoardPanel extends JPanel{
         int key = e.getKeyCode();
         //JOptionPane.showMessageDialog(null, "Arrow Key ditekan");
         //jika panah atas ditekan
-        if (key==KeyEvent.VK_UP || key==KeyEvent.VK_W) {
-            playerUI.atas();
-            repaint();
-        } else if (key==KeyEvent.VK_DOWN || key==KeyEvent.VK_S) {
-            playerUI.bawah();
-            repaint();
-        } else if (key==KeyEvent.VK_RIGHT || key==KeyEvent.VK_D) {
-            playerUI.kanan();
-            repaint();
-        } else if (key==KeyEvent.VK_LEFT || key==KeyEvent.VK_A) {
-            playerUI.kiri();
-            repaint();
+        try {
+            if (key==KeyEvent.VK_UP || key==KeyEvent.VK_W) {
+                playerUI.atas();
+                repaint();
+            } else if (key==KeyEvent.VK_DOWN || key==KeyEvent.VK_S) {
+                playerUI.bawah();
+                repaint();
+            } else if (key==KeyEvent.VK_RIGHT || key==KeyEvent.VK_D) {
+                playerUI.kanan();
+                repaint();
+            } else if (key==KeyEvent.VK_LEFT || key==KeyEvent.VK_A) {
+                playerUI.kiri();
+                repaint();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Masukan salah");
+            }
+        }
+        catch (Exception exception){
+            System.out.println(exception.getCause());
+            System.out.println(exception.getMessage());
+            //System.out.println("Something wrong");
         }
     }
 }

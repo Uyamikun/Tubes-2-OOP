@@ -16,8 +16,8 @@ public class MountainsCell extends Cell{
         Random rand = new Random();
         int x = rand.nextInt(2);
         switch (x) {
-            case 0 -> this.engimon = new Cyndaquil();
-            default -> this.engimon = new Hu_Tao();
+            case 0 : this.engimon = new Cyndaquil();
+            default : this.engimon = new Hu_Tao();
         }
     }
 
