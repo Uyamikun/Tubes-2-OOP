@@ -52,9 +52,22 @@ public class BoardPanel extends JPanel{
             }
         }
         catch (Exception exception){
-            System.out.println(exception.getCause());
+            System.out.println(exception.toString());
             System.out.println(exception.getMessage());
+            //System.out.println(exception.getLocalizedMessage());
+            //System.out.println(exception.getCause());
             //System.out.println("Something wrong");
         }
+
+        //Debug
+//        if (key==KeyEvent.VK_UP || key==KeyEvent.VK_W) {
+//            peta.movePlayer(new Point(peta.getPlayerPos().get_x(),peta.getPlayerPos().get_y()+1));
+//        } else if (key==KeyEvent.VK_DOWN || key==KeyEvent.VK_S) {
+//            peta.movePlayer(new Point(peta.getPlayerPos().get_x(),peta.getPlayerPos().get_y()-1));
+//        } else if (key==KeyEvent.VK_RIGHT || key==KeyEvent.VK_D) {
+//            peta.movePlayer(new Point(peta.getPlayerPos().get_x()+1,peta.getPlayerPos().get_y()));
+//        } else if (key==KeyEvent.VK_LEFT || key==KeyEvent.VK_A) {
+//            peta.movePlayer(new Point(peta.getPlayerPos().get_x()-1,peta.getPlayerPos().get_y()));
+//        }
     }
 }

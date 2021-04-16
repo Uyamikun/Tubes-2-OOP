@@ -55,7 +55,6 @@ public abstract class Cell {
          return this.engimon;
      }
      public void spawnEngimon(){
-
      }
      public void paint(Graphics g){
 
