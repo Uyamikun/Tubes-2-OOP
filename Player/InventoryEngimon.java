@@ -35,9 +35,15 @@ public class InventoryEngimon extends AbstractInventory<Engimon> {
             this.object.add(obj);
             this.neff += 1;
             addTotal(1);
+            Collections.sort(this.object); // Sorting berdasarkan level dari yang tertinggi ke yang terendah
+            Collections.reverse(this.object);
             return true;
         } else{
             return false;
         }
+    }
+
+    public void rename(Engimon obj, String name) {
+        obj.setName(name);
     }
 }
