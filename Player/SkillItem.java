@@ -46,7 +46,8 @@ public class SkillItem extends Skill implements Comparable<SkillItem>{
     // public bool learn(Engimon e)
     // public boolean learn(Engimon e){
     //     // Cek skill item kompatibel gak sama engimonnya
-    //     List<String> le = e.getElements();
+    //     ArrayList<String> le = new ArrayList<>();
+    //     le = e.getElements();
     //     Boolean kompatibel = false;
     //     for(String ite : le){
     //         for(String itesi : this.elements){
@@ -59,7 +60,8 @@ public class SkillItem extends Skill implements Comparable<SkillItem>{
     //         return false;
     //     }
     //     // Cek udah punya skillnya belum
-    //     List<Skill> ls = e.getEngimonSkill();
+    //     ArrayList<Skill> ls = new ArrayList<>();
+    //     ls = e.getEngimonSkill();
     //     for(Skill it : ls){
     //         if(it.getNama() == this.getNama()){
     //             return false;
