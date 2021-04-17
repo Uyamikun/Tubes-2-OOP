@@ -14,7 +14,8 @@ public class Map
     private  Point ActivePos;
     private  int EngimonCount = 0;
     private  int turnCounter = 0;
-    private  int movementTurn = 5;
+    private  final int movementTurn = 5;
+    private final Point[] direction = {new Point(0,1), new Point(1,0), new Point(0,-1), new Point(-1, 0)};
     private static int maxEngimon = 6;
     private static  int minSpawnLevel = 1;
 
@@ -52,7 +53,7 @@ public class Map
                     i++;
                     it.next();
                 }
-                this.map_matrix.add(0, col);
+                this.map_matrix.add(col);
                 j++;
             }
             this.PlayerPos = new Point(5,5);
@@ -67,7 +68,7 @@ public class Map
     }
 
     public Cell getCell(int x, int y) {
-        return this.map_matrix.get(this.map_matrix.size() - y-1).get(x);
+        return this.map_matrix.get(y).get(x);
     }
 
     public Cell getCell(Point p){
@@ -87,12 +88,13 @@ public class Map
 
     public void spawnEngimon(){
         Random rand = new Random();
-        Cell c;
-        do{
-            int x = rand.nextInt(this.map_matrix.size());
-            int y = rand.nextInt(this.map_matrix.get(0).size());
-            c = this.getCell(x,y);
-        }while (c.isBlocked());
+        int x = rand.nextInt(this.map_matrix.size());
+        int y = rand.nextInt(this.map_matrix.get(0).size());
+        while (this.getCell(x,y).isBlocked()){
+            x = rand.nextInt(this.map_matrix.size());
+            y = rand.nextInt(this.map_matrix.get(0).size());
+        }
+        Cell c = this.getCell(x,y);
         c.spawnEngimon();
         //set level engimon
         int bound = (int) (minSpawnLevel*1.5);
@@ -123,12 +125,16 @@ public class Map
         return ActivePos;
     }
 
-    public void movePlayer(Point dest){
+    public void movePlayer(Point dest) throws Exception{
         Cell c = this.getCell(dest);
-        if (!c.isBlocked()){
+        if(!c.isBlocked()){
+            this.getCell(PlayerPos).setPlayer(false);
+            c.setPlayer(true);
             this.ActivePos = this.PlayerPos;
             this.PlayerPos = dest;
             this.nextTurn();
+        }else{
+            throw new Exception("Cannot move, there is Engimon");
         }
     }
 
@@ -153,18 +159,22 @@ public class Map
     }
 
     public void moveWildEngimons(ArrayList<Cell> wildCells){
-        Point[] direction = {new Point(0,1), new Point(1,0), new Point(0,-1), new Point(-1, 0)};
         Random rand = new Random();
         for (Cell c : wildCells){
-            Point p = direction[rand.nextInt(4)];
-            this.moveEngimon(c, Point.add(c.getPosisi(), p));
+            Point p = this.direction[rand.nextInt(4)];
+            Point p1 = Point.add(c.getPosisi(), p);
+            if (checkBound(p1) && !this.getCell(p1).isBlocked() && !this.getCell(p1).isActive())
+            this.moveEngimon(c, p1);
         }
     }
 
+    public boolean checkBound(Point P){
+        return P.get_y()>= 0 && P.get_y()<this.map_matrix.size() && P.get_x() >= 0 && P.get_x() < this.map_matrix.get(0).size();
+    }
     public void levelUpEngimons(ArrayList<Cell> wildCells){
         if (wildCells != null){
             for (Cell c : wildCells){
-                c.getEngimon().setLevel(c.getEngimon().getLevel()+1);
+                c.getEngimon().changeExp(100);
             }
         }
     }
@@ -172,8 +182,10 @@ public class Map
     public void nextTurn(){
         if (turnCounter == 0){
             ArrayList<Cell> wildCells = this.getWildCells();
-            moveWildEngimons(wildCells);
-            levelUpEngimons(wildCells);
+            if (wildCells.size()>0) {
+                levelUpEngimons(wildCells);
+                moveWildEngimons(wildCells);
+            }
             if (EngimonCount < maxEngimon){
                 this.spawnEngimon();
             }
@@ -181,6 +193,17 @@ public class Map
         }else{
             turnCounter--;
         }
+    }
+
+    public ArrayList<Engimon> getNearbyEngimon(){
+        ArrayList<Engimon> engimons = new ArrayList<>();
+        for (Point p : this.direction){
+            Cell c = getCell(Point.add(p, this.getPlayerPos()));
+            if (c.engimon != null){
+                engimons.add(c.getEngimon());
+            }
+        }
+        return engimons;
     }
 
 

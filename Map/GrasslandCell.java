@@ -14,6 +14,7 @@ public class GrasslandCell extends Cell{
     }
     public void spawnEngimon() {
         Random rand = new Random();
+
         int x = rand.nextInt(4);
         switch (x) {
             case 0 : this.engimon = new Pikachu();
@@ -25,6 +26,9 @@ public class GrasslandCell extends Cell{
 
     public void paint(Graphics g){
         g.drawImage(Resources.TEXTURES.get(3),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+        if (this.engimon!= null){
+            g.drawImage(Resources.TEXTURES.get(0),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+        }
     }
 
     public boolean canMove(Engimon e){

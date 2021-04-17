@@ -62,5 +62,15 @@ public abstract class Cell {
      public boolean canMove(Engimon e){
         return false;
      }
+     public void printEngimon(){
+        if (this.engimon != null){
+            System.out.print(this.engimon.getSpecies() + " ");
+        }else if(this.player){
+            System.out.print("P ");
+        }
+        else{
+            System.out.print("no ");
+        }
+     }
 
 }

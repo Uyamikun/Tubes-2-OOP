@@ -10,6 +10,7 @@ public class driver {
             for (Cell c : ac){
                 System.out.println(c.getType());
                 System.out.print(" ");
+//                c.printEngimon();
             }
             System.out.println();
         }

@@ -27,7 +27,7 @@ public class PlayerUI {
         if (posX==0){
             throw new Exception("Out of bounds");
         }
-        //peta.movePlayer(new Point(peta.getPlayerPos().get_x()-1,peta.getPlayerPos().get_y()));
+        peta.movePlayer(new Point(peta.getPlayerPos().get_x()-1, peta.getPlayerPos().get_y()));
         posX = posX - Tile.SIZE;
     }
 
@@ -35,7 +35,7 @@ public class PlayerUI {
         if (posX==boundX){
             throw new Exception("Out of bounds");
         }
-        //peta.movePlayer(new Point(peta.getPlayerPos().get_x()+1,peta.getPlayerPos().get_y()));
+        peta.movePlayer(new Point(peta.getPlayerPos().get_x()+1, peta.getPlayerPos().get_y()));
         posX = posX + Tile.SIZE;
     }
 
@@ -43,7 +43,7 @@ public class PlayerUI {
         if (posY==0){
             throw new Exception("Out of bounds");
         }
-        //peta.movePlayer(new Point(peta.getPlayerPos().get_x(),peta.getPlayerPos().get_y()+1));
+        peta.movePlayer(new Point(peta.getPlayerPos().get_x(), peta.getPlayerPos().get_y() - 1));
         posY = posY - Tile.SIZE;
     }
 
@@ -51,7 +51,8 @@ public class PlayerUI {
         if (posY==boundY){
             throw new Exception("Out of bounds");
         }
-        //peta.movePlayer(new Point(peta.getPlayerPos().get_x(),peta.getPlayerPos().get_y()-1));
+        peta.movePlayer(new Point(peta.getPlayerPos().get_x(), peta.getPlayerPos().get_y() + 1));
         posY = posY + Tile.SIZE;
+
     }
 }
