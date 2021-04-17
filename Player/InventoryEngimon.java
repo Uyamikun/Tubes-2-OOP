@@ -46,4 +46,51 @@ public class InventoryEngimon extends AbstractInventory<Engimon> {
     public void rename(Engimon obj, String name) {
         obj.setName(name);
     }
+
+    public boolean engimonMeninggal(int idx, Engimon e) {
+        for(int i = 0; i < this.getNeff(); i++){
+            if(i == idx-1){
+                Engimon temp = e;
+                e = this.object.get(i);
+                this.object.set(i,temp);
+                for(int j = i; j < this.getNeff()-1; j++){
+                    this.object.set(i,this.object.get(i+1));
+                }
+                this.neff--;
+                decTotal(1);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean switchEngimon(int idx, Engimon e) {
+        for(int i = 0; i < this.getNeff(); i++){
+            if(i == idx-1){
+                Engimon temp = e;
+                e = this.object.get(i);
+                this.object.set(i,temp);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void setEngimon(int idx, Engimon e) {
+        if(idx <= this.neff){
+            this.object.set(idx-1,e);
+        }
+    }
+
+    public boolean stored(Engimon obj) {//mengembalikan true jika object ada di inventory
+        int i;
+        for(i=0;i<neff;i++)
+        {
+            if(object.get(i).getID() == obj.getID())
+            {
+                return true;
+            } 
+        }
+        return false;
+    }
 }

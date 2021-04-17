@@ -37,6 +37,10 @@ abstract class AbstractInventory<T> {
         total += i;
     }
 
+    public static void decTotal(int i){
+        total -= i;
+    }
+
     public T get(int idx){
         return this.object.get(idx-1); // asumsi index valid
     }

@@ -1,19 +1,19 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import Player.InventoryEngimon;
+import Player.InventorySkillItem;
 
 public class Player {
     private String nama;
     private Engimon active_engimon;               
     private Point position;                       
     private Point position_active_engimon;
-    private Inventory<Engimon> engimon_as_object; 
-    private Inventory<SkillItem> skill_as_object;
+    private InventoryEngimon engimon_as_object; 
+    private InventorySkillItem skill_as_object;
 
     public Player() {
-        this.nama = "Traveler";
-        this.position = new Point(5,5);
-        this.position_active_engimon = new Point(5,4);
-        this.active_engimon = new Pikachu();
-        this.active_engimon.setLevel(20);
+        this("Traveler");
     }
     public Player(String nama) {
         this.nama = nama;
@@ -21,9 +21,11 @@ public class Player {
         this.position_active_engimon = new Point(5,4);
         this.active_engimon = new Pikachu();
         this.active_engimon.setLevel(20);
+        this.engimon_as_object = new InventoryEngimon();
+        this.skill_as_object = new InventorySkillItem();
     }
     public void switch_out_engimon_meninggal() {
-        if(engimon_as_object.getCount() != 0){
+        if(engimon_as_object.getNeff() != 0){
             System.out.println("Berikut adalah daftar engimon yang anda punya: ");
             display_list_engimon();
             System.out.print("Pilih engimon nomor berapa untuk menggantikan active engimon: ");
@@ -41,12 +43,13 @@ public class Player {
         }
     }
     public int getTotalInventory() {
-        return skill_as_object.getCount() + engimon_as_object.getCount();
+        return skill_as_object.getNeff() + engimon_as_object.getNeff();
     }
     public void setActiveEngimon(Engimon e) {
         this.active_engimon = e;
     }
-    public void move(Peta map, char direction) {
+    public void move(Map map, char direction) {
+        // Di map belum ada getter untuk posisi player dan active engimon
         Point P1 = new Point(0,1);
         Point P2 = new Point(1,0);
         Point P3 = new Point(0,-1);
@@ -54,33 +57,34 @@ public class Player {
         try{
             if (direction == 'W' || direction == 'w')
             {
-                map.MovePlayer(map.getPlayerPosition()+P3);
+                map.movePlayer(Point.add(map.getPlayerPosition()+P3));
             }
             else if (direction == 'A' || direction == 'a')
             {
-                map.MovePlayer(map.getPlayerPosition()+P4);
+                map.movePlayer(Point.add(map.getPlayerPosition()+P4));
             }
             else if (direction == 'S' || direction == 's')
             {
-                map.MovePlayer(map.getPlayerPosition()+P1);
+                map.movePlayer(Point.add(map.getPlayerPosition()+P1));
             }
             else if (direction == 'D' || direction == 'd')
             {
-                map.MovePlayer(map.getPlayerPosition()+P2);
+                map.movePlayer(Point.add(map.getPlayerPosition()+P2));
             } else{
                 System.out.println("Input direction tidak valid");
             }
         } catch(mapException m){};
         this.position = map.getPlayerPosition();
         this.position_active_engimon = map.getActiveEngimonPosition();
-        map.print();
+        //map.print();
     }
     public void display_list_engimon() {
         System.out.println(" List engimon yang dimiliki : ");
-        Engimon le = this.engimon_as_object.getObject();
-        for (int i = 0; i < this.engimon_as_object.getCount(); i++)
+        ArrayList<Engimon> le = new ArrayList<>();
+        le = this.engimon_as_object.getObject();
+        for (int i = 0; i < this.engimon_as_object.getNeff(); i++)
         {
-            System.out.println((i + 1) + ". " + le[i].getName());
+            System.out.println((i + 1) + ". " + le.get(i).getName());
         }
     }
     public void display_info_engimon() {
@@ -95,14 +99,14 @@ public class Player {
             this.display_list_engimon();
             System.out.print("Pilih engimon nomor berapa yang ingin anda lihat infonya: ");
             idx=S.nextInt();
-            this.engimon_as_object[idx].printDetail();
+            this.engimon_as_object.get(idx).printDetail();
         }
     }
     public string get_active_engimon() {
         return this.active_engimon.getName();
     }
     public void switch_out_active_engimon() {
-        if(this.engimon_as_object.getCount() != 0){
+        if(this.engimon_as_object.getNeff() != 0){
             System.out.println("Berikut adalah daftar engimon yang anda punya: ");
             this.display_list_engimon();
             System.out.print("Pilih engimon nomor berapa yang akan ditukar: ");
@@ -121,14 +125,15 @@ public class Player {
     }
     public void display_list_skill() {
         System.out.println(" List skill item yang dimiliki : ");
-        SkillItem le = this.skill_as_object.getObject();
-        for (int i = 0; i < this.skill_as_object.getCountIdx(); i++)
+        ArrayList<SkillItem> le = new ArrayList<>();
+        le = this.skill_as_object.getObject();
+        for (int i = 0; i < this.skill_as_object.getNeff(); i++)
         {
-            System.out.println((i + 1) + ". " + le[i].getNama());
+            System.out.println((i + 1) + ". " + le.get(i).getNama());
         }
     }
     public void use_skill() {
-        if(this.skill_as_object.getCount() == 0){
+        if(this.skill_as_object.getNeff() == 0){
             System.out.println("Anda tidak mempunyai skill item di inventory");
         } else{
             this.display_list_skill();
@@ -154,7 +159,7 @@ public class Player {
                 System.out.println("Pilih engimon nomor berapa yang ingin anda lakukan learn skill item: ");
                 idxE=S.nextInt();
                 System.out.println("");
-                Engimon temp = this.engimon_as_object[idxE];
+                Engimon temp = this.engimon_as_object.get(idxE);
                 if(this.skill_as_object.learn(temp, idxSI)){
                     this.engimon_as_object.setEngimon(idxE, temp);
                     System.out.println("Berhasil melakukan learn skill item ^_^");
@@ -183,7 +188,7 @@ public class Player {
                     Child.setName(name);
                 }
                 Child.printDetail();
-                if(this.getTotalInventory() < this.engimon_as_object.getMaxCapacity()){
+                if(this.getTotalInventory() < this.engimon_as_object.getMaxEl()){
                     this.engimon_as_object.insert(Child);
                 } else{
                     System.out.println("Maaf inventory penuh :(");
@@ -200,23 +205,31 @@ public class Player {
         }
     }
     public SkillItem random_generator_skill(List<String> element) {
-        List<SkillItem> list_of_skill = new List<SkillItem>();
-        SkillItem tsunami = new SkillItem("Tsunami",120,1,Arrays.asList("Water"));
-        SkillItem fireball = new SkillItem("FireBall",120,1,Arrays.asList("Fire"));
-        SkillItem freezing = new SkillItem("Freezing field",120,1,Arrays.asList("Ice"));
-        SkillItem fissure = new SkillItem("Fissure",120,1,Arrays.asList("Ground"));
-        SkillItem thunder = new SkillItem("Thunder God",120,1,Arrays.asList("Electric"));
-        SkillItem cold = new SkillItem("Cold Embrace",150,1,Arrays.asList("Water","Ice"));
-        SkillItem watershock = new SkillItem("Watershock",150,1,Arrays.asList("Water","Ground"));
-        SkillItem overload = new SkillItem("Overload",150,1,Arrays.asList("Fire","Electric"));
-        list_of_skill.push_back(tsunami);
-        list_of_skill.push_back(fireball);
-        list_of_skill.push_back(freezing);
-        list_of_skill.push_back(fissure);
-        list_of_skill.push_back(thunder);
-        list_of_skill.push_back(cold);
-        list_of_skill.push_back(watershock);
-        list_of_skill.push_back(overload);
+        ArrayList<SkillItem> list_of_skill = new ArrayList<SkillItem>();
+        Skill tsunami_s = new Skill("Tsunami",120,1,Arrays.asList("Water"));
+        Skill fireball_s = new Skill("FireBall",120,1,Arrays.asList("Fire"));
+        Skill freezing_s = new Skill("Freezing field",120,1,Arrays.asList("Ice"));
+        Skill fissure_s = new Skill("Fissure",120,1,Arrays.asList("Ground"));
+        Skill thunder_s = new Skill("Thunder God",120,1,Arrays.asList("Electric"));
+        Skill cold_s = new Skill("Cold Embrace",150,1,Arrays.asList("Water","Ice"));
+        Skill watershock_s = new Skill("Watershock",150,1,Arrays.asList("Water","Ground"));
+        Skill overload_s = new Skill("Overload",150,1,Arrays.asList("Fire","Electric"));
+        SkillItem tsunami = new SkillItem(tsunami_s);
+        SkillItem fireball = new SkillItem(fireball_s);
+        SkillItem freezing = new SkillItem(freezing_s);
+        SkillItem fissure = new SkillItem(fissure_s);
+        SkillItem thunder = new SkillItem(thunder_s);
+        SkillItem cold = new SkillItem(cold_s);
+        SkillItem watershock = new SkillItem(watershock_s);
+        SkillItem overload = new SkillItem(overload_s);
+        list_of_skill.add(tsunami);
+        list_of_skill.add(fireball);
+        list_of_skill.add(freezing);
+        list_of_skill.add(fissure);
+        list_of_skill.add(thunder);
+        list_of_skill.add(cold);
+        list_of_skill.add(watershock);
+        list_of_skill.add(overload);
         for (SkillItem it : list_of_skill)
         {
             if(it.getElements() == element)
@@ -225,7 +238,7 @@ public class Player {
             }
         }
     }
-    public void battle(Peta map, bool run) {
+    public void battle(Map map, bool run) {
         Point P1 = new Point(0, 1);
         Point P2 = new Point(1, 0);
         Point P3 = new Point(0, -1);
@@ -300,7 +313,7 @@ public class Player {
                         } else{
                             System.out.println("You lose :(");
                             System.out.println("Engimon anda meninggal dunia");
-                            if(this.engimon_as_object.getCount() != 0){
+                            if(this.engimon_as_object.getNeff() != 0){
                                 this.switch_out_engimon_meninggal();
                             } else{
                                 System.out.println( "Anda tidak punya engimon didalam inventory terpaksa anda kalah :(((");
@@ -350,7 +363,7 @@ public class Player {
                         } else{
                             System.out.println("You lose :(");
                             System.out.println("Engimon anda meninggal dunia");
-                            if(this.engimon_as_object.getCount() != 0){
+                            if(this.engimon_as_object.getNeff() != 0){
                                 this.switch_out_engimon_meninggal();
                             } else{
                                 System.out.println( "Anda tidak punya engimon didalam inventory terpaksa anda kalah :(((");
@@ -364,7 +377,7 @@ public class Player {
         }
     }
     public void insertSkillItem(SkillItem si) {
-        if (this.getTotalInventory() < this.engimon_as_object.getMaxCapacity()){
+        if (this.getTotalInventory() < this.engimon_as_object.getMaxEl()){
             this.skill_as_object.insert(si);
         } else{
             System.out.println("Inventory anda penuh");
@@ -376,7 +389,7 @@ public class Player {
         int counter = 1;
         Engimon e1;
         Engimon e2;
-        if(this.engimon_as_object.getCount() >= 2)
+        if(this.engimon_as_object.getNeff() >= 2)
         {
             while (counter<=2)
             {
