@@ -9,12 +9,25 @@ public class InventorySkillItem extends AbstractInventory<SkillItem> {
         super();
     }
 
+    public int getTotalSkillItem(){
+        int tot = 0;
+        for(SkillItem si: this.getObject()){
+            tot += si.getJumlah();
+        }
+        return tot;
+    }
+
     @Override
     public String printInventory(){
         StringBuilder str = new StringBuilder();
         if(this.object.size() > 0){
+            str.append("Anda memiliki " + this.getNeff() + " jenis Skill Item, dengan total item sebanyak " + this.getTotalSkillItem() + " item\n");
+            str.append("Berikut adalah list skill item yang anda miliki:\n");
+            str.append("(No. NamaSkill / BasePower / Element / TotalItem)\n");
+            int idx = 1;
             for(SkillItem si : this.getObject()){
-                str.append(si.printSkillItem());
+                str.append(idx + ". " + si.printSkillItem());
+                idx += 1;
             }
         } else{
             str.append("Inventory kosong :(\n");
@@ -33,6 +46,7 @@ public class InventorySkillItem extends AbstractInventory<SkillItem> {
                     this.object.get(i).addJumlah(1);
                     this.object.set(i, this.object.get(i));
                     addTotal(1);
+                    done = true;
                     sama = true;
                 } else{
                     i++;

@@ -22,9 +22,14 @@ public class DriverInventory {
         isi.insert(new SkillItem(S));
         isi.insert(new SkillItem(Sk));
         isi.insert(new SkillItem(Sp));
+        if(isi.insert(new SkillItem(Sp))){
+            System.out.println("Berhasil menyimpan ke dalam inventory");
+        } else{
+            System.out.println("Gagal menyimpan ke dalam inventory");
+        }
         isi.insert(new SkillItem(Sp));
         isi.insert(new SkillItem(Sp));
-        isi.removeX(1, 3);
+        isi.removeX(1, 2);
 
         // ArrayList<SkillItem> listSkill = isi.getObject();
 
@@ -43,9 +48,14 @@ public class DriverInventory {
         Engimon e4 = new Earthshaker();
         ie.insert(e1);
         ie.insert(e2);
-        ie.insert(e3);
+        if(ie.insert(e3)){
+            System.out.println("Berhasil menyimpan ke dalam inventory");
+        } else{
+            System.out.println("Gagal menyimpan ke dalam inventory");
+        }
         System.out.println(ie.printInventory());
-        ie.switchObj(3, e4);
+        e4 = ie.switchObj(3, e4);
+        e4 = ie.switchObj(1, e4);
         System.out.println(ie.printInventory());
         System.out.println(e4.printDetail());
     }

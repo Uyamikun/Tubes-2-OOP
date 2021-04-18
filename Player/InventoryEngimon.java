@@ -13,8 +13,12 @@ public class InventoryEngimon extends AbstractInventory<Engimon> {
     public String printInventory(){
         StringBuilder str = new StringBuilder();
         if(this.object.size() > 0){
+            str.append("Anda memiliki " + this.getNeff() + " Engimon di dalam inventory\n");
+            str.append("Berikut adalah list engimon yang ada di dalam inventory anda:\n");
+            str.append("(No. NamaEngimon / NamaSpesies / ElemenEngimon / LevelEngimon)\n");
+            int idx = 1;
             for(Engimon e : this.getObject()){
-                str.append(e.getName() + " / ");
+                str.append(idx + ". " + e.getName() + " / " + e.getSpecies() + " / ");
                 for(String s : e.getElements()){
                     str.append(s);
                     if(s != e.getElements().get(e.getElements().size()-1)){
@@ -22,6 +26,7 @@ public class InventoryEngimon extends AbstractInventory<Engimon> {
                     }
                 }
                 str.append(" / Lv." + e.getLevel() + "\n");
+                idx += 1;
             }
         } else{
             str.append("Inventory kosong :(\n");

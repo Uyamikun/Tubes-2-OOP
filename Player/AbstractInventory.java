@@ -45,15 +45,19 @@ abstract class AbstractInventory<T> {
         return this.object.get(idx-1); // asumsi index valid
     }
 
-    public boolean switchObj(int idx, T obj){
+    public T switchObj(int idx, T obj){
         if(idx-1 < this.neff){
             T temp = obj;
-            obj = this.object.get(idx-1);
+            T tempret = this.object.get(idx-1);
             this.object.set(idx-1, temp);
-            return true;
+            return tempret;
         } else{
-            return false;
+            return null;
         }
+    }
+
+    public boolean isIdxValid(int idx){
+        return idx-1 < this.neff;
     }
 
     public boolean setObj(int idx, T obj){
