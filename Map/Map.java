@@ -1,7 +1,7 @@
 
 
 import Engimon.Engimon;
-
+import Battle.Battle;
 import java.awt.*;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
@@ -217,7 +217,7 @@ public class Map
             for (Cell c : ac){
                 c.paint(g);
                 if (c.getEngimon() != null){
-                    if (c.getEngimon().getLevel()>minSpawnLevel) {
+                    if (isStronger(c.getEngimon())) {
                         c.paintLevel(g);
                     }
                 }
@@ -227,6 +227,11 @@ public class Map
 
     public void setActiveEngimon(Engimon e){
         this.getCell(this.getActivePos()).addEngimon(e);
+    }
+
+    public boolean isStronger(Engimon e){
+        Battle b = new Battle(this.getCell(ActivePos).getEngimon(), e);
+        return b.calculatePowerEnemy() > b.calculatePowerPlayer();
     }
 
 
