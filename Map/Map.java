@@ -2,6 +2,7 @@
 
 import Engimon.Engimon;
 
+import java.awt.*;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.*;
@@ -58,6 +59,8 @@ public class Map
             }
             this.PlayerPos = new Point(5,5);
             this.ActivePos = new Point(4,5);
+            this.getCell(PlayerPos).setPlayer(true);
+            this.getCell(ActivePos).setActive(true);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -130,7 +133,10 @@ public class Map
         if(!c.isBlocked()){
             this.getCell(PlayerPos).setPlayer(false);
             c.setPlayer(true);
+            moveEngimon(this.getCell(this.getActivePos()), this.getPlayerPos());
+            this.getCell(ActivePos).setActive(false);
             this.ActivePos = this.PlayerPos;
+            this.getCell(ActivePos).setActive(true);
             this.PlayerPos = dest;
             this.nextTurn();
         }else{
@@ -140,7 +146,7 @@ public class Map
 
     public void moveEngimon(Cell c, Point dest){
         Cell c1 = this.getCell(dest);
-        if (!c1.isBlocked() && !c1.active && c1.canMove(c.getEngimon())){
+        if (!c1.isBlocked() && !c1.active && (c1.canMove(c.getEngimon())) || c.isActive()){
             c1.addEngimon(c.getEngimon());
             c.removeEngimon();
         }
@@ -150,7 +156,7 @@ public class Map
         ArrayList<Cell> arr = new ArrayList<>();
         for (ArrayList<Cell> ac : this.map_matrix){
             for (Cell c : ac){
-                if (c.getEngimon() != null){
+                if (c.getEngimon() != null && !c.isActive()){
                     arr.add(c);
                 }
             }
@@ -205,6 +211,25 @@ public class Map
         }
         return engimons;
     }
+
+    public void paint(Graphics g){
+        for (ArrayList<Cell> ac :this.map_matrix){
+            for (Cell c : ac){
+                c.paint(g);
+                if (c.getEngimon() != null){
+                    if (c.getEngimon().getLevel()>minSpawnLevel) {
+                        c.paintLevel(g);
+                    }
+                }
+            }
+        }
+    }
+
+    public void setActiveEngimon(Engimon e){
+        this.getCell(this.getActivePos()).addEngimon(e);
+    }
+
+
 
 
 }

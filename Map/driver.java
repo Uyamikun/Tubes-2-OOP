@@ -38,6 +38,8 @@ public class driver {
         System.out.println(peta.getCell(3,4).getPosisi().get_x());
         System.out.println(peta.getCell(3,4).getPosisi().get_y());
 
+        peta.setActiveEngimon(new Blastoise());
+
         //cek Battle
         Hu_Tao e1 = new Hu_Tao("Aoooo",10);
         Wynter e2 = new Wynter("Wynn",5);

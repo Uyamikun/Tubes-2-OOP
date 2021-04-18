@@ -29,7 +29,10 @@ public class SeaCell extends Cell{
     public void paint(Graphics g){
         g.drawImage(Resources.TEXTURES.get(4),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
         if (this.engimon!= null){
-            g.drawImage(Resources.TEXTURES.get(0),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+            this.paintEngimon(g);
+            if (this.active){
+                this.paintActive(g);
+            }
         }
     }
 

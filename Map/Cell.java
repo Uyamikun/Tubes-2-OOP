@@ -73,4 +73,16 @@ public abstract class Cell {
         }
      }
 
+     public void paintEngimon(Graphics g){
+         g.drawImage(Resources.TEXTURES.get(0),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+     }
+
+     public void paintLevel(Graphics g){
+
+     }
+
+     public void paintActive(Graphics g){
+
+     }
+
 }

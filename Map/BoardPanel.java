@@ -18,12 +18,7 @@ public class BoardPanel extends JPanel{
         //create gambar component
         
         //peta
-        ArrayList<ArrayList<Cell>> matriks = peta.getMap();
-        for (ArrayList<Cell> ac :matriks){
-            for (Cell c : ac){
-                c.paint(g);
-            }
-        }
+        peta.paint(g);
         //gambar orang
         //Player ID= 0
         g.drawImage(Resources.TEXTURES.get(0),playerUI.getPosX(),playerUI.getPosY(),null);
@@ -58,6 +53,14 @@ public class BoardPanel extends JPanel{
             //System.out.println(exception.getCause());
             //System.out.println("Something wrong");
         }
+
+        //DEBUG
+//        for (ArrayList<Cell> ac :peta.getMap()){
+//            for (Cell c : ac){
+//                c.printEngimon();
+//            }
+//            System.out.println();
+//        }
 
         //Debug
 //        if (key==KeyEvent.VK_UP || key==KeyEvent.VK_W) {
