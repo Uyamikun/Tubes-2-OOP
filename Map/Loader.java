@@ -13,6 +13,15 @@ public class Loader {
             Resources.TEXTURES.add(Resources.TUNDRA, ImageIO.read(new File("Resources/tundra.png")));
             Resources.TEXTURES.add(Resources.GRASS, ImageIO.read(new File("Resources/grass.png")));
             Resources.TEXTURES.add(Resources.SEA, ImageIO.read(new File("Resources/sea.png")));
+            //5-12 ENGIMON
+			Resources.TEXTURES.add(Resources.BLASTOISE, ImageIO.read(new File("Resources/blastoise.png")));
+			Resources.TEXTURES.add(Resources.CYNDAQUIL, ImageIO.read(new File("Resources/cyndaquil.png")));
+			Resources.TEXTURES.add(Resources.AMAURA, ImageIO.read(new File("Resources/amaura.png")));
+			Resources.TEXTURES.add(Resources.EARTHSHAKER, ImageIO.read(new File("Resources/earthshaker.png")));
+			Resources.TEXTURES.add(Resources.PIKACHU, ImageIO.read(new File("Resources/pikachu.png")));
+			Resources.TEXTURES.add(Resources.WYNTER, ImageIO.read(new File("Resources/wynter.png")));
+			Resources.TEXTURES.add(Resources.KATARATOPH, ImageIO.read(new File("Resources/kataratoph.png")));
+			Resources.TEXTURES.add(Resources.HUTAO, ImageIO.read(new File("Resources/hutao.png")));
         } catch (IOException e) {
 			e.printStackTrace();
 		}

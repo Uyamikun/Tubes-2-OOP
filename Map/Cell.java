@@ -74,7 +74,52 @@ public abstract class Cell {
      }
 
      public void paintEngimon(Graphics g){
-         g.drawImage(Resources.TEXTURES.get(0),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+//         e.getSpecies().equals("Cyndaquil")
+        if (this.engimon.getSpecies().equals("Blastoise")){
+            g.drawImage(Resources.TEXTURES.get(5),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+            //debug
+            //System.out.println("Spawned" + this.engimon.getSpecies());
+        }
+        else if (this.engimon.getSpecies().equals("Cyndaquil")){
+            g.drawImage(Resources.TEXTURES.get(6),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+            //debug
+            //System.out.println("Spawned" + this.engimon.getSpecies());
+        }
+        else if (this.engimon.getSpecies().equals("Amaura")){
+            g.drawImage(Resources.TEXTURES.get(7),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+            //debug
+            //System.out.println("Spawned" + this.engimon.getSpecies());
+        }
+        else if (this.engimon.getSpecies().equals("Earthshaker")){
+            g.drawImage(Resources.TEXTURES.get(8),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+            //debug
+            //System.out.println("Spawned" + this.engimon.getSpecies());
+        }
+        else if (this.engimon.getSpecies().equals("Pikachu")){
+            g.drawImage(Resources.TEXTURES.get(9),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+            //debug
+            //System.out.println("Spawned" + this.engimon.getSpecies());
+        }
+        else if (this.engimon.getSpecies().equals("Wynter")){
+            g.drawImage(Resources.TEXTURES.get(10),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+            //debug
+            //System.out.println("Spawned" + this.engimon.getSpecies());
+        }
+        else if (this.engimon.getSpecies().equals("KataraToph")){
+            g.drawImage(Resources.TEXTURES.get(11),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+            //debug
+            //System.out.println("Spawned" + this.engimon.getSpecies());
+        }
+        else if (this.engimon.getSpecies().equals("Hu_Tao")){
+            g.drawImage(Resources.TEXTURES.get(12),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+            //debug
+            //System.out.println("Spawned" + this.engimon.getSpecies());
+        }
+        else {
+            g.drawImage(Resources.TEXTURES.get(0),this.posisi.get_x()*Tile.SIZE,this.posisi.get_y()*Tile.SIZE,null);
+            //debug
+            //System.out.println("Spawned" + this.engimon.getSpecies());
+        }
      }
 
      public void paintLevel(Graphics g){

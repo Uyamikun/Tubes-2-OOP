@@ -17,7 +17,7 @@ public class Map
     private  int turnCounter = 0;
     private  final int movementTurn = 5;
     private final Point[] direction = {new Point(0,1), new Point(1,0), new Point(0,-1), new Point(-1, 0)};
-    private static int maxEngimon = 6;
+    private static int maxEngimon = 10;
     private static  int minSpawnLevel = 1;
 
 
@@ -103,6 +103,8 @@ public class Map
         int bound = (int) (minSpawnLevel*1.5);
         int level = rand.nextInt(bound);
         c.getEngimon().setLevel(minSpawnLevel + level);
+        //debug
+        System.out.println("Spawned: " + c.getEngimon().getSpecies());
         EngimonCount++;
     }
 
