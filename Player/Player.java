@@ -4,13 +4,41 @@ import java.util.*;
 import Engimon.*;
 
 // Method yang udah terimplementasi dan ditest: 
-// - Konstruktor
-// - display_list_engimon
-// - display_list_skill
-// - setActiveEngimon
-// - display_info_engimon
-// - switch_out_active_engimon
-// Sisanya nanti lagi hehehe :) dicicil
+// a. Konstruktor
+// b. display_list_engimon
+// c. display_list_skill
+// d. setActiveEngimon
+// e. display_info_engimon
+// f. switch_out_active_engimon
+// g. removeXSkillItem
+// h. removeEngimon
+// i. interact
+// j. renameEngimon
+// k. use_skill
+// l. getHelp
+
+// Method yang harus diimplementasikan
+// 1. Menampilkan list command yang tersedia (l)
+// 2. Move
+// 3. Menampilkan list engimon yang dimiliki (b)
+// 4. Menampilkan data lengkap suatu engimon (e)
+// 5. Mengecek dan mengganti active engimon (f)
+// 6. Menampilkan list skill item (c)
+// 7. Menggunakan skill item pada engimon (k)
+// 8. Melaksanakan breeding antara 2 engimon
+// 9. Melakukan battle
+// 10. Membuang X amount skill item (g)
+// 11. Melepaskan engimon (h)
+// 12. Mengganti nama suatu engimon (j)
+// 13. Interaksi dengan active engimon (i)
+// 14. Save game
+
+// Method yang belum diimplementasi dan test
+// 1. Move
+// 2. Breeding
+// 3. Battle
+// 4. save
+// Sisanya sudah ditest :3
 
 public class Player {
     private String nama;
@@ -44,6 +72,9 @@ public class Player {
         // this.skill_as_object.insert(new SkillItem(Sk));
         // this.skill_as_object.insert(new SkillItem(Sp));
         // this.skill_as_object.insert(new SkillItem(So));
+        // this.skill_as_object.insert(new SkillItem(So));
+        // this.skill_as_object.insert(new SkillItem(So));
+        // this.skill_as_object.insert(new SkillItem(So));
         // Engimon e1 = new Amaura();
         // Engimon e2 = new Blastoise();
         // Engimon e3 = new Pikachu();
@@ -75,6 +106,78 @@ public class Player {
     
     public void setActiveEngimon(Engimon e) {
         this.active_engimon = e;
+    }
+
+    public void removeXSkillItem(){
+        System.out.print(this.display_list_skill());
+        System.out.print("Pilih skill item mana yang ingin dibuang: ");
+        int idx;
+        Scanner S = new Scanner(System.in); 
+        idx = S.nextInt();
+        System.out.print("Pilih berapa jumlah skill item yang akan dibuang: ");
+        int x = S.nextInt();
+        System.out.println("");
+        if(this.skill_as_object.removeX(idx, x)){
+            System.out.println("Berhasil membuang skill item :)"); // Jika x > jumlah skill item, skill item tersebut akan dihapus
+        } else{
+            System.out.println("Gagal membuang skill item :(");
+        }
+    }
+
+    public void removeEngimon(){
+        System.out.print(this.display_list_engimon());
+        System.out.print("Pilih engimon mana yang ingin ditelantarkan: ");
+        int idx;
+        Scanner S = new Scanner(System.in); 
+        idx = S.nextInt();
+        System.out.println("");
+        if(this.engimon_as_object.removeItem(idx)){
+            System.out.println("Berhasil menelantarkan engimon :)"); // Jika x > jumlah skill item, skill item tersebut akan dihapus
+        } else{
+            System.out.println("Gagal menelantarkan engimon :(");
+        }
+    }
+
+    public String interact(){
+        String strret = "[" + this.active_engimon.getName() + "]: " + this.active_engimon.getSound();
+        return strret;
+    }
+
+    public void renameEngimon(){
+        System.out.print(this.display_list_engimon());
+        System.out.print("Pilih engimon mana yang ingin diganti namanya: ");
+        int idx;
+        Scanner S = new Scanner(System.in); 
+        idx = S.nextInt();
+        S.nextLine();
+        System.out.print("Masukkan nama baru: ");
+        String nama = S.nextLine();
+        System.out.println("");
+        if(this.engimon_as_object.rename(idx, nama)){
+            System.out.println("Berhasil mengganti nama engimon :)"); // Jika x > jumlah skill item, skill item tersebut akan dihapus
+        } else{
+            System.out.println("Gagal mengganti nama engimon :(");
+        }
+    }
+
+    public String getHelp(){
+        StringBuilder str = new StringBuilder();
+        str.append("----HELP----\n");
+        str.append("1. 'w, a, s, d' untuk bergerak.\n");
+        str.append("2. 'battle' untuk melakukan battle dengan musuh terdekat.\n");
+        str.append("3. 'listengimon' untuk menampilkan list engimon yang ada di inventory.\n");
+        str.append("4. 'info' untuk menampilkan data lengkap dari suatu engimon.\n");
+        str.append("5. 'switch' untuk mengecek dan mengganti active engimon.\n");
+        str.append("6. 'listskill' untuk menampilkan list skill item yang ada di inventory.\n");
+        str.append("7. 'useskill' untuk menggunakan skill item pada suatu engimon.\n");
+        str.append("8. 'breed' untuk melakukan breeding antara 2 engimon.\n");
+        str.append("9. 'removex' untuk membuang X amount skill item di inventory.\n");
+        str.append("10. 'removee' untuk melepaskan engimon.\n");
+        str.append("11. 'rename' untuk mengganti nama suatu engimon di inventory.\n");
+        str.append("12. 'interact' untuk berinteraksi dengan active engimon.\n");
+        str.append("13. 'save' untuk melakukan save game.\n");
+        str.append("14. 'help' untuk menampilkan perintah apa saja yang tersedia.\n");
+        return str.toString();
     }
 
     // public void move(Map map, char direction) {
@@ -156,43 +259,42 @@ public class Player {
         return this.skill_as_object.printInventory();
     }
 
-    // public void use_skill() {
-    //     if(this.skill_as_object.getNeff() == 0){
-    //         System.out.println("Anda tidak mempunyai skill item di inventory");
-    //     } else{
-    //         this.display_list_skill();
-    //         System.out.print("Pilih nomor skill item yang ingin anda gunakan pada suatu engimon: ");
-    //         int idxSI;
-    //         Scanner S=new Scanner(System.in); 
-    //         idxSI=S.nextInt();
-    //         System.out.println("");
-    //         System.out.print("Pilih engimon mana yang ingin anda gunakan skill item: \n1. Active Engimon\n2. Engimon di inventory\nPilih nomor (1/2): ");
-    //         int idxE;
-    //         idxE=S.nextInt();
-    //         System.out.println("");
-    //         if(idxE == 1){
-    //             engimon temp = this.active_engimon;;
-    //             if(this.skill_as_object.learn(temp, idxSI)){
-    //                 this.setActiveEngimon(temp);
-    //                 System.out.println("Berhasil melakukan learn skill item ^_^");
-    //             } else{
-    //                 System.out.println("Gagal melakukan learn skill item :{ ");
-    //             }
-    //         } else if(idxE == 2){
-    //             this.display_list_engimon();
-    //             System.out.println("Pilih engimon nomor berapa yang ingin anda lakukan learn skill item: ");
-    //             idxE=S.nextInt();
-    //             System.out.println("");
-    //             Engimon temp = this.engimon_as_object.get(idxE);
-    //             if(this.skill_as_object.learn(temp, idxSI)){
-    //                 this.engimon_as_object.setEngimon(idxE, temp);
-    //                 System.out.println("Berhasil melakukan learn skill item ^_^");
-    //             } else{
-    //                 System.out.println("Gagal melakukan learn skill item :{ ");
-    //             }   
-    //         }  
-    //     }
-    // }
+    public void use_skill() {
+        if(this.skill_as_object.getNeff() == 0){
+            System.out.println("Anda tidak mempunyai skill item di inventory :(");
+        } else{
+            System.out.print(this.display_list_skill());
+            System.out.print("Pilih nomor skill item yang ingin anda gunakan pada suatu engimon: ");
+            int idxSI;
+            Scanner S=new Scanner(System.in); 
+            idxSI = S.nextInt();
+            System.out.print("Pilih engimon mana yang ingin anda gunakan skill item: \n1. Active Engimon\n2. Engimon di inventory\nPilih nomor (1/2): ");
+            int idxE;
+            idxE = S.nextInt();
+            System.out.println("");
+            if(idxE == 1){
+                Engimon temp = this.active_engimon;;
+                if(this.skill_as_object.learnSkill(idxSI, temp)){
+                    this.setActiveEngimon(temp);
+                    System.out.println("Berhasil melakukan learn skill item ^_^");
+                } else{
+                    System.out.println("Gagal melakukan learn skill item :{ ");
+                }
+            } else if(idxE == 2){
+                System.out.print(this.display_list_engimon());
+                System.out.print("Pilih engimon nomor berapa yang ingin anda lakukan learn skill item: ");
+                idxE = S.nextInt(); // Asumsi index valid
+                System.out.println("");
+                Engimon temp = this.engimon_as_object.get(idxE);
+                if(this.skill_as_object.learnSkill(idxSI, temp)){
+                    this.engimon_as_object.setObj(idxE, temp);
+                    System.out.println("Berhasil melakukan learn skill item ^_^");
+                } else{
+                    System.out.println("Gagal melakukan learn skill item :{ ");
+                }   
+            }  
+        }
+    }
     // public void breeding(Engimon e1, Engimon e2) {
     //     Engimon Child = new Engimon();
     //     if (this.engimon_as_object.stored(e1) && this.engimon_as_object.stored(e2))

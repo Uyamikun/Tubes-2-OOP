@@ -85,4 +85,17 @@ public class InventorySkillItem extends AbstractInventory<SkillItem> {
             return false;
         }
     }
+
+    public boolean learnSkill(int idx, Engimon e){
+        if(this.isIdxValid(idx)){
+            if(this.object.get(idx-1).learn(e)){
+                this.removeX(idx, 1);
+                return true;
+            } else{
+                return false;
+            }
+        } else{
+            return false;
+        }
+    }
 }

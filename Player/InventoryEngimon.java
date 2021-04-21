@@ -48,8 +48,13 @@ public class InventoryEngimon extends AbstractInventory<Engimon> {
         }
     }
 
-    public void rename(Engimon obj, String name) {
-        obj.setName(name);
+    public boolean rename(int idx, String name) {
+        if(this.isIdxValid(idx)){
+            this.object.get(idx-1).setName(name);
+            return true;
+        } else{
+            return false;
+        }
     }
 
     public boolean engimonMeninggal(int idx, Engimon e) {

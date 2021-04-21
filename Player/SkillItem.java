@@ -85,13 +85,11 @@ public class SkillItem extends Skill implements Comparable<SkillItem>{
             System.out.println();
             ls.set(s-1, this.getThisSkillItem());
             ls.get(s-1).setMasteryLevel(1); // mastery level di set ke 1
-            this.jumlah -= 1;
             e.setAllSkill(new ArrayList<Skill>(ls));
             return true;
         } else{
             this.setMasteryLevel(1); // set mastery level ke 1
             ls.add(this.getThisSkillItem());
-            this.jumlah -= 1;
             e.setAllSkill(new ArrayList<Skill>(ls));
             return true;
         }

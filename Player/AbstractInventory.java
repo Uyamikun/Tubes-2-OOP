@@ -56,6 +56,17 @@ abstract class AbstractInventory<T> {
         }
     }
 
+    public boolean removeItem(int idx){
+        if(this.isIdxValid(idx)){
+            this.object.remove(idx-1);
+            this.neff -= 1;
+            addTotal(-1);
+            return true;
+        } else{
+            return false;
+        }
+    }
+
     public boolean isIdxValid(int idx){
         return idx-1 < this.neff;
     }
