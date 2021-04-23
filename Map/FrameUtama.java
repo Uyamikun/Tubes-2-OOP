@@ -3,23 +3,45 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class FrameUtama extends JFrame {
+public class FrameUtama extends JFrame{
 
     private BoardPanel objBoardPanel;
+    private JPanel inputPanel;
+    private JSplitPane splitPane;
 
-    public FrameUtama(PlayerUI player, Map peta) throws HeadlessException {
+    public FrameUtama(PlayerUI player, Map peta) throws HeadlessException{
         objBoardPanel = new BoardPanel(player,peta);
-        add(objBoardPanel); //tambah panel ke frame
+        inputPanel = new JPanel();
+
         //ukuran 
         int lebarPeta = peta.getMap().get(0).size();
         int panjangPeta = peta.getMap().size();
-        setSize((lebarPeta)*Tile.SIZE+16,(panjangPeta+1)*Tile.SIZE+8);
+        setSize(((lebarPeta)*Tile.SIZE+16)+200,((panjangPeta+1)*Tile.SIZE+8));
         setTitle("Game Wankymon");
-        //setBounds(70,70,0,0);
+        //ukuran 12*32 = 384
+        //setBounds(70,70,(lebarPeta)*Tile.SIZE+16,(panjangPeta+1)*Tile.SIZE+8);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        //split panel
+        splitPane = new JSplitPane();
+        getContentPane().setLayout(new GridLayout());
+        getContentPane().add(splitPane); //tambah panel ke frame
+        //configure split panel
+        splitPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
+        splitPane.setDividerLocation(((lebarPeta)*Tile.SIZE+16)-16);
+        //input panel
+        inputPanel.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));     // we set the max height to 75 and the max width to (almost) unlimited
+        inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
+        //Component
+        splitPane.setLeftComponent(objBoardPanel);
+        //splitPane.setRightComponent(objBoardPanel);
+        splitPane.setRightComponent(inputPanel);
+        
+        //add key listener
         addKeyListener(new TAdapter());
     }
 

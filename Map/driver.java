@@ -4,7 +4,6 @@ import Engimon.*;
 
 import java.util.*;
 
-
 public class driver {
     public static void printPeta(ArrayList<ArrayList<Cell>> matriks){
         for (ArrayList<Cell> ac :matriks){
