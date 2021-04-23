@@ -19,6 +19,9 @@ public class Resources {
 	public static final byte WYNTER = 10;
 	public static final byte KATARATOPH = 11;
 	public static final byte HUTAO = 12;
+	//fx
+	public static final byte HIGH_LEVEL = 13;
+	public static final byte ACTIVE_ENGIMON = 14;
 
     //menyimpan buffered image
 	public static final HashMap<String, BufferedImage> ROOMS = new HashMap<>();

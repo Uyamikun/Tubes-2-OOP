@@ -23,6 +23,9 @@ public class Loader {
 			Resources.TEXTURES.add(Resources.WYNTER, ImageIO.read(new File("Resources/wynter.png")));
 			Resources.TEXTURES.add(Resources.KATARATOPH, ImageIO.read(new File("Resources/kataratoph.png")));
 			Resources.TEXTURES.add(Resources.HUTAO, ImageIO.read(new File("Resources/hutao.png")));
+			//FX
+			Resources.TEXTURES.add(Resources.HIGH_LEVEL, ImageIO.read(new File("Resources/symbol_highlevel.png")));
+			Resources.TEXTURES.add(Resources.ACTIVE_ENGIMON, ImageIO.read(new File("Resources/symbol_activeengimon.png")));
         } catch (IOException e) {
 			e.printStackTrace();
 		}
