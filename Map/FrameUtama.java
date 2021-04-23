@@ -62,7 +62,7 @@ public class FrameUtama extends JFrame implements ActionListener {
         buttons.add(button_data_engimon,gbc);
         buttons.add(button_list_engimon,gbc);
         inputPanel.add(buttons,gbc);
-        
+
         button_list_engimon.addActionListener(this);
         button_data_engimon.addActionListener(this);
         //inputPanel.add(button);
