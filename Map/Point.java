@@ -1,3 +1,4 @@
+package Map;
 public class Point {
     public Point(){
         this.x = 0;

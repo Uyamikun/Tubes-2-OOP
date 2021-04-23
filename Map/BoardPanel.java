@@ -1,3 +1,5 @@
+package Map;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -53,24 +55,5 @@ public class BoardPanel extends JPanel{
             //System.out.println(exception.getCause());
             //System.out.println("Something wrong");
         }
-
-        //DEBUG
-//        for (ArrayList<Cell> ac :peta.getMap()){
-//            for (Cell c : ac){
-//                c.printEngimon();
-//            }
-//            System.out.println();
-//        }
-
-        //Debug
-//        if (key==KeyEvent.VK_UP || key==KeyEvent.VK_W) {
-//            peta.movePlayer(new Point(peta.getPlayerPos().get_x(),peta.getPlayerPos().get_y()+1));
-//        } else if (key==KeyEvent.VK_DOWN || key==KeyEvent.VK_S) {
-//            peta.movePlayer(new Point(peta.getPlayerPos().get_x(),peta.getPlayerPos().get_y()-1));
-//        } else if (key==KeyEvent.VK_RIGHT || key==KeyEvent.VK_D) {
-//            peta.movePlayer(new Point(peta.getPlayerPos().get_x()+1,peta.getPlayerPos().get_y()));
-//        } else if (key==KeyEvent.VK_LEFT || key==KeyEvent.VK_A) {
-//            peta.movePlayer(new Point(peta.getPlayerPos().get_x()-1,peta.getPlayerPos().get_y()));
-//        }
     }
 }
