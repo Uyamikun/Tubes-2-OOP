@@ -13,11 +13,13 @@ public class TundraCell extends Cell{
         this.type = CellType.TUNDRA;
     }
     public void spawnEngimon() {
-        Random rand = new Random();
         int x = rand.nextInt(2);
+        System.out.println(x);
         switch (x) {
             case 0 : this.engimon = new Amaura();
+                break;
             default : this.engimon = new Wynter();
+                break;
         }
     }
 

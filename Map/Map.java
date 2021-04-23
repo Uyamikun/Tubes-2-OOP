@@ -19,6 +19,7 @@ public class Map
     private final Point[] direction = {new Point(0,1), new Point(1,0), new Point(0,-1), new Point(-1, 0)};
     private static int maxEngimon = 10;
     private static  int minSpawnLevel = 1;
+    private static final Random rand = new Random();
 
 
     public Map(String file)
@@ -90,7 +91,6 @@ public class Map
     }
 
     public void spawnEngimon(){
-        Random rand = new Random();
         int x = rand.nextInt(this.map_matrix.size());
         int y = rand.nextInt(this.map_matrix.get(0).size());
         while (this.getCell(x,y).isBlocked()){
@@ -132,7 +132,7 @@ public class Map
 
     public void movePlayer(Point dest) throws Exception{
         Cell c = this.getCell(dest);
-        if(!c.isBlocked()){
+        if(!c.isBlocked() || c.isActive()){
             this.getCell(PlayerPos).setPlayer(false);
             c.setPlayer(true);
             moveEngimon(this.getCell(this.getActivePos()), this.getPlayerPos());
@@ -167,7 +167,6 @@ public class Map
     }
 
     public void moveWildEngimons(ArrayList<Cell> wildCells){
-        Random rand = new Random();
         for (Cell c : wildCells){
             Point p = this.direction[rand.nextInt(4)];
             Point p1 = Point.add(c.getPosisi(), p);

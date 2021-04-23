@@ -13,11 +13,13 @@ public class MountainsCell extends Cell{
         this.type = CellType.MOUNTAINS;
     }
     public void spawnEngimon() {
-        Random rand = new Random();
         int x = rand.nextInt(2);
+        System.out.println(x);
         switch (x) {
             case 0 : this.engimon = new Cyndaquil();
+                break;
             default : this.engimon = new Hu_Tao();
+                break;
         }
     }
 

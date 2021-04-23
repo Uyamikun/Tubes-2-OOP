@@ -1,6 +1,7 @@
 import Engimon.*;
 
 import java.awt.*;
+import java.util.Random;
 
 public abstract class Cell {
     enum CellType{
@@ -11,6 +12,7 @@ public abstract class Cell {
     protected CellType type;
     protected boolean player;
     protected  boolean active;
+    protected static final Random rand = new Random();
 
     public Cell(Point input_posisi){
         this.posisi = input_posisi;

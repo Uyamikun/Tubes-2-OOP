@@ -17,12 +17,15 @@ public class SeaCell extends Cell{
         this.type = CellType.SEA;
     }
     public void spawnEngimon() {
-        Random rand = new Random();
         int x = rand.nextInt(3);
+        System.out.println(x);
         switch (x) {
             case 0 : this.engimon = new Blastoise();
+                break;
             case 1 : this.engimon = new Wynter();
+                break;
             default : this.engimon = new Hu_Tao();
+                break;
         }
     }
 

@@ -13,14 +13,18 @@ public class GrasslandCell extends Cell{
         this.type = CellType.GRASSLAND;
     }
     public void spawnEngimon() {
-        Random rand = new Random();
 
         int x = rand.nextInt(4);
+        System.out.println(x);
         switch (x) {
             case 0 : this.engimon = new Pikachu();
+                break;
             case 1 : this.engimon = new Earthshaker();
+                break;
             case 2 : this.engimon = new KataraToph();
+                break;
             default : this.engimon = new Hu_Tao();
+                break;
         }
     }
 
