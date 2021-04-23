@@ -66,6 +66,7 @@ public class driver {
         PlayerUI playerUI = new PlayerUI(peta);
         FrameUtama objFrameUtama = new FrameUtama(playerUI,peta);
         objFrameUtama.setVisible(false);
+        objFrameUtama.getObjBoardPanel().requestFocusInWindow();
         //Main Menu
         FrameMenu objFrameMenu = new FrameMenu(objFrameUtama);
         objFrameMenu.setVisible(true);

@@ -50,6 +50,7 @@ public class MenuPanel extends JPanel {
                 case START_GAME:
                     frameobj.setVisible(false);
                     frameUtamaObj.setVisible(true);
+                    frameUtamaObj.getObjBoardPanel().requestFocusInWindow();
                     break;
                 case QUIT_GAME:
                     System.exit(0);

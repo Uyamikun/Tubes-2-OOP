@@ -1,19 +1,25 @@
 package Map;
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
+import javax.swing.border.EmptyBorder;
 
-public class FrameUtama extends JFrame{
+public class FrameUtama extends JFrame implements ActionListener {
 
     private BoardPanel objBoardPanel;
     private JPanel inputPanel;
     private JSplitPane splitPane;
+    private JScrollPane scrollPane;
+    private JButton button_list_engimon;
+    private JButton button_data_engimon;
 
     public FrameUtama(PlayerUI player, Map peta) throws HeadlessException{
         objBoardPanel = new BoardPanel(player,peta);
         inputPanel = new JPanel();
+        //scrollPane = new JScrollPane();
+        button_list_engimon = new JButton("Test_List_Engimon");
+        button_data_engimon = new JButton("Test_Data_Engimon");
 
         //ukuran 
         int lebarPeta = peta.getMap().get(0).size();
@@ -26,6 +32,8 @@ public class FrameUtama extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        objBoardPanel.setRequestFocusEnabled(true);
+
         //split panel
         splitPane = new JSplitPane();
         getContentPane().setLayout(new GridLayout());
@@ -34,15 +42,33 @@ public class FrameUtama extends JFrame{
         splitPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
         splitPane.setDividerLocation(((lebarPeta)*Tile.SIZE+16)-16);
         //input panel
-        inputPanel.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));     // we set the max height to 75 and the max width to (almost) unlimited
+        inputPanel.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
         inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
         //Component
         splitPane.setLeftComponent(objBoardPanel);
-        //splitPane.setRightComponent(objBoardPanel);
         splitPane.setRightComponent(inputPanel);
+        //inputPanel.add(scrollPane);
+        inputPanel.setBorder(new EmptyBorder(10, 15, 10, 15));
+        inputPanel.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        inputPanel.add(new JLabel("<html><h1><strong><i>Commands</i></strong></h1><hr></html>"), gbc);
+
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        JPanel buttons = new JPanel(new GridBagLayout());
+        buttons.add(button_data_engimon,gbc);
+        buttons.add(button_list_engimon,gbc);
+        inputPanel.add(buttons,gbc);
         
+        button_list_engimon.addActionListener(this);
+        button_data_engimon.addActionListener(this);
+        //inputPanel.add(button);
+
         //add key listener
-        addKeyListener(new TAdapter());
+        objBoardPanel.addKeyListener(new TAdapter());
     }
 
     private class TAdapter extends KeyAdapter {
@@ -51,5 +77,14 @@ public class FrameUtama extends JFrame{
             super.keyPressed(e);
             objBoardPanel.keypress(e);
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        objBoardPanel.requestFocusInWindow();
+    }
+
+    public BoardPanel getObjBoardPanel() {
+        return objBoardPanel;
     }
 }
