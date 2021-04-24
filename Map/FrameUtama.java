@@ -55,7 +55,8 @@ public class FrameUtama extends JFrame implements ActionListener {
                 //objBoardPanel.moveToFront(objBoardPanel);
             }
         });
-        button_list_engimon = new JButton( new AbstractAction("List Engimon") {
+
+        button_data_engimon = new JButton( new AbstractAction("Data Engimon") {
             @Override
             public void actionPerformed( ActionEvent e ) {
                 //Test tambah panel lain
@@ -70,7 +71,7 @@ public class FrameUtama extends JFrame implements ActionListener {
                 GridBagConstraints gbc = new GridBagConstraints();
                 gbc.gridwidth = GridBagConstraints.REMAINDER;
                 gbc.anchor = GridBagConstraints.NORTH;
-                subPane.add(new JLabel("<html><h1><strong><i>List Engimon</i></strong></h1><hr></html>"), gbc);
+                subPane.add(new JLabel("<html><h1><strong><i>Data Engimon</i></strong></h1><hr></html>"), gbc);
 
                 //Kumpulan button dalam grid
                 gbc.anchor = GridBagConstraints.CENTER;
@@ -82,7 +83,8 @@ public class FrameUtama extends JFrame implements ActionListener {
                 //objBoardPanel.moveToFront(objBoardPanel);
             }
         });
-        button_data_engimon = new JButton( new AbstractAction("Data Engimon") {
+
+        button_list_engimon = new JButton( new AbstractAction("List Engimon") {
             @Override
             public void actionPerformed( ActionEvent e ) {
                 //Test tambah panel lain
@@ -148,6 +150,7 @@ public class FrameUtama extends JFrame implements ActionListener {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         JPanel buttons = new JPanel(new GridBagLayout());
+        buttons.setBackground(new Color(105,123,165));
         buttons.add(button_help,gbc);
         buttons.add(button_data_engimon,gbc);
         buttons.add(button_list_engimon,gbc);
