@@ -1,8 +1,6 @@
 *.class
 *.cpp
 *.hpp
-Engimon
-Player
 .idea
 TestForm.form
 TestForm.java

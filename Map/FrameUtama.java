@@ -9,15 +9,28 @@ public class FrameUtama extends JFrame implements ActionListener {
 
     private BoardPanel objBoardPanel;
     private JPanel inputPanel;
+    private JPanel subPane;
     private JSplitPane splitPane;
+
+
     private JScrollPane scrollPane;
+    private JButton button_help;
     private JButton button_list_engimon;
     private JButton button_data_engimon;
+
 
     public FrameUtama(PlayerUI player, Map peta) throws HeadlessException{
         objBoardPanel = new BoardPanel(player,peta);
         inputPanel = new JPanel();
         //scrollPane = new JScrollPane();
+        button_help = new JButton("Test_Help");
+        button_help = new JButton( new AbstractAction("Test_Help") {
+            @Override
+            public void actionPerformed( ActionEvent e ) {
+                //Test tambah panel lain
+                subPane.setVisible(true);
+            }
+        });
         button_list_engimon = new JButton("Test_List_Engimon");
         button_data_engimon = new JButton("Test_Data_Engimon");
 
@@ -44,6 +57,7 @@ public class FrameUtama extends JFrame implements ActionListener {
         //input panel
         inputPanel.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
         inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
+        inputPanel.setBackground(new Color(105,123,165));
         //Component
         splitPane.setLeftComponent(objBoardPanel);
         splitPane.setRightComponent(inputPanel);
@@ -51,21 +65,39 @@ public class FrameUtama extends JFrame implements ActionListener {
         inputPanel.setBorder(new EmptyBorder(10, 15, 10, 15));
         inputPanel.setLayout(new GridBagLayout());
 
+        //Title
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.anchor = GridBagConstraints.NORTH;
         inputPanel.add(new JLabel("<html><h1><strong><i>Commands</i></strong></h1><hr></html>"), gbc);
 
+        //Kumpulan button dalam grid
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         JPanel buttons = new JPanel(new GridBagLayout());
+        buttons.add(button_help,gbc);
         buttons.add(button_data_engimon,gbc);
         buttons.add(button_list_engimon,gbc);
         inputPanel.add(buttons,gbc);
 
-        button_list_engimon.addActionListener(this);
-        button_data_engimon.addActionListener(this);
-        //inputPanel.add(button);
+        subPane = new JPanel();
+        subPane.setSize((((lebarPeta)*Tile.SIZE+16)+200)/2,(((panjangPeta+1)*Tile.SIZE+8))/2);
+        JButton back = new JButton( new AbstractAction("Back") {
+            @Override
+            public void actionPerformed( ActionEvent e ) {
+                //Test tambah panel lain
+                subPane.setVisible(false);
+            }
+        });
+        back.addActionListener(this);
+        subPane.add(back);
+        objBoardPanel.add(subPane);
+        subPane.setVisible(false);
+
+        //Add action listener
+//        button_list_engimon.addActionListener(this);
+//        button_data_engimon.addActionListener(this);
+//        button_help.addActionListener(this);
 
         //add key listener
         objBoardPanel.addKeyListener(new TAdapter());
@@ -81,6 +113,7 @@ public class FrameUtama extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //subPane.requestFocusInWindow();
         objBoardPanel.requestFocusInWindow();
     }
 

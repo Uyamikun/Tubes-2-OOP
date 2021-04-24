@@ -1,6 +1,7 @@
 package Map;
 import Engimon.Engimon;
 import Battle.Battle;
+import Player.*;
 import java.awt.*;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
@@ -19,7 +20,7 @@ public class Map
     private static int maxEngimon = 10;
     private static  int minSpawnLevel = 1;
     private static final Random rand = new Random();
-
+    private Player player;
 
     public Map(String file)
     {
@@ -227,6 +228,12 @@ public class Map
 
     public void setActiveEngimon(Engimon e){
         this.getCell(this.getActivePos()).addEngimon(e);
+    }
+
+    //Set Player
+    public void setPlayer(Player player) {
+        this.player = player;
+        setActiveEngimon(player.getActive_engimon());
     }
 
     public boolean isStronger(Engimon e){

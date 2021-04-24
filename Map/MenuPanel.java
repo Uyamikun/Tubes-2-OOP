@@ -24,6 +24,7 @@ public class MenuPanel extends JPanel {
         super.paintComponent(g);
         //create gambar component
         g.setColor(new Color(30,30,70));
+        //g.setColor(new Color(105,123,165));
         g.fillRect(0,0,800,450);
 
         g.setFont(new Font("Araial",Font.PLAIN,25));
