@@ -41,5 +41,14 @@ public class DriverPlayer {
 
         // Test get Help
         System.out.println(p.getHelp());
+
+        // Test breeding
+        p.chooseBreeding();
+        p.display_info_engimon();
+
+        // Test getFirstElementEngimon
+        Engimon e = new Amaura();
+        SkillItem si = p.getFirstSkillEngimon(e);
+        System.out.println(si.printSkillItem());
     }
 }
