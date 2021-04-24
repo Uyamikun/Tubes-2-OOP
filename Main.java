@@ -18,9 +18,7 @@ public class Main {
         Player p = new Player("Hello world");
         //Set Active Engimon
         //Note peta: memiliki player perlu edit player
-//        public Engimon getActive_engimon() {
-//            return active_engimon;
-//        }
+//        public Engimon getActive_engimon()
         peta.setPlayer(p);
 
         //cek GUI

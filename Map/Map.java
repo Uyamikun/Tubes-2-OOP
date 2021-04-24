@@ -236,6 +236,10 @@ public class Map
         setActiveEngimon(player.getActive_engimon());
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     public boolean isStronger(Engimon e){
         Battle b = new Battle(this.getCell(ActivePos).getEngimon(), e);
         return b.calculatePowerEnemy() > b.calculatePowerPlayer();

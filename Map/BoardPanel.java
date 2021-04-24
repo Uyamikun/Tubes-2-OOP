@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.*;
 
-public class BoardPanel extends JPanel{
+public class BoardPanel extends JLayeredPane{
     private PlayerUI playerUI;
     private Map peta;
 
