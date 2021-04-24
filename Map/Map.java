@@ -1,8 +1,9 @@
 package Map;
-import Engimon.Engimon;
+import Engimon.*;
 import Battle.Battle;
 import Player.*;
 import java.awt.*;
+import java.nio.charset.StandardCharsets;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.*;
@@ -244,6 +245,72 @@ public class Map
         Battle b = new Battle(this.getCell(ActivePos).getEngimon(), e);
         return b.calculatePowerEnemy() > b.calculatePowerPlayer();
     }
+
+    public void save(String path){
+        StringBuilder s = new StringBuilder();
+        s.append(PlayerPos.get_x());
+        s.append(" ");
+        s.append(PlayerPos.get_y());
+        s.append("\n");
+        s.append(ActivePos.get_x());
+        s.append(" ");
+        s.append(ActivePos.get_y());
+        s.append("\n");
+
+        ArrayList<Cell> wildCells = this.getWildCells();
+        for (Cell c : wildCells){
+            s.append(c.getEngimon().getSpecies());
+            s.append(" ");
+            s.append(c.getEngimon().getLevel());
+            s.append(" ");
+            s.append(c.getPosisi().get_x());
+            s.append(" ");
+            s.append(c.posisi.get_y());
+            s.append("\n");
+        }
+        try {
+            PrintWriter writer = new PrintWriter(path + "mapStatus.txt", StandardCharsets.UTF_8);
+            writer.print(s);
+            writer.close();
+        }catch (Exception e){
+            System.out.println("Failed to save map");
+        }
+    }
+
+    public void load(String path){
+        try {
+            Scanner input = new Scanner(new File(path + "mapStatus.txt"));
+            String[] Player = input.nextLine().split(" ");
+            this.PlayerPos = new Point(Integer.parseInt(Player[0]), Integer.parseInt(Player[1]));
+            String[] Active = input.nextLine().split(" ");
+            this.ActivePos = new Point(Integer.parseInt(Active[0]), Integer.parseInt(Active[1]));
+            while (input.hasNextLine()){
+                Engimon eg;
+                String[] engimon = input.nextLine().split(" ");
+                switch (engimon[0]) {
+                    case "Blastoise" -> eg = new Blastoise();
+                    case "Cyndaquil" -> eg = new Cyndaquil();
+                    case "Amaura" -> eg = new Amaura();
+                    case "Earthshaker" -> eg = new Earthshaker();
+                    case "Pikachu" -> eg = new Pikachu();
+                    case "Wynter" -> eg = new Wynter();
+                    case "KataraToph" -> eg = new KataraToph();
+                    case "Hu_Tao" -> eg = new Hu_Tao();
+                    default -> eg = null;
+                }
+                if (eg != null){
+                    eg.setLevel(Integer.parseInt(engimon[1]));
+                    this.getCell(Integer.parseInt(engimon[2]), Integer.parseInt(engimon[3])).addEngimon(eg);
+                }
+
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+
 
 
 
