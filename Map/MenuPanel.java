@@ -28,12 +28,16 @@ public class MenuPanel extends JPanel {
         //g.setColor(new Color(105,123,165));
         g.fillRect(0,0,800,450);
 
-        g.setFont(new Font("Araial",Font.PLAIN,25));
+        g.setFont(new Font("Roboto Light",Font.BOLD,50));
+        g.setColor(Color.WHITE);
+        g.drawString("~Wangkymon~", 20, 75);
+
+        g.setFont(new Font("Arial",Font.PLAIN,25));
         for (int i=0; i<this.optionsMenu.length;i++)
         {
             if (i==this.selected) g.setColor(Color.GREEN);
             else g.setColor(Color.WHITE);
-            g.drawString(this.optionsMenu[i], 20, 50+i*40);
+            g.drawString(this.optionsMenu[i], 20, 75+50+i*40);
         }
     }
 
