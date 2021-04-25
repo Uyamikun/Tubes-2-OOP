@@ -7,13 +7,14 @@ import java.util.*;
 public class MenuPanel extends JPanel {
     private String[] optionsMenu;
     private static final String START_GAME = "Start Game!";
+    private static final String LOAD_GAME = "Load Game";
     private static final String QUIT_GAME = "Quit Game";
     private int selected;
     private FrameMenu frameobj;
     private FrameUtama frameUtamaObj;
 
     public MenuPanel(FrameMenu menu, FrameUtama futama){
-        this.optionsMenu = new String[]{START_GAME,QUIT_GAME};
+        this.optionsMenu = new String[]{START_GAME,LOAD_GAME,QUIT_GAME};
         this.selected = 0;
         this.frameobj = menu;
         this.frameUtamaObj = futama;
@@ -52,6 +53,9 @@ public class MenuPanel extends JPanel {
                     frameobj.setVisible(false);
                     frameUtamaObj.setVisible(true);
                     frameUtamaObj.getObjBoardPanel().requestFocusInWindow();
+                    break;
+                case LOAD_GAME:
+                    JOptionPane.showMessageDialog(null, "Belum implemented :)");
                     break;
                 case QUIT_GAME:
                     System.exit(0);

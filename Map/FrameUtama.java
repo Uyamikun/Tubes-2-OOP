@@ -849,6 +849,11 @@ public class FrameUtama extends JFrame implements ActionListener {
                 JLabel kuantitas = new JLabel("Pilih berapa jumlah skill item yang akan dibuang: ");
                 JTextField tf1=new JTextField();
 
+                String[] arrListSkill = peta.getPlayer().display_list_skill().split("\n");
+                for (String arg: arrListSkill) {
+                    labels2.add(new JLabel(arg),gbc);
+                }
+
                 JButton buttonEnter = new JButton(new AbstractAction("Enter") {
                     @Override
                     public void actionPerformed(ActionEvent e) {
