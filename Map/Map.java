@@ -327,6 +327,16 @@ public class Map
         }
     }
 
+    public void initiateBattle(){
+        ArrayList<Engimon> engimons= this.getNearbyEngimon();
+        //Pilih engimon yang mau dilawan
+
+        //Tampilin status engimon
+
+        //Pi
+    }
+
+
 
 
 

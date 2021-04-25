@@ -1,6 +1,7 @@
 package Player;
 import java.util.*;
 
+import Battle.Battle;
 import Engimon.*;
 
 // Method yang udah terimplementasi dan ditest: 
@@ -362,6 +363,29 @@ public class Player {
         ArrayList<Skill> ls = e.getEngimonSkill();
         return new SkillItem(ls.get(0));
     }
+
+    public void Battle(Engimon e){
+        Battle b = new Battle(this.getActive_engimon(), e);
+        double enemyPower = b.calculatePowerEnemy();
+        //tampilin informasi engimon musuh + power level
+
+        //pilih mau battle apa engga
+        double playerPower = b.calculatePowerPlayer();
+        if (playerPower >= enemyPower){
+            //dapet engimon
+            //dapet skill
+
+        }else{
+            int life = this.getActive_engimon().getLife();
+            if (life > 1){
+                this.getActive_engimon().setLife(life-1);
+            }else{
+                //bunuh engimon
+            }
+        }
+    }
+
+
 
     // public SkillItem random_generator_skill(List<String> element) {
     //     ArrayList<SkillItem> list_of_skill = new ArrayList<SkillItem>();
