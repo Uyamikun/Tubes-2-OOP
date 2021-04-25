@@ -16,6 +16,9 @@ import Engimon.*;
 // j. renameEngimon
 // k. use_skill
 // l. getHelp
+// m. chooseBreeding
+// n. getFirstSkillEngimon
+// 0. breeding
 
 // Method yang harus diimplementasikan
 // 1. Menampilkan list command yang tersedia (l)
@@ -25,7 +28,7 @@ import Engimon.*;
 // 5. Mengecek dan mengganti active engimon (f)
 // 6. Menampilkan list skill item (c)
 // 7. Menggunakan skill item pada engimon (k)
-// 8. Melaksanakan breeding antara 2 engimon
+// 8. Melaksanakan breeding antara 2 engimon (m)
 // 9. Melakukan battle
 // 10. Membuang X amount skill item (g)
 // 11. Melepaskan engimon (h)
@@ -35,9 +38,8 @@ import Engimon.*;
 
 // Method yang belum diimplementasi dan test
 // 1. Move
-// 2. Breeding
-// 3. Battle
-// 4. save
+// 2. Battle
+// 3. save
 // Sisanya sudah ditest :3
 
 public class Player {
@@ -60,29 +62,36 @@ public class Player {
         this.engimon_as_object = new InventoryEngimon();
         this.skill_as_object = new InventorySkillItem();
         // Di bawah ini untuk nyoba driver (uncomment dulu)
-        // ArrayList<String> al = new ArrayList<String>(){{
-        //     add("Fire");
-        //     add("Water");
-        // }};
-        // Skill S = new Skill("Searing chain", 31, 2, al);
-        // Skill Sk = new Skill("Fire gun", 30, 1, al);
-        // Skill Sp = new Skill("Earthshock", 32, 3, al);
-        // Skill So = new Skill("Tatap mata ojan", 100, 3, al);
-        // this.skill_as_object.insert(new SkillItem(S));
-        // this.skill_as_object.insert(new SkillItem(Sk));
-        // this.skill_as_object.insert(new SkillItem(Sp));
-        // this.skill_as_object.insert(new SkillItem(So));
-        // this.skill_as_object.insert(new SkillItem(So));
-        // this.skill_as_object.insert(new SkillItem(So));
-        // this.skill_as_object.insert(new SkillItem(So));
-        // Engimon e1 = new Amaura();
-        // Engimon e2 = new Blastoise();
-        // Engimon e3 = new Pikachu();
-        // Engimon e4 = new Earthshaker();
-        // this.engimon_as_object.insert(e1);
-        // this.engimon_as_object.insert(e2);
-        // this.engimon_as_object.insert(e3);
-        // this.engimon_as_object.insert(e4);
+        ArrayList<String> al = new ArrayList<String>(){{
+            add("Fire");
+            add("Water");
+        }};
+        Skill S = new Skill("Searing chain", 31, 2, al);
+        Skill Sk = new Skill("Fire gun", 30, 1, al);
+        Skill Sp = new Skill("Earthshock", 32, 3, al);
+        Skill So = new Skill("Tatap mata ojan", 100, 3, al);
+        this.skill_as_object.insert(new SkillItem(S));
+        this.skill_as_object.insert(new SkillItem(Sk));
+        this.skill_as_object.insert(new SkillItem(Sp));
+        this.skill_as_object.insert(new SkillItem(So));
+        this.skill_as_object.insert(new SkillItem(So));
+        this.skill_as_object.insert(new SkillItem(So));
+        this.skill_as_object.insert(new SkillItem(So));
+        Engimon e1 = new Amaura();
+        Engimon e2 = new Blastoise();
+        Engimon e3 = new Pikachu();
+        Engimon e4 = new Earthshaker();
+        e1.setLevel(35);
+        e2.setLevel(35);
+        e3.setLevel(35);
+        e4.setLevel(35);
+        this.engimon_as_object.insert(e1);
+        this.engimon_as_object.insert(e2);
+        this.engimon_as_object.insert(e3);
+        this.engimon_as_object.insert(e4);
+        Engimon e5 = new Earthshaker();
+        e5.setLevel(39);
+        this.engimon_as_object.insert(e5);
     }
 
     // public void switch_out_engimon_meninggal() {
@@ -103,10 +112,7 @@ public class Player {
     //         System.out.println("Anda tidak mempunyai engimon pada inventory");
     //     }
     // }
-    public Engimon getActive_engimon() {
-        return active_engimon;
-    }
-
+    
     public void setActiveEngimon(Engimon e) {
         this.active_engimon = e;
     }
@@ -299,42 +305,52 @@ public class Player {
         }
     }
 
+    public void breeding(Engimon e1, Engimon e2, int idx1, int idx2) {
+        try
+        {
+            Engimon Child = Breeding.startBreeding(e1, e2);
+            System.out.println("Selamat anda mendapatkan anak: ");
+            System.out.println(Child.printDetail());
+            System.out.print("Ingin memberi nama child?(Y/N): ");
+            char choice;
+            String name;
+            Scanner S=new Scanner(System.in); 
+            choice=S.next().charAt(0);
+            S.nextLine();
+            if(choice == 'Y')
+            {
+                System.out.print("Masukkan nama child: ");
+                name = S.nextLine();
+                Child.setName(name);
+            }
+            this.engimon_as_object.setObj(idx1, e1);
+            this.engimon_as_object.setObj(idx2, e2);
+            if(this.engimon_as_object.insert(Child)){
+                System.out.println("Berhasil menyimpan anak engimon ke Inventory :)");
+            } else{
+                System.out.println("Maaf inventory anda penuh :(");
+                System.out.print("Ingin menelantarkan engimon di Inventory? (Y/N): ");
+                choice=S.next().charAt(0);
+                S.nextLine();
+                if(choice == 'Y'){
+                    this.removeEngimon();
+                    if(this.engimon_as_object.insert(Child)){
+                        System.out.println("Berhasil menyimpan anak engimon ke Inventory :)");
+                    }
+                } else{
+                    System.out.println("Menelantarkan anak engimon karena tidak diinginkan :(");
+                }
+            }
+        }
+        catch(BreedingInvalidException e){}
+    }
 
-    // public void breeding(Engimon e1, Engimon e2) {
-    //     Engimon Child = new Engimon();
-    //     if (this.engimon_as_object.stored(e1) && this.engimon_as_object.stored(e2))
-    //     {
-    //         try
-    //         {
-    //             Child = startBreeding(e1, e2);
-    //             System.out.print("Ingin memberi nama child?(Y/N)");
-    //             char choice;
-    //             String name;
-    //             Scanner S=new Scanner(System.in); 
-    //             choice=S.next().charAt(0);
-    //             if(choice == 'Y')
-    //             {
-    //                 System.out.print("Masukkan nama child: ");
-    //                 name = S.nextLine();
-    //                 Child.setName(name);
-    //             }
-    //             Child.printDetail();
-    //             if(this.getTotalInventory() < this.engimon_as_object.getMaxEl()){
-    //                 this.engimon_as_object.insert(Child);
-    //             } else{
-    //                 System.out.println("Maaf inventory penuh :(");
-    //             }
-    //         }
-    //         catch(BreedingException e)
-    //         {
-    //             System.out.println(e.what());
-    //         }
-    //     } 
-    //     else
-    //     {
-    //         System.out.println("Gagal melakukan breeding, engimon tidak terdapat pada inventory");
-    //     }
-    // }
+    // Get First Skill from Engimon, buat dapetin skill item kalau menang battle
+    public SkillItem getFirstSkillEngimon(Engimon e){
+        ArrayList<Skill> ls = e.getEngimonSkill();
+        return new SkillItem(ls.get(0));
+    }
+
     // public SkillItem random_generator_skill(List<String> element) {
     //     ArrayList<SkillItem> list_of_skill = new ArrayList<SkillItem>();
     //     Skill tsunami_s = new Skill("Tsunami",120,1,Arrays.asList("Water"));
@@ -517,44 +533,34 @@ public class Player {
     // }
     
     //tambahan untuk breeding
-    // public void chooseBreeding() {
-    //     int counter = 1;
-    //     Engimon e1;
-    //     Engimon e2;
-    //     if(this.engimon_as_object.getNeff() >= 2)
-    //     {
-    //         while (counter<=2)
-    //         {
-    //             System.out.println("Berikut adalah daftar engimon yang anda punya: ");
-    //             this.display_list_engimon();
-    //             System.out.print("Pilih engimon" + counter + " untuk breeding: ");
-    //             int idx;
-    //             Scanner S=new Scanner(System.in); 
-    //             idx=S.nextInt();
-    //             System.out.println("");
-    //             if(counter==1)
-    //             {
-    //                 e1=this.engimon_as_object[idx];
-    //             } 
-    //             else //counter==2
-    //             {
-    //                 e2=this.engimon_as_object[idx];
-    //             }
-    //             counter++;
-    //         }
-    //         if (e1.getName() != e2.getName())
-    //         {
-    //             breeding(e1,e2);
-    //         }
-    //         else
-    //         {
-    //             System.out.println("Masukan salah untuk breeding");
-    //         }
-    //     }
-    //     else
-    //     {
-    //         System.out.println("Anda tidak mempunyai cukup engimon");
-    //     }
+    public void chooseBreeding() {
+        Engimon e1;
+        Engimon e2;
+        if(this.engimon_as_object.getNeff() >= 2)
+        {
+            System.out.println(this.display_list_engimon());
+            System.out.print("Pilih engimon 1 untuk melakukan breeding: ");
+            int idx1, idx2;
+            Scanner S=new Scanner(System.in); 
+            idx1 = S.nextInt();
+            System.out.print("Pilih engimon 2 untuk melakukan breeding: ");
+            idx2 = S.nextInt();
+            System.out.println("");
+            if(idx1 != idx2 && idx1 >= 1 && idx1 <= this.engimon_as_object.getNeff() && idx2 >= 1 && idx2 <= this.engimon_as_object.getNeff())
+            {
+                e1 = this.engimon_as_object.get(idx1);
+                e2 = this.engimon_as_object.get(idx2);
+                this.breeding(e1,e2,idx1,idx2);
+            } 
+            else
+            {
+               System.out.println("Nomor engimon yang anda masukkan tidak valid :("); 
+            }
+        }
+        else
+        {
+            System.out.println("Anda tidak mempunyai cukup engimon di Inventory :(");
+        }
     
-    // }
+    }
 }
