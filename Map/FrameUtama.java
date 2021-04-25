@@ -16,11 +16,18 @@ public class FrameUtama extends JFrame implements ActionListener {
     //for submenu
 //    private String[] optionsMenu;
 //    private int selected;
+    private JButton button_battle;
+    private JButton button_breed;
+    private JButton button_rename;
     private JButton button_help;
     private JButton button_interact;
     private JButton button_data_engimon;
-    private JButton button_list_engimon;
-    private JButton button_list_skill;
+    private JButton button_inventory_engimon;
+    private JButton button_inventory_skill;
+    private JButton button_switch;
+    private JButton button_remove_engimon;
+    private JButton button_remove_skill;
+    private JButton button_save;
 
     public FrameUtama(PlayerUI player, Map peta) throws HeadlessException{
         //ukuran
@@ -31,6 +38,92 @@ public class FrameUtama extends JFrame implements ActionListener {
         objBoardPanel = new BoardPanel(player,peta);
         inputPanel = new JPanel();
         //scrollPane = new JScrollPane();
+
+        //Sub menu buttons
+        button_battle = new JButton( new AbstractAction("Battle") {
+            @Override
+            public void actionPerformed( ActionEvent e ) {
+                //Test tambah panel lain
+                //Loop through the components
+                for(Component c : subPane.getComponents()){
+                    //Find the components you want to remove
+                    if(c instanceof JPanel || c instanceof JLabel){
+                        //Remove it
+                        subPane.remove(c);
+                    }
+                }
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridwidth = GridBagConstraints.REMAINDER;
+                gbc.anchor = GridBagConstraints.NORTH;
+                subPane.add(new JLabel("<html><h1><strong><i>Battle</i></strong></h1><hr></html>"), gbc);
+
+                //Kumpulan button dalam grid
+                gbc.anchor = GridBagConstraints.CENTER;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                JPanel labels = new JPanel(new GridBagLayout());
+                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
+                subPane.add(labels,gbc);
+                subPane.setVisible(true);
+                //objBoardPanel.moveToFront(objBoardPanel);
+            }
+        });
+
+        button_breed = new JButton( new AbstractAction("Breed") {
+            @Override
+            public void actionPerformed( ActionEvent e ) {
+                //Test tambah panel lain
+                //Loop through the components
+                for(Component c : subPane.getComponents()){
+                    //Find the components you want to remove
+                    if(c instanceof JPanel || c instanceof JLabel){
+                        //Remove it
+                        subPane.remove(c);
+                    }
+                }
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridwidth = GridBagConstraints.REMAINDER;
+                gbc.anchor = GridBagConstraints.NORTH;
+                subPane.add(new JLabel("<html><h1><strong><i>Breed</i></strong></h1><hr></html>"), gbc);
+
+                //Kumpulan button dalam grid
+                gbc.anchor = GridBagConstraints.CENTER;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                JPanel labels = new JPanel(new GridBagLayout());
+                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
+                subPane.add(labels,gbc);
+                subPane.setVisible(true);
+                //objBoardPanel.moveToFront(objBoardPanel);
+            }
+        });
+
+        button_rename = new JButton( new AbstractAction("Rename") {
+            @Override
+            public void actionPerformed( ActionEvent e ) {
+                //Test tambah panel lain
+                //Loop through the components
+                for(Component c : subPane.getComponents()){
+                    //Find the components you want to remove
+                    if(c instanceof JPanel || c instanceof JLabel){
+                        //Remove it
+                        subPane.remove(c);
+                    }
+                }
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridwidth = GridBagConstraints.REMAINDER;
+                gbc.anchor = GridBagConstraints.NORTH;
+                subPane.add(new JLabel("<html><h1><strong><i>Rename</i></strong></h1><hr></html>"), gbc);
+
+                //Kumpulan button dalam grid
+                gbc.anchor = GridBagConstraints.CENTER;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                JPanel labels = new JPanel(new GridBagLayout());
+                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
+                subPane.add(labels,gbc);
+                subPane.setVisible(true);
+                //objBoardPanel.moveToFront(objBoardPanel);
+            }
+        });
+
         button_help = new JButton( new AbstractAction("Help") {
             @Override
             public void actionPerformed( ActionEvent e ) {
@@ -117,7 +210,7 @@ public class FrameUtama extends JFrame implements ActionListener {
             }
         });
 
-        button_list_engimon = new JButton( new AbstractAction("List Engimon") {
+        button_inventory_engimon = new JButton( new AbstractAction("Inventory Engimon") {
             @Override
             public void actionPerformed( ActionEvent e ) {
                 //Test tambah panel lain
@@ -148,7 +241,7 @@ public class FrameUtama extends JFrame implements ActionListener {
             }
         });
 
-        button_list_skill = new JButton( new AbstractAction("List Skill") {
+        button_inventory_skill = new JButton(new AbstractAction("Inventory Skill") {
             @Override
             public void actionPerformed( ActionEvent e ) {
                 //Test tambah panel lain
@@ -173,6 +266,122 @@ public class FrameUtama extends JFrame implements ActionListener {
                 for (String arg: arrListSkill) {
                     labels.add(new JLabel(arg),gbc);
                 }
+                subPane.add(labels,gbc);
+                subPane.setVisible(true);
+                //objBoardPanel.moveToFront(objBoardPanel);
+            }
+        });
+
+        button_switch = new JButton( new AbstractAction("Switch Engimon") {
+            @Override
+            public void actionPerformed( ActionEvent e ) {
+                //Test tambah panel lain
+                //Loop through the components
+                for(Component c : subPane.getComponents()){
+                    //Find the components you want to remove
+                    if(c instanceof JPanel || c instanceof JLabel){
+                        //Remove it
+                        subPane.remove(c);
+                    }
+                }
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridwidth = GridBagConstraints.REMAINDER;
+                gbc.anchor = GridBagConstraints.NORTH;
+                subPane.add(new JLabel("<html><h1><strong><i>Switch Engimon</i></strong></h1><hr></html>"), gbc);
+
+                //Kumpulan button dalam grid
+                gbc.anchor = GridBagConstraints.CENTER;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                JPanel labels = new JPanel(new GridBagLayout());
+                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
+//                String[] arrListSkill = peta.getPlayer().display_list_skill().split("\n");
+//                for (String arg: arrListSkill) {
+//                    labels.add(new JLabel(arg),gbc);
+//                }
+                subPane.add(labels,gbc);
+                subPane.setVisible(true);
+                //objBoardPanel.moveToFront(objBoardPanel);
+            }
+        });
+
+        button_remove_engimon = new JButton( new AbstractAction("Remove Engimon") {
+            @Override
+            public void actionPerformed( ActionEvent e ) {
+                //Test tambah panel lain
+                //Loop through the components
+                for(Component c : subPane.getComponents()){
+                    //Find the components you want to remove
+                    if(c instanceof JPanel || c instanceof JLabel){
+                        //Remove it
+                        subPane.remove(c);
+                    }
+                }
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridwidth = GridBagConstraints.REMAINDER;
+                gbc.anchor = GridBagConstraints.NORTH;
+                subPane.add(new JLabel("<html><h1><strong><i>Remove Engimon</i></strong></h1><hr></html>"), gbc);
+
+                //Kumpulan button dalam grid
+                gbc.anchor = GridBagConstraints.CENTER;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                JPanel labels = new JPanel(new GridBagLayout());
+                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
+                subPane.add(labels,gbc);
+                subPane.setVisible(true);
+                //objBoardPanel.moveToFront(objBoardPanel);
+            }
+        });
+
+        button_remove_skill = new JButton( new AbstractAction("Remove Skill") {
+            @Override
+            public void actionPerformed( ActionEvent e ) {
+                //Test tambah panel lain
+                //Loop through the components
+                for(Component c : subPane.getComponents()){
+                    //Find the components you want to remove
+                    if(c instanceof JPanel || c instanceof JLabel){
+                        //Remove it
+                        subPane.remove(c);
+                    }
+                }
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridwidth = GridBagConstraints.REMAINDER;
+                gbc.anchor = GridBagConstraints.NORTH;
+                subPane.add(new JLabel("<html><h1><strong><i>Remove Skill</i></strong></h1><hr></html>"), gbc);
+
+                //Kumpulan button dalam grid
+                gbc.anchor = GridBagConstraints.CENTER;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                JPanel labels = new JPanel(new GridBagLayout());
+                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
+                subPane.add(labels,gbc);
+                subPane.setVisible(true);
+                //objBoardPanel.moveToFront(objBoardPanel);
+            }
+        });
+
+        button_save = new JButton( new AbstractAction("Save") {
+            @Override
+            public void actionPerformed( ActionEvent e ) {
+                //Test tambah panel lain
+                //Loop through the components
+                for(Component c : subPane.getComponents()){
+                    //Find the components you want to remove
+                    if(c instanceof JPanel || c instanceof JLabel){
+                        //Remove it
+                        subPane.remove(c);
+                    }
+                }
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridwidth = GridBagConstraints.REMAINDER;
+                gbc.anchor = GridBagConstraints.NORTH;
+                subPane.add(new JLabel("<html><h1><strong><i>Save</i></strong></h1><hr></html>"), gbc);
+
+                //Kumpulan button dalam grid
+                gbc.anchor = GridBagConstraints.CENTER;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                JPanel labels = new JPanel(new GridBagLayout());
+                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
                 subPane.add(labels,gbc);
                 subPane.setVisible(true);
                 //objBoardPanel.moveToFront(objBoardPanel);
@@ -219,10 +428,17 @@ public class FrameUtama extends JFrame implements ActionListener {
         JPanel buttons = new JPanel(new GridBagLayout());
         buttons.setBackground(new Color(105,123,165));
         buttons.add(button_help,gbc);
+        buttons.add(button_battle,gbc);
+        buttons.add(button_breed,gbc);
+        buttons.add(button_rename,gbc);
         buttons.add(button_interact,gbc);
         buttons.add(button_data_engimon,gbc);
-        buttons.add(button_list_engimon,gbc);
-        buttons.add(button_list_skill,gbc);
+        buttons.add(button_inventory_engimon,gbc);
+        buttons.add(button_inventory_skill,gbc);
+        buttons.add(button_switch,gbc);
+        buttons.add(button_remove_engimon,gbc);
+        buttons.add(button_remove_skill,gbc);
+        buttons.add(button_save,gbc);
         inputPanel.add(buttons,gbc);
 
         //subpanel
