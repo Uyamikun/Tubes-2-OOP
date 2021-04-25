@@ -1,5 +1,7 @@
 package Map;
 import Engimon.Engimon;
+import Engimon.Breeding;
+import Engimon.BreedingInvalidException;
 import Player.InventoryEngimon;
 import Player.InventorySkillItem;
 import Player.SkillItem;
@@ -8,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.border.EmptyBorder;
 
 public class FrameUtama extends JFrame implements ActionListener {
@@ -95,9 +98,99 @@ public class FrameUtama extends JFrame implements ActionListener {
                 //Kumpulan button dalam grid
                 gbc.anchor = GridBagConstraints.CENTER;
                 gbc.fill = GridBagConstraints.HORIZONTAL;
-                JPanel labels = new JPanel(new GridBagLayout());
-                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
-                subPane.add(labels,gbc);
+                if(peta.getPlayer().getEngimon_as_object().getNeff() >= 2)
+                {
+                    //Create combobox
+                    InventoryEngimon invEngimon = peta.getPlayer().getEngimon_as_object();
+                    ArrayList<String> namaEngimon = new ArrayList<String>();
+                    if(invEngimon.getObject().size() > 0){
+                        for(Engimon engi : invEngimon.getObject()){
+                            namaEngimon.add(engi.getName());
+                        }
+                    }
+                    subPane.c1 = new JComboBox(namaEngimon.toArray());
+                    subPane.c2 = new JComboBox(namaEngimon.toArray());
+                    gbc.anchor = GridBagConstraints.CENTER;
+                    gbc.fill = GridBagConstraints.HORIZONTAL;
+                    JPanel labels2 = new JPanel();
+                    labels2.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                    labels2.setLayout(new BoxLayout(labels2, BoxLayout.Y_AXIS));
+                    subPane.c1.addItemListener(subPane);
+                    subPane.l2 = new JLabel("");
+                    subPane.c2.addItemListener(subPane);
+                    subPane.l3 = new JLabel("");
+
+                    JLabel nama = new JLabel("Masukkan nama yang baru:");
+                    JTextField tf1=new JTextField();
+
+                    JButton buttonEnter = new JButton(new AbstractAction("Enter") {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            subPane.remove(labels2);
+                            GridBagConstraints gbc = new GridBagConstraints();
+                            gbc.anchor = GridBagConstraints.CENTER;
+                            gbc.fill = GridBagConstraints.HORIZONTAL;
+                            JPanel labels3 = new JPanel();
+                            labels3.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                            labels3.setLayout(new BoxLayout(labels3, BoxLayout.Y_AXIS));
+                            //debug
+                            System.out.println(subPane.c1.getSelectedIndex());
+                            System.out.println(subPane.c2.getSelectedIndex());
+                            int idx1 = subPane.c1.getSelectedIndex()+1;
+                            int idx2 = subPane.c2.getSelectedIndex()+1;
+                            if(idx1 != idx2 && idx1 >= 1 && idx1 <= peta.getPlayer().getEngimon_as_object().getNeff() && idx2 >= 1 && idx2 <= peta.getPlayer().getEngimon_as_object().getNeff()) {
+                                Engimon e1 = peta.getPlayer().getEngimon_as_object().get(idx1);
+                                Engimon e2 = peta.getPlayer().getEngimon_as_object().get(idx2);
+                                try
+                                {
+                                    Engimon Child = Breeding.startBreeding(e1, e2);
+                                    if (!tf1.getText().equals(""))
+                                    {
+                                        Child.setName(tf1.getText());
+                                    }
+                                    peta.getPlayer().getEngimon_as_object().setObj(idx1, e1);
+                                    peta.getPlayer().getEngimon_as_object().setObj(idx2, e2);
+                                    if(peta.getPlayer().getEngimon_as_object().insert(Child)){
+                                        labels3.add(new JLabel("Berhasil menyimpan anak engimon ke Inventory :)"),gbc);
+                                    } else{
+                                        labels3.add(new JLabel("Maaf inventory anda penuh"),gbc);
+                                        //menelantarkan tidak ada
+                                    }
+                                }
+                                catch(BreedingInvalidException exce){}
+                                //peta.getPlayer().breeding(e1, e2, idx1, idx2);
+                            }
+                            else
+                            {
+                                labels3.add(new JLabel("Engimon yang anda masukkan tidak valid :("),gbc);
+                            }
+                            subPane.add(labels3,gbc);
+                            subPane.revalidate();
+                            subPane.repaint();
+                        }
+                    });
+
+                    labels2.add(new JLabel("Select first engimon"),gbc);
+                    labels2.add(subPane.l2,gbc);
+                    labels2.add(subPane.c1,gbc);
+                    labels2.add(new JLabel("Select second engimon"),gbc);
+                    labels2.add(subPane.l3,gbc);
+                    labels2.add(subPane.c2,gbc);
+                    labels2.add(nama,gbc);
+                    labels2.add(tf1,gbc);
+                    labels2.add(buttonEnter,gbc);
+                    subPane.add(labels2,gbc);
+                    subPane.revalidate();
+                    subPane.repaint();
+                }
+                else
+                {
+                    JPanel labels2 = new JPanel();
+                    labels2.add(new JLabel("Anda tidak mempunyai cukup engimon di Inventory :("),gbc);
+                    subPane.add(labels2,gbc);
+                    subPane.revalidate();
+                    subPane.repaint();
+                }
                 subPane.setVisible(true);
                 //objBoardPanel.moveToFront(objBoardPanel);
             }
