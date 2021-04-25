@@ -220,6 +220,10 @@ public class Player {
     //     //map.print();
     // }
 
+    public Engimon getActive_engimon() {
+        return active_engimon;
+    }
+
     public String display_list_engimon() {
         return this.engimon_as_object.printInventory();
     }

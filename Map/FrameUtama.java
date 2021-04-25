@@ -14,9 +14,10 @@ public class FrameUtama extends JFrame implements ActionListener {
 
     private JScrollPane scrollPane;
     private JButton button_help;
-    private JButton button_list_engimon;
-    private JButton button_data_engimon;
     private JButton button_interact;
+    private JButton button_data_engimon;
+    private JButton button_list_engimon;
+    private JButton button_list_skill;
 
     public FrameUtama(PlayerUI player, Map peta) throws HeadlessException{
         //ukuran
@@ -141,6 +142,34 @@ public class FrameUtama extends JFrame implements ActionListener {
             }
         });
 
+        button_list_skill = new JButton( new AbstractAction("List Skill") {
+            @Override
+            public void actionPerformed( ActionEvent e ) {
+                //Test tambah panel lain
+                //Loop through the components
+                for(Component c : subPane.getComponents()){
+                    //Find the components you want to remove
+                    if(c instanceof JPanel || c instanceof JLabel){
+                        //Remove it
+                        subPane.remove(c);
+                    }
+                }
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridwidth = GridBagConstraints.REMAINDER;
+                gbc.anchor = GridBagConstraints.NORTH;
+                subPane.add(new JLabel("<html><h1><strong><i>List Skill</i></strong></h1><hr></html>"), gbc);
+
+                //Kumpulan button dalam grid
+                gbc.anchor = GridBagConstraints.CENTER;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                JPanel labels = new JPanel(new GridBagLayout());
+                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
+                subPane.add(labels,gbc);
+                subPane.setVisible(true);
+                //objBoardPanel.moveToFront(objBoardPanel);
+            }
+        });
+
         //Configure
         setSize(((lebarPeta)*Tile.SIZE+16)+200,((panjangPeta+1)*Tile.SIZE+8));
         setTitle("Game Wankymon");
@@ -184,6 +213,7 @@ public class FrameUtama extends JFrame implements ActionListener {
         buttons.add(button_interact,gbc);
         buttons.add(button_data_engimon,gbc);
         buttons.add(button_list_engimon,gbc);
+        buttons.add(button_list_skill,gbc);
         inputPanel.add(buttons,gbc);
 
         //subpanel
