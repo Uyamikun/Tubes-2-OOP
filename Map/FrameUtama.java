@@ -16,6 +16,7 @@ public class FrameUtama extends JFrame implements ActionListener {
     private JButton button_help;
     private JButton button_list_engimon;
     private JButton button_data_engimon;
+    private JButton button_interact;
 
     public FrameUtama(PlayerUI player, Map peta) throws HeadlessException{
         //ukuran
@@ -50,6 +51,34 @@ public class FrameUtama extends JFrame implements ActionListener {
                 labels.add(new JLabel("HELP:"),gbc);
                 labels.add(new JLabel("W,A,S,D to move"),gbc);
                 labels.add(new JLabel("Arrow keys to move"),gbc);
+                subPane.add(labels,gbc);
+                subPane.setVisible(true);
+                //objBoardPanel.moveToFront(objBoardPanel);
+            }
+        });
+
+        button_interact = new JButton( new AbstractAction("Interact") {
+            @Override
+            public void actionPerformed( ActionEvent e ) {
+                //Test tambah panel lain
+                //Loop through the components
+                for(Component c : subPane.getComponents()){
+                    //Find the components you want to remove
+                    if(c instanceof JPanel || c instanceof JLabel){
+                        //Remove it
+                        subPane.remove(c);
+                    }
+                }
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridwidth = GridBagConstraints.REMAINDER;
+                gbc.anchor = GridBagConstraints.NORTH;
+                subPane.add(new JLabel("<html><h1><strong><i>Interact</i></strong></h1><hr></html>"), gbc);
+
+                //Kumpulan button dalam grid
+                gbc.anchor = GridBagConstraints.CENTER;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                JPanel labels = new JPanel(new GridBagLayout());
+                labels.add(new JLabel(peta.getPlayer().interact()),gbc);
                 subPane.add(labels,gbc);
                 subPane.setVisible(true);
                 //objBoardPanel.moveToFront(objBoardPanel);
@@ -152,6 +181,7 @@ public class FrameUtama extends JFrame implements ActionListener {
         JPanel buttons = new JPanel(new GridBagLayout());
         buttons.setBackground(new Color(105,123,165));
         buttons.add(button_help,gbc);
+        buttons.add(button_interact,gbc);
         buttons.add(button_data_engimon,gbc);
         buttons.add(button_list_engimon,gbc);
         inputPanel.add(buttons,gbc);
@@ -162,6 +192,7 @@ public class FrameUtama extends JFrame implements ActionListener {
         subPane = new JPanel();
         subPane.setLayout(new GridBagLayout());
         subPane.setSize((((lebarPeta)*Tile.SIZE+16)+200)/2,(((panjangPeta+1)*Tile.SIZE+8))/2);
+        inputPanel.setBorder(new EmptyBorder(10, 15, 10, 15));
         JButton back = new JButton( new AbstractAction("Back") {
             @Override
             public void actionPerformed( ActionEvent e ) {
