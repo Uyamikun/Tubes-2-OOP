@@ -1,6 +1,5 @@
 package Map;
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.border.EmptyBorder;
@@ -13,6 +12,10 @@ public class FrameUtama extends JFrame implements ActionListener {
     private JSplitPane splitPane;
 
     private JScrollPane scrollPane;
+
+    //for submenu
+//    private String[] optionsMenu;
+//    private int selected;
     private JButton button_help;
     private JButton button_interact;
     private JButton button_data_engimon;
@@ -135,7 +138,10 @@ public class FrameUtama extends JFrame implements ActionListener {
                 gbc.anchor = GridBagConstraints.CENTER;
                 gbc.fill = GridBagConstraints.HORIZONTAL;
                 JPanel labels = new JPanel(new GridBagLayout());
-                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
+                String[] arrListEngimon = peta.getPlayer().display_list_engimon().split("\n");
+                for (String arg: arrListEngimon) {
+                    labels.add(new JLabel(arg),gbc);
+                }
                 subPane.add(labels,gbc);
                 subPane.setVisible(true);
                 //objBoardPanel.moveToFront(objBoardPanel);
@@ -163,7 +169,10 @@ public class FrameUtama extends JFrame implements ActionListener {
                 gbc.anchor = GridBagConstraints.CENTER;
                 gbc.fill = GridBagConstraints.HORIZONTAL;
                 JPanel labels = new JPanel(new GridBagLayout());
-                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
+                String[] arrListSkill = peta.getPlayer().display_list_skill().split("\n");
+                for (String arg: arrListSkill) {
+                    labels.add(new JLabel(arg),gbc);
+                }
                 subPane.add(labels,gbc);
                 subPane.setVisible(true);
                 //objBoardPanel.moveToFront(objBoardPanel);
@@ -221,6 +230,7 @@ public class FrameUtama extends JFrame implements ActionListener {
         gbc.anchor = GridBagConstraints.NORTH;
         subPane = new JPanel();
         subPane.setLayout(new GridBagLayout());
+        //subPane.setBackground(new Color(105,123,165));
         subPane.setSize((((lebarPeta)*Tile.SIZE+16)+200)/2,(((panjangPeta+1)*Tile.SIZE+8))/2);
         inputPanel.setBorder(new EmptyBorder(10, 15, 10, 15));
         JButton back = new JButton( new AbstractAction("Back") {
