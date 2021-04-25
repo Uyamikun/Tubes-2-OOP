@@ -8,7 +8,7 @@ public class DriverPlayer {
     public static void main(String[] args) {
         Player p = new Player("Hello world");
         // Test display list engimon skill item
-        // System.out.println(p.display_list_engimon());
+        System.out.println(p.display_list_engimon());
         // System.out.println(p.display_list_skill());
 
         // Test display info engimon
@@ -40,6 +40,15 @@ public class DriverPlayer {
         // System.out.println(p.display_list_skill());
 
         // Test get Help
-        System.out.println(p.getHelp());
+        // System.out.println(p.getHelp());
+
+        // Test breeding
+        // p.chooseBreeding();
+        // p.display_info_engimon();
+
+        // Test getFirstElementEngimon
+        // Engimon e = new Amaura();
+        // SkillItem si = p.getFirstSkillEngimon(e);
+        // System.out.println(si.printSkillItem());
     }
 }
