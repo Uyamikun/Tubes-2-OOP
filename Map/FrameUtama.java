@@ -1,6 +1,8 @@
 package Map;
 import Engimon.Engimon;
 import Player.InventoryEngimon;
+import Player.InventorySkillItem;
+import Player.SkillItem;
 
 import javax.swing.*;
 import java.awt.*;
@@ -580,14 +582,59 @@ public class FrameUtama extends JFrame implements ActionListener {
                 gbc.anchor = GridBagConstraints.NORTH;
                 subPane.add(new JLabel("<html><h1><strong><i>Remove Skill</i></strong></h1><hr></html>"), gbc);
 
-                //Kumpulan button dalam grid
+                //Create combobox
+                InventorySkillItem invSkill = peta.getPlayer().getSkill_as_object();
+                ArrayList<String> namaSkill = new ArrayList<String>();
+                if(invSkill.getObject().size() > 0){
+                    for(SkillItem si : invSkill.getObject()){
+                        namaSkill.add(si.getSkillName());
+                    }
+                }
+                subPane.c1 = new JComboBox(namaSkill.toArray());
                 gbc.anchor = GridBagConstraints.CENTER;
                 gbc.fill = GridBagConstraints.HORIZONTAL;
-                JPanel labels = new JPanel(new GridBagLayout());
-                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
-                subPane.add(labels,gbc);
+                JPanel labels2 = new JPanel();
+                labels2.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                labels2.setLayout(new BoxLayout(labels2, BoxLayout.Y_AXIS));
+                subPane.c1.addItemListener(subPane);
+                subPane.l = new JLabel("Pilih skill item mana yang ingin dibuang: ");
+                subPane.l2 = new JLabel("");
+                JLabel kuantitas = new JLabel("Pilih berapa jumlah skill item yang akan dibuang: ");
+                JTextField tf1=new JTextField();
+                
+                JButton buttonEnter = new JButton(new AbstractAction("Enter") {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        subPane.remove(labels2);
+                        GridBagConstraints gbc = new GridBagConstraints();
+                        gbc.anchor = GridBagConstraints.CENTER;
+                        gbc.fill = GridBagConstraints.HORIZONTAL;
+                        JPanel labels3 = new JPanel();
+                        labels3.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                        labels3.setLayout(new BoxLayout(labels3, BoxLayout.Y_AXIS));
+                        //debug
+                        System.out.println(subPane.c1.getSelectedIndex());
+                        if(peta.getPlayer().getSkill_as_object().removeX(subPane.c1.getSelectedIndex()+1,Integer.parseInt(tf1.getText()))){
+                            labels3.add(new JLabel("Berhasil membuang skill item :)"),gbc); // Jika x > jumlah skill item, skill item tersebut akan dihapus
+                        } else{
+                            labels3.add(new JLabel("Gagal membuang skill item :("),gbc);
+                        }
+                        subPane.add(labels3,gbc);
+                        subPane.revalidate();
+                        subPane.repaint();
+                    }
+                });
+
+                labels2.add(subPane.l,gbc);
+                labels2.add(subPane.l2,gbc);
+                labels2.add(subPane.c1,gbc);
+                labels2.add(kuantitas,gbc);
+                labels2.add(tf1,gbc);
+                labels2.add(buttonEnter,gbc);
+                subPane.add(labels2,gbc);
+                subPane.revalidate();
+                subPane.repaint();
                 subPane.setVisible(true);
-                //objBoardPanel.moveToFront(objBoardPanel);
             }
         });
 
