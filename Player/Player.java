@@ -224,6 +224,10 @@ public class Player {
         return active_engimon;
     }
 
+    public void setActive_engimon(Engimon active_engimon) {
+        this.active_engimon = active_engimon;
+    }
+
     public InventoryEngimon getEngimon_as_object() {
         return engimon_as_object;
     }
