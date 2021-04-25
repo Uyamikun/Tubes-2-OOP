@@ -224,6 +224,14 @@ public class Player {
         return active_engimon;
     }
 
+    public InventoryEngimon getEngimon_as_object() {
+        return engimon_as_object;
+    }
+
+    public InventorySkillItem getSkill_as_object() {
+        return skill_as_object;
+    }
+
     public String display_list_engimon() {
         return this.engimon_as_object.printInventory();
     }

@@ -202,9 +202,18 @@ public class FrameUtama extends JFrame implements ActionListener {
                 //Kumpulan button dalam grid
                 gbc.anchor = GridBagConstraints.CENTER;
                 gbc.fill = GridBagConstraints.HORIZONTAL;
-                JPanel labels = new JPanel(new GridBagLayout());
-                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
-                subPane.add(labels,gbc);
+                JPanel subs = new JPanel(new GridBagLayout());
+                String[] arrListEngimon = peta.getPlayer().display_list_engimon().split("\n");
+                for (String arg: arrListEngimon) {
+                    subs.add(new JButton( new AbstractAction("Data Engimon") {
+                        @Override
+                        public void actionPerformed( ActionEvent e ) {
+
+                        }
+                    }),gbc);
+                }
+                subs.add(new JLabel("BELUM IMPLEMENTED"),gbc);
+                subPane.add(subs,gbc);
                 subPane.setVisible(true);
                 //objBoardPanel.moveToFront(objBoardPanel);
             }
