@@ -29,6 +29,7 @@ public class FrameUtama extends JFrame implements ActionListener {
     private JButton button_inventory_engimon;
     private JButton button_inventory_skill;
     private JButton button_switch;
+    private JButton button_learn_skill;
     private JButton button_remove_engimon;
     private JButton button_remove_skill;
     private JButton button_save;
@@ -461,6 +462,38 @@ public class FrameUtama extends JFrame implements ActionListener {
             }
         });
 
+        button_learn_skill = new JButton( new AbstractAction("Learn Skill") {
+            @Override
+            public void actionPerformed( ActionEvent e ) {
+                //Test tambah panel lain
+                //Loop through the components
+                for(Component c : subPane.getComponents()){
+                    //Find the components you want to remove
+                    if(c instanceof JPanel || c instanceof JLabel){
+                        //Remove it
+                        subPane.remove(c);
+                    }
+                }
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridwidth = GridBagConstraints.REMAINDER;
+                gbc.anchor = GridBagConstraints.NORTH;
+                subPane.add(new JLabel("<html><h1><strong><i>Learn Skill</i></strong></h1><hr></html>"), gbc);
+
+                //Kumpulan button dalam grid
+                gbc.anchor = GridBagConstraints.CENTER;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                JPanel labels = new JPanel(new GridBagLayout());
+                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
+//                String[] arrListSkill = peta.getPlayer().display_list_skill().split("\n");
+//                for (String arg: arrListSkill) {
+//                    labels.add(new JLabel(arg),gbc);
+//                }
+                subPane.add(labels,gbc);
+                subPane.setVisible(true);
+                //objBoardPanel.moveToFront(objBoardPanel);
+            }
+        });
+
         button_remove_engimon = new JButton( new AbstractAction("Remove Engimon") {
             @Override
             public void actionPerformed( ActionEvent e ) {
@@ -478,14 +511,55 @@ public class FrameUtama extends JFrame implements ActionListener {
                 gbc.anchor = GridBagConstraints.NORTH;
                 subPane.add(new JLabel("<html><h1><strong><i>Remove Engimon</i></strong></h1><hr></html>"), gbc);
 
-                //Kumpulan button dalam grid
+                //Create combobox
+                InventoryEngimon invEngimon = peta.getPlayer().getEngimon_as_object();
+                ArrayList<String> namaEngimon = new ArrayList<String>();
+                if(invEngimon.getObject().size() > 0){
+                    for(Engimon engi : invEngimon.getObject()){
+                        namaEngimon.add(engi.getName());
+                    }
+                }
+                subPane.c1 = new JComboBox(namaEngimon.toArray());
                 gbc.anchor = GridBagConstraints.CENTER;
                 gbc.fill = GridBagConstraints.HORIZONTAL;
-                JPanel labels = new JPanel(new GridBagLayout());
-                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
-                subPane.add(labels,gbc);
+                JPanel labels2 = new JPanel();
+                labels2.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                labels2.setLayout(new BoxLayout(labels2, BoxLayout.Y_AXIS));
+                subPane.c1.addItemListener(subPane);
+                subPane.l = new JLabel("Select your engimon ");
+                subPane.l2 = new JLabel("");
+
+                JButton buttonEnter = new JButton(new AbstractAction("Enter") {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        subPane.remove(labels2);
+                        GridBagConstraints gbc = new GridBagConstraints();
+                        gbc.anchor = GridBagConstraints.CENTER;
+                        gbc.fill = GridBagConstraints.HORIZONTAL;
+                        JPanel labels3 = new JPanel();
+                        labels3.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                        labels3.setLayout(new BoxLayout(labels3, BoxLayout.Y_AXIS));
+                        //debug
+                        System.out.println(subPane.c1.getSelectedIndex());
+                        if(peta.getPlayer().getEngimon_as_object().removeItem(subPane.c1.getSelectedIndex()+1)){
+                            labels3.add(new JLabel("Berhasil menelantarkan engimon :)"),gbc); // Jika x > jumlah skill item, skill item tersebut akan dihapus
+                        } else{
+                            labels3.add(new JLabel("Gagal menelantarkan engimon :("),gbc);
+                        }
+                        subPane.add(labels3,gbc);
+                        subPane.revalidate();
+                        subPane.repaint();
+                    }
+                });
+
+                labels2.add(subPane.l,gbc);
+                labels2.add(subPane.l2,gbc);
+                labels2.add(subPane.c1,gbc);
+                labels2.add(buttonEnter,gbc);
+                subPane.add(labels2,gbc);
+                subPane.revalidate();
+                subPane.repaint();
                 subPane.setVisible(true);
-                //objBoardPanel.moveToFront(objBoardPanel);
             }
         });
 
@@ -546,7 +620,7 @@ public class FrameUtama extends JFrame implements ActionListener {
         });
 
         //Configure
-        setSize(((lebarPeta)*Tile.SIZE+16)+200,((panjangPeta+1)*Tile.SIZE+8));
+        setSize(((lebarPeta)*Tile.SIZE+16)+416,((panjangPeta+1)*Tile.SIZE+8));
         setTitle("Game Wankymon");
         //ukuran 12*32 = 384
         //setBounds(70,70,(lebarPeta)*Tile.SIZE+16,(panjangPeta+1)*Tile.SIZE+8);
@@ -570,14 +644,19 @@ public class FrameUtama extends JFrame implements ActionListener {
         splitPane.setLeftComponent(objBoardPanel);
         splitPane.setRightComponent(inputPanel);
         //inputPanel.add(scrollPane);
-        inputPanel.setBorder(new EmptyBorder(10, 15, 10, 15));
+        inputPanel.setBorder(new EmptyBorder(0, 15, 10, 15));
         inputPanel.setLayout(new GridBagLayout());
+        //Scrollable
+        inputPanel.setAutoscrolls(true);
+        JScrollPane scrollFrame = new JScrollPane(inputPanel);
+        scrollFrame.setPreferredSize(new Dimension( 800,300));
+        this.add(scrollFrame);
 
         //Title
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.anchor = GridBagConstraints.NORTH;
-        inputPanel.add(new JLabel("<html><h1><strong><i>Commands</i></strong></h1><hr></html>"), gbc);
+        inputPanel.add(new JLabel("<html><h1>Commands</h1></html>"), gbc);
 
         //Kumpulan button dalam grid
         gbc.anchor = GridBagConstraints.CENTER;
@@ -593,6 +672,7 @@ public class FrameUtama extends JFrame implements ActionListener {
         buttons.add(button_inventory_engimon,gbc);
         buttons.add(button_inventory_skill,gbc);
         buttons.add(button_switch,gbc);
+        buttons.add(button_learn_skill,gbc);
         buttons.add(button_remove_engimon,gbc);
         buttons.add(button_remove_skill,gbc);
         buttons.add(button_save,gbc);
