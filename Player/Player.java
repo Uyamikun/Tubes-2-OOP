@@ -50,6 +50,7 @@ public class Player {
     //private Point position_active_engimon;
     private InventoryEngimon engimon_as_object; 
     private InventorySkillItem skill_as_object;
+    private  static Battle b = new Battle(null, null);
 
     public Player() {
         this("Traveler");
@@ -368,24 +369,35 @@ public class Player {
         return new SkillItem(ls.get(0));
     }
 
-    public void Battle(Engimon e){
-        Battle b = new Battle(this.getActive_engimon(), e);
-        double enemyPower = b.calculatePowerEnemy();
-        //tampilin informasi engimon musuh + power level
-
-        //pilih mau battle apa engga
-        double playerPower = b.calculatePowerPlayer();
-        if (playerPower >= enemyPower){
+    public boolean Battle(Engimon e) throws Exception{
+        b.setPlayer(this.getActive_engimon());
+        b.setEnemy(e);
+        if (b.calculatePowerPlayer() >= b.calculatePowerEnemy()){
             //dapet engimon
+            e.setLife(3);
+            boolean engimon = this.engimon_as_object.insert(e);
+            boolean skill = this.skill_as_object.insert(this.getFirstSkillEngimon(e));
+            if (!engimon){
+                throw new Exception("Inventory engimon penuh");
+            }
             //dapet skill
-
+            if (!skill){
+                throw new Exception("Inventory skill penuh");
+            }
+            return true;
         }else{
             int life = this.getActive_engimon().getLife();
             if (life > 1){
                 this.getActive_engimon().setLife(life-1);
             }else{
-                //bunuh engimon
+                //bunuh engimon masih bingung
+                boolean ada = this.engimon_as_object.engimonMeninggal(1, this.active_engimon);
+                if (!ada){
+                    throw new Exception("dead");
+                }
+
             }
+            return false;
         }
     }
 

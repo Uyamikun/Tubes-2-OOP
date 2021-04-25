@@ -19,7 +19,7 @@ public class Map
     private  final int movementTurn = 5;
     private final Point[] direction = {new Point(0,1), new Point(1,0), new Point(0,-1), new Point(-1, 0)};
     private static int maxEngimon = 10;
-    private static  int minSpawnLevel = 1;
+    private int minSpawnLevel = 1;
     private static final Random rand = new Random();
     private Player player;
 
@@ -113,9 +113,12 @@ public class Map
         maxEngimon = x;
     }
 
-    public static void setMinSpawnLevel(int x){
+    public void setMinSpawnLevel(int x){
         minSpawnLevel = x;
     }
+
+    public int getMinSpawnLevel(){
+        return minSpawnLevel;}
 
     public void removeEngimon(Engimon e){
         Cell C = this.getCell(e);
@@ -206,9 +209,12 @@ public class Map
     public ArrayList<Engimon> getNearbyEngimon(){
         ArrayList<Engimon> engimons = new ArrayList<>();
         for (Point p : this.direction){
-            Cell c = getCell(Point.add(p, this.getPlayerPos()));
-            if (c.engimon != null){
-                engimons.add(c.getEngimon());
+            Point p1 = Point.add(p, this.getPlayerPos());
+            if (checkBound(p1)){
+                Cell c = getCell(p1);
+                if (c.engimon != null && !c.active){
+                    engimons.add(c.getEngimon());
+                }
             }
         }
         return engimons;
@@ -242,8 +248,13 @@ public class Map
     }
 
     public boolean isStronger(Engimon e){
-        Battle b = new Battle(this.getCell(ActivePos).getEngimon(), e);
-        return b.calculatePowerEnemy() > b.calculatePowerPlayer();
+        Engimon active = this.getCell(ActivePos).getEngimon();
+        if (active != null) {
+            Battle b = new Battle(active, e);
+            return b.calculatePowerEnemy() > b.calculatePowerPlayer();
+        }else{
+            return false;
+        }
     }
 
     public void save(String path){

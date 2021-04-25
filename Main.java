@@ -21,6 +21,10 @@ public class Main {
 //        public Engimon getActive_engimon()
         peta.setPlayer(p);
 
+        //set minimum spawn level
+        int level = Math.max(peta.getPlayer().getActive_engimon().getLevel(), peta.getPlayer().getEngimon_as_object().getMaxLevel());
+        peta.setMinSpawnLevel(level);
+
         //cek GUI
         //Game utama hidden
         PlayerUI playerUI = new PlayerUI(peta);

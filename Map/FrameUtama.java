@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.border.EmptyBorder;
 
+
 public class FrameUtama extends JFrame implements ActionListener {
 
     private BoardPanel objBoardPanel;
@@ -66,15 +67,100 @@ public class FrameUtama extends JFrame implements ActionListener {
                 gbc.gridwidth = GridBagConstraints.REMAINDER;
                 gbc.anchor = GridBagConstraints.NORTH;
                 subPane.add(new JLabel("<html><h1><strong><i>Battle</i></strong></h1><hr></html>"), gbc);
-
-                //Kumpulan button dalam grid
+                ArrayList<Engimon> engimons = peta.getNearbyEngimon();
+                ArrayList<String> namaEngimon = new ArrayList<String>();
+                if(engimons.size() > 0){
+                    for(Engimon engi : engimons){
+                        namaEngimon.add(engi.getSpecies() + "/Lvl: " + engi.getLevel());
+                    }
+                }
+                subPane.c1 = new JComboBox(namaEngimon.toArray());
                 gbc.anchor = GridBagConstraints.CENTER;
                 gbc.fill = GridBagConstraints.HORIZONTAL;
-                JPanel labels = new JPanel(new GridBagLayout());
-                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
-                subPane.add(labels,gbc);
+                JPanel labels2 = new JPanel();
+                labels2.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                labels2.setLayout(new BoxLayout(labels2, BoxLayout.Y_AXIS));
+                subPane.c1.addItemListener(subPane);
+                subPane.l = new JLabel("Select engimon to battle");
+                subPane.l2 = new JLabel("");
+
+                JButton buttonEnter = new JButton(new AbstractAction("Select") {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        subPane.remove(labels2);
+                        GridBagConstraints gbc = new GridBagConstraints();
+                        gbc.anchor = GridBagConstraints.CENTER;
+                        gbc.fill = GridBagConstraints.HORIZONTAL;
+                        JPanel labels4 = new JPanel();
+                        labels4.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                        labels4.setLayout(new BoxLayout(labels4, BoxLayout.Y_AXIS));
+                        String[] arrListDetail = engimons.get(subPane.c1.getSelectedIndex()).printDetail().split("\n");
+                        for (String arg: arrListDetail) {
+                            System.out.println(arg);
+                            labels4.add(new JLabel(arg),gbc);
+                        }
+                        //labels4.add(new JLabel(arg),gbc);
+
+                        JButton buttonBattle = new JButton(new AbstractAction("Battle"){
+                            public void actionPerformed(ActionEvent e) {
+                                subPane.remove(labels4);
+                                GridBagConstraints gbc = new GridBagConstraints();
+                                gbc.anchor = GridBagConstraints.CENTER;
+                                gbc.fill = GridBagConstraints.HORIZONTAL;
+                                JPanel labels3 = new JPanel();
+                                labels3.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                                labels3.setLayout(new BoxLayout(labels3, BoxLayout.Y_AXIS));
+
+                                if(subPane.c1.getSelectedIndex() < engimons.size()){
+                                    boolean win = false;
+                                    try{
+                                        win = peta.getPlayer().Battle(engimons.get(subPane.c1.getSelectedIndex()));
+                                    }catch (Exception err){
+                                        if (err.getMessage().equals("dead")){
+                                            labels3.add(new JLabel("Anda tidak punya engimon lagi"));
+                                            //game over
+                                        }else {
+                                            labels3.add(new JLabel(err.getMessage()));
+                                        }
+                                    }
+                                    if (win){
+                                        peta.getPlayer().getActive_engimon().changeExp(50);
+                                        peta.removeEngimon(engimons.get(subPane.c1.getSelectedIndex()));
+                                        labels3.add(new JLabel("You Win"),gbc);
+                                    }else {
+                                        labels3.add(new JLabel("You Lose"), gbc);
+                                        peta.setActiveEngimon(peta.getPlayer().getActive_engimon());
+                                    }
+                                    int level = Math.max(peta.getPlayer().getActive_engimon().getLevel(), peta.getPlayer().getEngimon_as_object().getMaxLevel());
+                                    peta.setMinSpawnLevel(level);
+
+                                } else{
+                                    labels3.add(new JLabel("Gagal Memulai Battle"),gbc);
+                                }
+                                objBoardPanel.repaint();
+                                subPane.add(labels3,gbc);
+                                subPane.revalidate();
+                                subPane.repaint();
+                            }
+                        });
+                        labels4.add(buttonBattle);
+                        //debug
+                        objBoardPanel.repaint();
+                        subPane.add(labels4,gbc);
+                        subPane.revalidate();
+                        subPane.repaint();
+
+                    }
+                });
+
+                labels2.add(subPane.l,gbc);
+                labels2.add(subPane.l2,gbc);
+                labels2.add(subPane.c1,gbc);
+                labels2.add(buttonEnter,gbc);
+                subPane.add(labels2,gbc);
+                subPane.revalidate();
+                subPane.repaint();
                 subPane.setVisible(true);
-                //objBoardPanel.moveToFront(objBoardPanel);
             }
         });
 

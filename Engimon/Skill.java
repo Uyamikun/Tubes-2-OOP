@@ -61,11 +61,12 @@ public class Skill{
     }
     public String printSkillDetail(){
         StringBuilder str = new StringBuilder();
-        str.append("Skill name : " + this.skillName + "\n");
-        str.append("Base power : " + this.basePower + "\n");
-        str.append("Mastery level : " + this.masteryLevel + "\n");
-        str.append("Skill elements : \n");
-        this.elements.forEach((element) -> str.append("- " + element + "\n"));
+        str.append(this.skillName + " / ");
+        str.append(this.basePower + " / ");
+        str.append(this.masteryLevel + " / ");
+        str.append("(");
+        this.elements.forEach((element) -> str.append(" " + element ));
+        str.append(")");
         str.append("\n");
         return str.toString();
     }

@@ -184,6 +184,7 @@ public abstract class Engimon implements Comparable<Engimon> {
         str.append("Parent 2 : " + this.ParentInfo.get(3)  + "\n");
         str.append("================= SKILL DETAIL ============\n");
         //str.append("Skills:\n");
+        str.append("Nama / Base Power / Mastery Level / Element\n");
         this.engimonskill.forEach((sk) -> str.append(sk.printSkillDetail()));
         str.append("================= Element =================\n");
         //str.append("Elements:\n");

@@ -102,4 +102,15 @@ public class InventoryEngimon extends AbstractInventory<Engimon> {
         }
         return false;
     }
+
+    public int getMaxLevel(){
+        int max = 1;
+        for (Engimon e : object){
+            if (e.getLevel() > max){
+                max = e.getLevel();
+            }
+        }
+        return max;
+    }
+
 }
