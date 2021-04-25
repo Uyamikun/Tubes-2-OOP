@@ -82,6 +82,10 @@ public abstract class Engimon implements Comparable<Engimon> {
     public void setAllSkill(ArrayList<Skill> newSkill){
         this.engimonskill.clear();
         this.engimonskill.addAll(newSkill);
+        /*
+        for(Skill s: newSkill){
+            this.engimonskill.add(s);
+        }*/
     }
         // Jika skill sudah penuh, ganti skill pertama menjadi new SKill
     public void setEngimonSkill(Skill newSkill){
@@ -144,7 +148,26 @@ public abstract class Engimon implements Comparable<Engimon> {
     // Sorted descendant
     @Override
     public int compareTo(Engimon other) {
-        return Integer.compare(getLevel(), other.getLevel());
+        StringBuilder str1 = new StringBuilder();
+        StringBuilder str2 = new StringBuilder();
+        for(String s : this.elements){
+            str1.append(s);
+            if(s != this.elements.get(this.elements.size()-1)){
+                str1.append("-");
+            }
+        }
+        for(String s : other.getElements()){
+            str2.append(s);
+            if(s != other.getElements().get(other.getElements().size()-1)){
+                str2.append("-");
+            }
+        }
+        String s1 = str1.toString();
+        String s2 = str2.toString();
+        if(s1.equals(s2)){
+            return Integer.compare(other.getLevel(), getLevel());
+        }
+        return s1.compareTo(s2);
     }
 
     public String printDetail(){ 
