@@ -171,7 +171,10 @@ public class FrameUtama extends JFrame implements ActionListener {
         });
         back.addActionListener(this);
         subPane.add(back,gbc);
-        objBoardPanel.add(subPane);
+        GridBagConstraints gbc2 = new GridBagConstraints();
+        gbc2.gridwidth = GridBagConstraints.CENTER;
+        gbc2.anchor = GridBagConstraints.NORTH;
+        objBoardPanel.add(subPane,gbc2);
         subPane.setVisible(false);
         //objBoardPanel.moveToBack(subPane);
 

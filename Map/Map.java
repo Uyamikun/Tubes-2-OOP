@@ -269,7 +269,7 @@ public class Map
             s.append("\n");
         }
         try {
-            PrintWriter writer = new PrintWriter(path + "mapStatus.txt", StandardCharsets.UTF_8);
+            PrintWriter writer = new PrintWriter(path + "mapStatus.txt", "UTF-8");
             writer.print(s);
             writer.close();
         }catch (Exception e){
@@ -288,15 +288,33 @@ public class Map
                 Engimon eg;
                 String[] engimon = input.nextLine().split(" ");
                 switch (engimon[0]) {
-                    case "Blastoise" -> eg = new Blastoise();
-                    case "Cyndaquil" -> eg = new Cyndaquil();
-                    case "Amaura" -> eg = new Amaura();
-                    case "Earthshaker" -> eg = new Earthshaker();
-                    case "Pikachu" -> eg = new Pikachu();
-                    case "Wynter" -> eg = new Wynter();
-                    case "KataraToph" -> eg = new KataraToph();
-                    case "Hu_Tao" -> eg = new Hu_Tao();
-                    default -> eg = null;
+                    case "Blastoise" :
+                        eg = new Blastoise();
+                        break;
+                    case "Cyndaquil" :
+                        eg = new Cyndaquil();
+                        break;
+                    case "Amaura" :
+                        eg = new Amaura();
+                        break;
+                    case "Earthshaker" :
+                        eg = new Earthshaker();
+                        break;
+                    case "Pikachu" :
+                        eg = new Pikachu();
+                        break;
+                    case "Wynter" :
+                        eg = new Wynter();
+                        break;
+                    case "KataraToph" :
+                        eg = new KataraToph();
+                        break;
+                    case "Hu_Tao" :
+                        eg = new Hu_Tao();
+                        break;
+                    default :
+                        eg = null;
+                        break;
                 }
                 if (eg != null){
                     eg.setLevel(Integer.parseInt(engimon[1]));

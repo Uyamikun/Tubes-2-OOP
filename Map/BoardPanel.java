@@ -12,6 +12,7 @@ public class BoardPanel extends JLayeredPane{
     public BoardPanel(PlayerUI player,Map peta){
         this.playerUI = player;
         this.peta = peta;
+        this.setLayout(new GridBagLayout());
     }
 
     @Override
