@@ -7,13 +7,14 @@ import java.util.*;
 public class MenuPanel extends JPanel {
     private String[] optionsMenu;
     private static final String START_GAME = "Start Game!";
+    private static final String LOAD_GAME = "Load Game";
     private static final String QUIT_GAME = "Quit Game";
     private int selected;
     private FrameMenu frameobj;
     private FrameUtama frameUtamaObj;
 
     public MenuPanel(FrameMenu menu, FrameUtama futama){
-        this.optionsMenu = new String[]{START_GAME,QUIT_GAME};
+        this.optionsMenu = new String[]{START_GAME,LOAD_GAME,QUIT_GAME};
         this.selected = 0;
         this.frameobj = menu;
         this.frameUtamaObj = futama;
@@ -27,12 +28,16 @@ public class MenuPanel extends JPanel {
         //g.setColor(new Color(105,123,165));
         g.fillRect(0,0,800,450);
 
-        g.setFont(new Font("Araial",Font.PLAIN,25));
+        g.setFont(new Font("Roboto Light",Font.BOLD,50));
+        g.setColor(Color.WHITE);
+        g.drawString("~Wangkymon~", 20, 75);
+
+        g.setFont(new Font("Arial",Font.PLAIN,25));
         for (int i=0; i<this.optionsMenu.length;i++)
         {
             if (i==this.selected) g.setColor(Color.GREEN);
             else g.setColor(Color.WHITE);
-            g.drawString(this.optionsMenu[i], 20, 50+i*40);
+            g.drawString(this.optionsMenu[i], 20, 75+50+i*40);
         }
     }
 
@@ -52,6 +57,9 @@ public class MenuPanel extends JPanel {
                     frameobj.setVisible(false);
                     frameUtamaObj.setVisible(true);
                     frameUtamaObj.getObjBoardPanel().requestFocusInWindow();
+                    break;
+                case LOAD_GAME:
+                    JOptionPane.showMessageDialog(null, "Belum implemented :)");
                     break;
                 case QUIT_GAME:
                     System.exit(0);

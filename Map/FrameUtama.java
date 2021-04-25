@@ -1,11 +1,16 @@
 package Map;
 import Engimon.Engimon;
+import Engimon.Breeding;
+import Engimon.BreedingInvalidException;
 import Player.InventoryEngimon;
+import Player.InventorySkillItem;
+import Player.SkillItem;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.border.EmptyBorder;
 
 public class FrameUtama extends JFrame implements ActionListener {
@@ -93,9 +98,99 @@ public class FrameUtama extends JFrame implements ActionListener {
                 //Kumpulan button dalam grid
                 gbc.anchor = GridBagConstraints.CENTER;
                 gbc.fill = GridBagConstraints.HORIZONTAL;
-                JPanel labels = new JPanel(new GridBagLayout());
-                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
-                subPane.add(labels,gbc);
+                if(peta.getPlayer().getEngimon_as_object().getNeff() >= 2)
+                {
+                    //Create combobox
+                    InventoryEngimon invEngimon = peta.getPlayer().getEngimon_as_object();
+                    ArrayList<String> namaEngimon = new ArrayList<String>();
+                    if(invEngimon.getObject().size() > 0){
+                        for(Engimon engi : invEngimon.getObject()){
+                            namaEngimon.add(engi.getName());
+                        }
+                    }
+                    subPane.c1 = new JComboBox(namaEngimon.toArray());
+                    subPane.c2 = new JComboBox(namaEngimon.toArray());
+                    gbc.anchor = GridBagConstraints.CENTER;
+                    gbc.fill = GridBagConstraints.HORIZONTAL;
+                    JPanel labels2 = new JPanel();
+                    labels2.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                    labels2.setLayout(new BoxLayout(labels2, BoxLayout.Y_AXIS));
+                    subPane.c1.addItemListener(subPane);
+                    subPane.l2 = new JLabel("");
+                    subPane.c2.addItemListener(subPane);
+                    subPane.l3 = new JLabel("");
+
+                    JLabel nama = new JLabel("Masukkan nama yang baru:");
+                    JTextField tf1=new JTextField();
+
+                    JButton buttonEnter = new JButton(new AbstractAction("Enter") {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            subPane.remove(labels2);
+                            GridBagConstraints gbc = new GridBagConstraints();
+                            gbc.anchor = GridBagConstraints.CENTER;
+                            gbc.fill = GridBagConstraints.HORIZONTAL;
+                            JPanel labels3 = new JPanel();
+                            labels3.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                            labels3.setLayout(new BoxLayout(labels3, BoxLayout.Y_AXIS));
+                            //debug
+                            System.out.println(subPane.c1.getSelectedIndex());
+                            System.out.println(subPane.c2.getSelectedIndex());
+                            int idx1 = subPane.c1.getSelectedIndex()+1;
+                            int idx2 = subPane.c2.getSelectedIndex()+1;
+                            if(idx1 != idx2 && idx1 >= 1 && idx1 <= peta.getPlayer().getEngimon_as_object().getNeff() && idx2 >= 1 && idx2 <= peta.getPlayer().getEngimon_as_object().getNeff()) {
+                                Engimon e1 = peta.getPlayer().getEngimon_as_object().get(idx1);
+                                Engimon e2 = peta.getPlayer().getEngimon_as_object().get(idx2);
+                                try
+                                {
+                                    Engimon Child = Breeding.startBreeding(e1, e2);
+                                    if (!tf1.getText().equals(""))
+                                    {
+                                        Child.setName(tf1.getText());
+                                    }
+                                    peta.getPlayer().getEngimon_as_object().setObj(idx1, e1);
+                                    peta.getPlayer().getEngimon_as_object().setObj(idx2, e2);
+                                    if(peta.getPlayer().getEngimon_as_object().insert(Child)){
+                                        labels3.add(new JLabel("Berhasil menyimpan anak engimon ke Inventory :)"),gbc);
+                                    } else{
+                                        labels3.add(new JLabel("Maaf inventory anda penuh"),gbc);
+                                        //menelantarkan tidak ada
+                                    }
+                                }
+                                catch(BreedingInvalidException exce){}
+                                //peta.getPlayer().breeding(e1, e2, idx1, idx2);
+                            }
+                            else
+                            {
+                                labels3.add(new JLabel("Engimon yang anda masukkan tidak valid :("),gbc);
+                            }
+                            subPane.add(labels3,gbc);
+                            subPane.revalidate();
+                            subPane.repaint();
+                        }
+                    });
+
+                    labels2.add(new JLabel("Select first engimon"),gbc);
+                    labels2.add(subPane.l2,gbc);
+                    labels2.add(subPane.c1,gbc);
+                    labels2.add(new JLabel("Select second engimon"),gbc);
+                    labels2.add(subPane.l3,gbc);
+                    labels2.add(subPane.c2,gbc);
+                    labels2.add(nama,gbc);
+                    labels2.add(tf1,gbc);
+                    labels2.add(buttonEnter,gbc);
+                    subPane.add(labels2,gbc);
+                    subPane.revalidate();
+                    subPane.repaint();
+                }
+                else
+                {
+                    JPanel labels2 = new JPanel();
+                    labels2.add(new JLabel("Anda tidak mempunyai cukup engimon di Inventory :("),gbc);
+                    subPane.add(labels2,gbc);
+                    subPane.revalidate();
+                    subPane.repaint();
+                }
                 subPane.setVisible(true);
                 //objBoardPanel.moveToFront(objBoardPanel);
             }
@@ -121,7 +216,6 @@ public class FrameUtama extends JFrame implements ActionListener {
                 //Kumpulan button dalam grid
                 gbc.anchor = GridBagConstraints.CENTER;
                 gbc.fill = GridBagConstraints.HORIZONTAL;
-                JPanel labels = new JPanel(new GridBagLayout());
                 //Create combobox
                 InventoryEngimon invEngimon = peta.getPlayer().getEngimon_as_object();
                 ArrayList<String> namaEngimon = new ArrayList<String>();
@@ -155,7 +249,7 @@ public class FrameUtama extends JFrame implements ActionListener {
                         //debug
                         System.out.println(subPane.c1.getSelectedIndex());
                         if(peta.getPlayer().getEngimon_as_object().rename(subPane.c1.getSelectedIndex()+1, tf1.getText())){
-                            labels3.add(new JLabel("Berhasil mengganti nama engimon :)"),gbc); // Jika x > jumlah skill item, skill item tersebut akan dihapus
+                            labels3.add(new JLabel("Berhasil mengganti nama engimon :)"),gbc);
                         } else{
                             labels3.add(new JLabel("Gagal mengganti nama engimon :("),gbc);
                         }
@@ -174,7 +268,6 @@ public class FrameUtama extends JFrame implements ActionListener {
                 subPane.add(labels2,gbc);
                 subPane.revalidate();
                 subPane.repaint();
-                subPane.add(labels,gbc);
                 subPane.setVisible(true);
                 //objBoardPanel.moveToFront(objBoardPanel);
             }
@@ -450,15 +543,60 @@ public class FrameUtama extends JFrame implements ActionListener {
                 //Kumpulan button dalam grid
                 gbc.anchor = GridBagConstraints.CENTER;
                 gbc.fill = GridBagConstraints.HORIZONTAL;
-                JPanel labels = new JPanel(new GridBagLayout());
-                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
-//                String[] arrListSkill = peta.getPlayer().display_list_skill().split("\n");
-//                for (String arg: arrListSkill) {
-//                    labels.add(new JLabel(arg),gbc);
-//                }
-                subPane.add(labels,gbc);
+                //Create combobox
+                InventoryEngimon invEngimon = peta.getPlayer().getEngimon_as_object();
+                ArrayList<String> namaEngimon = new ArrayList<String>();
+                if(invEngimon.getObject().size() > 0){
+                    for(Engimon engi : invEngimon.getObject()){
+                        namaEngimon.add(engi.getName());
+                    }
+                }
+                subPane.c1 = new JComboBox(namaEngimon.toArray());
+                gbc.anchor = GridBagConstraints.CENTER;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                JPanel labels2 = new JPanel();
+                labels2.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                labels2.setLayout(new BoxLayout(labels2, BoxLayout.Y_AXIS));
+                subPane.c1.addItemListener(subPane);
+                subPane.l = new JLabel("Select your engimon ");
+                subPane.l2 = new JLabel("");
+
+                JButton buttonEnter = new JButton(new AbstractAction("Switch") {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        subPane.remove(labels2);
+                        GridBagConstraints gbc = new GridBagConstraints();
+                        gbc.anchor = GridBagConstraints.CENTER;
+                        gbc.fill = GridBagConstraints.HORIZONTAL;
+                        JPanel labels3 = new JPanel();
+                        labels3.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                        labels3.setLayout(new BoxLayout(labels3, BoxLayout.Y_AXIS));
+                        //debug
+                        System.out.println(subPane.c1.getSelectedIndex());
+                        if(peta.getPlayer().getEngimon_as_object().isIdxValid(subPane.c1.getSelectedIndex()+1)){
+                            //Untuk switch engimonUI perlu switch manual
+                            peta.getPlayer().setActive_engimon(peta.getPlayer().getEngimon_as_object().switchObj(subPane.c1.getSelectedIndex()+1,peta.getPlayer().getActive_engimon()));
+                            peta.setActiveEngimon(peta.getPlayer().getActive_engimon());
+                            //peta.getPlayer().getActive_engimon() = peta.getPlayer().getEngimon_as_object().switchObj(subPane.c1.getSelectedIndex()+1,peta.getPlayer().getActive_engimon());
+                            labels3.add(new JLabel("Berhasil menukar active engimon :)"),gbc);
+                        } else{
+                            labels3.add(new JLabel("Gagal menukar active engimon :("),gbc);
+                        }
+                        objBoardPanel.repaint();
+                        subPane.add(labels3,gbc);
+                        subPane.revalidate();
+                        subPane.repaint();
+                    }
+                });
+
+                labels2.add(subPane.l,gbc);
+                labels2.add(subPane.l2,gbc);
+                labels2.add(subPane.c1,gbc);
+                labels2.add(buttonEnter,gbc);
+                subPane.add(labels2,gbc);
+                subPane.revalidate();
+                subPane.repaint();
                 subPane.setVisible(true);
-                //objBoardPanel.moveToFront(objBoardPanel);
             }
         });
 
@@ -479,16 +617,127 @@ public class FrameUtama extends JFrame implements ActionListener {
                 gbc.anchor = GridBagConstraints.NORTH;
                 subPane.add(new JLabel("<html><h1><strong><i>Learn Skill</i></strong></h1><hr></html>"), gbc);
 
-                //Kumpulan button dalam grid
+                //Bentuk grid
                 gbc.anchor = GridBagConstraints.CENTER;
                 gbc.fill = GridBagConstraints.HORIZONTAL;
                 JPanel labels = new JPanel(new GridBagLayout());
-                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
-//                String[] arrListSkill = peta.getPlayer().display_list_skill().split("\n");
-//                for (String arg: arrListSkill) {
-//                    labels.add(new JLabel(arg),gbc);
-//                }
+                //Invent engimon
+                String[] arrListSkill = peta.getPlayer().display_list_skill().split("\n");
+                for (String arg: arrListSkill) {
+                    labels.add(new JLabel(arg),gbc);
+                }
+
+                //Combo box skill
+                InventorySkillItem invSkill = peta.getPlayer().getSkill_as_object();
+                ArrayList<String> namaSkill = new ArrayList<String>();
+                if(invSkill.getObject().size() > 0){
+                    for(SkillItem si : invSkill.getObject()){
+                        namaSkill.add(si.getSkillName());
+                    }
+                }
+                JComboBox comboSkill = new JComboBox(namaSkill.toArray());
+
+                JButton button1 = new JButton(new AbstractAction("Active Engimon") {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        for(Component c : subPane.getComponents()){
+                            //Find the components you want to remove
+                            if(c instanceof JPanel || c instanceof JLabel){
+                                //Remove it
+                                subPane.remove(c);
+                            }
+                        }
+                        //subPane.remove(labels);
+                        GridBagConstraints gbc = new GridBagConstraints();
+                        gbc.anchor = GridBagConstraints.CENTER;
+                        gbc.fill = GridBagConstraints.HORIZONTAL;
+                        JPanel labels2 = new JPanel();
+                        labels2.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                        labels2.setLayout(new BoxLayout(labels2, BoxLayout.Y_AXIS));
+                        //JPanel labels2 = new JPanel(new GridBagLayout());
+                        //System.out.println(peta.getPlayer().getActive_engimon().printDetail());
+                        Engimon temp = peta.getPlayer().getActive_engimon();
+                        if(peta.getPlayer().getSkill_as_object().learnSkill(comboSkill.getSelectedIndex()+1,temp)){
+                            labels2.add(new JLabel("Berhasil melakukan learn skill item ^_^"),gbc); // Jika x > jumlah skill item, skill item tersebut akan dihapus
+                        } else{
+                            labels2.add(new JLabel("Gagal melakukan learn skill item :{ "),gbc);
+                        }
+                        subPane.add(labels2,gbc);
+                        subPane.revalidate();
+                        subPane.repaint();
+                    }
+                });
+
+                JButton button2 = new JButton(new AbstractAction("Inventory Engimon") {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        for(Component c : subPane.getComponents()){
+                            //Find the components you want to remove
+                            if(c instanceof JPanel || c instanceof JLabel){
+                                //Remove it
+                                subPane.remove(c);
+                            }
+                        }
+                        //Create combobox
+                        InventoryEngimon invEngimon = peta.getPlayer().getEngimon_as_object();
+                        ArrayList<String> namaEngimon = new ArrayList<String>();
+                        if(invEngimon.getObject().size() > 0){
+                            for(Engimon engi : invEngimon.getObject()){
+                                namaEngimon.add(engi.getName());
+                            }
+                        }
+                        subPane.c1 = new JComboBox(namaEngimon.toArray());
+//                        this.engimon_as_object.get(idx1).printDetail();
+                        GridBagConstraints gbc = new GridBagConstraints();
+                        gbc.anchor = GridBagConstraints.CENTER;
+                        gbc.fill = GridBagConstraints.HORIZONTAL;
+                        JPanel labels2 = new JPanel();
+                        labels2.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                        labels2.setLayout(new BoxLayout(labels2, BoxLayout.Y_AXIS));
+                        subPane.c1.addItemListener(subPane);
+                        subPane.l = new JLabel("Select your engimon ");
+                        subPane.l2 = new JLabel("");
+
+                        JButton buttonEnter = new JButton(new AbstractAction("Enter") {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                subPane.remove(labels2);
+                                GridBagConstraints gbc = new GridBagConstraints();
+                                gbc.anchor = GridBagConstraints.CENTER;
+                                gbc.fill = GridBagConstraints.HORIZONTAL;
+                                JPanel labels3 = new JPanel();
+                                labels3.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                                labels3.setLayout(new BoxLayout(labels3, BoxLayout.Y_AXIS));
+                                //debug
+                                System.out.println(subPane.c1.getSelectedIndex());
+                                Engimon temp = peta.getPlayer().getEngimon_as_object().get(subPane.c1.getSelectedIndex()+1);
+                                if(peta.getPlayer().getSkill_as_object().learnSkill(comboSkill.getSelectedIndex()+1,temp)){
+                                    labels3.add(new JLabel("Berhasil melakukan learn skill item ^_^"),gbc); // Jika x > jumlah skill item, skill item tersebut akan dihapus
+                                } else{
+                                    labels3.add(new JLabel("Gagal melakukan learn skill item :{ "),gbc);
+                                }
+                                subPane.add(labels3,gbc);
+                                subPane.revalidate();
+                                subPane.repaint();
+                            }
+                        });
+
+                        labels2.add(subPane.l,gbc);
+                        labels2.add(subPane.l2,gbc);
+                        labels2.add(subPane.c1,gbc);
+                        labels2.add(buttonEnter,gbc);
+                        subPane.add(labels2,gbc);
+                        subPane.revalidate();
+                        subPane.repaint();
+                    }
+                });
+                JPanel buttons = new JPanel(new GridBagLayout());
+                buttons.add(new JLabel("Pilih skill yang akan di-learn: "));
+                buttons.add(comboSkill,gbc);
+                buttons.add(button1,gbc);
+                buttons.add(button2,gbc);
                 subPane.add(labels,gbc);
+                subPane.add(buttons,gbc);
                 subPane.setVisible(true);
                 //objBoardPanel.moveToFront(objBoardPanel);
             }
@@ -580,14 +829,64 @@ public class FrameUtama extends JFrame implements ActionListener {
                 gbc.anchor = GridBagConstraints.NORTH;
                 subPane.add(new JLabel("<html><h1><strong><i>Remove Skill</i></strong></h1><hr></html>"), gbc);
 
-                //Kumpulan button dalam grid
+                //Create combobox
+                InventorySkillItem invSkill = peta.getPlayer().getSkill_as_object();
+                ArrayList<String> namaSkill = new ArrayList<String>();
+                if(invSkill.getObject().size() > 0){
+                    for(SkillItem si : invSkill.getObject()){
+                        namaSkill.add(si.getSkillName());
+                    }
+                }
+                subPane.c1 = new JComboBox(namaSkill.toArray());
                 gbc.anchor = GridBagConstraints.CENTER;
                 gbc.fill = GridBagConstraints.HORIZONTAL;
-                JPanel labels = new JPanel(new GridBagLayout());
-                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
-                subPane.add(labels,gbc);
+                JPanel labels2 = new JPanel();
+                labels2.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                labels2.setLayout(new BoxLayout(labels2, BoxLayout.Y_AXIS));
+                subPane.c1.addItemListener(subPane);
+                subPane.l = new JLabel("Pilih skill item mana yang ingin dibuang: ");
+                subPane.l2 = new JLabel("");
+                JLabel kuantitas = new JLabel("Pilih berapa jumlah skill item yang akan dibuang: ");
+                JTextField tf1=new JTextField();
+
+                String[] arrListSkill = peta.getPlayer().display_list_skill().split("\n");
+                for (String arg: arrListSkill) {
+                    labels2.add(new JLabel(arg),gbc);
+                }
+
+                JButton buttonEnter = new JButton(new AbstractAction("Enter") {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        subPane.remove(labels2);
+                        GridBagConstraints gbc = new GridBagConstraints();
+                        gbc.anchor = GridBagConstraints.CENTER;
+                        gbc.fill = GridBagConstraints.HORIZONTAL;
+                        JPanel labels3 = new JPanel();
+                        labels3.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                        labels3.setLayout(new BoxLayout(labels3, BoxLayout.Y_AXIS));
+                        //debug
+                        System.out.println(subPane.c1.getSelectedIndex());
+                        if(peta.getPlayer().getSkill_as_object().removeX(subPane.c1.getSelectedIndex()+1,Integer.parseInt(tf1.getText()))){
+                            labels3.add(new JLabel("Berhasil membuang skill item :)"),gbc); // Jika x > jumlah skill item, skill item tersebut akan dihapus
+                        } else{
+                            labels3.add(new JLabel("Gagal membuang skill item :("),gbc);
+                        }
+                        subPane.add(labels3,gbc);
+                        subPane.revalidate();
+                        subPane.repaint();
+                    }
+                });
+
+                labels2.add(subPane.l,gbc);
+                labels2.add(subPane.l2,gbc);
+                labels2.add(subPane.c1,gbc);
+                labels2.add(kuantitas,gbc);
+                labels2.add(tf1,gbc);
+                labels2.add(buttonEnter,gbc);
+                subPane.add(labels2,gbc);
+                subPane.revalidate();
+                subPane.repaint();
                 subPane.setVisible(true);
-                //objBoardPanel.moveToFront(objBoardPanel);
             }
         });
 
