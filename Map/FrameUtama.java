@@ -251,7 +251,9 @@ public class FrameUtama extends JFrame implements ActionListener {
                                         //menelantarkan tidak ada
                                     }
                                 }
-                                catch(BreedingInvalidException exce){}
+                                catch(BreedingInvalidException exce){
+                                    labels3.add(new JLabel("Maaf engimon untuk breeding invalid (level salah)"),gbc);
+                                }
                                 //peta.getPlayer().breeding(e1, e2, idx1, idx2);
                             }
                             else
