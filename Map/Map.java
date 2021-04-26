@@ -257,7 +257,9 @@ public class Map
         }
     }
 
-    public void save(String path){
+    public void save(String path) throws Exception{
+        File directory = new File(path);
+        directory.mkdirs();
         StringBuilder s = new StringBuilder();
         s.append(PlayerPos.get_x());
         s.append(" ");
@@ -279,13 +281,11 @@ public class Map
             s.append(c.posisi.get_y());
             s.append("\n");
         }
-        try {
-            PrintWriter writer = new PrintWriter(path + "mapStatus.txt", "UTF-8");
-            writer.print(s);
-            writer.close();
-        }catch (Exception e){
-            System.out.println("Failed to save map");
-        }
+
+        PrintWriter writer = new PrintWriter(path + "/mapStatus.txt", "UTF-8");
+        writer.print(s);
+        writer.close();
+
     }
 
     public void load(String path){

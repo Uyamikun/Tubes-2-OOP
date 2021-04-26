@@ -378,11 +378,11 @@ public class Player {
             boolean engimon = this.engimon_as_object.insert(e);
             boolean skill = this.skill_as_object.insert(this.getFirstSkillEngimon(e));
             if (!engimon){
-                throw new Exception("Inventory engimon penuh");
+                throw new Exception("Tidak dapat menambah engimon, Inventory penuh");
             }
             //dapet skill
             if (!skill){
-                throw new Exception("Inventory skill penuh");
+                throw new Exception("Tidak dapat menambah skill, Inventory penuh");
             }
             return true;
         }else{

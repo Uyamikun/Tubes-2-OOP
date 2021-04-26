@@ -997,8 +997,35 @@ public class FrameUtama extends JFrame implements ActionListener {
                 gbc.anchor = GridBagConstraints.CENTER;
                 gbc.fill = GridBagConstraints.HORIZONTAL;
                 JPanel labels = new JPanel(new GridBagLayout());
-                labels.add(new JLabel("BELUM IMPLEMENTED"),gbc);
-                subPane.add(labels,gbc);
+                JLabel nama = new JLabel("Masukkan nama save:");
+                JTextField tf1=new JTextField();
+
+                JButton buttonEnter = new JButton(new AbstractAction("Enter") {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        subPane.remove(labels);
+                        GridBagConstraints gbc = new GridBagConstraints();
+                        gbc.anchor = GridBagConstraints.CENTER;
+                        gbc.fill = GridBagConstraints.HORIZONTAL;
+                        JPanel labels3 = new JPanel();
+                        labels3.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                        labels3.setLayout(new BoxLayout(labels3, BoxLayout.Y_AXIS));
+                        // Save player state belum
+                        try{
+                            peta.save("Saves/"+tf1.getText());
+                            labels3.add(new JLabel("Berhasil melakukan save"),gbc);
+                        }catch (Exception err){
+                            labels3.add(new JLabel(err.getMessage()),gbc);
+                        }
+                        subPane.add(labels3,gbc);
+                        subPane.revalidate();
+                        subPane.repaint();
+                    }
+                });
+                labels.add(buttonEnter);
+                labels.add(nama,gbc);
+                labels.add(tf1,gbc);
+                subPane.add(labels);
                 subPane.setVisible(true);
                 //objBoardPanel.moveToFront(objBoardPanel);
             }
