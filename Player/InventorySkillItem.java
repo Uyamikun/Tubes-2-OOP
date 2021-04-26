@@ -108,12 +108,30 @@ public class InventorySkillItem extends AbstractInventory<SkillItem> {
         StringBuilder s = new StringBuilder();
         for (SkillItem sk : this.object){
             s.append(sk.printSkillItem());
-            s.deleteCharAt(s.length()-1);
-            s.append(";");
+            s.delete(s.length()-6, s.length()-1);
+            //s.append("\n");
         }
 
         PrintWriter writer = new PrintWriter(path + "/Skills.txt", "UTF-8");
         writer.print(s);
         writer.close();
+    }
+
+    public void load(String path){
+        try {
+            Scanner input = new Scanner(new File(path + "/Skills.txt"));
+            while (input.hasNextLine()) {
+                String[] infos = input.nextLine().split(" / ");
+                for (int i = 0; i < Integer.parseInt(infos[3]);i++){
+                    String[] elements = infos[2].split("-");
+                    ArrayList<String> el = new ArrayList<>();
+                    Collections.addAll(el, elements);
+                    this.insert(new SkillItem(new Skill(infos[0], Integer.parseInt(infos[1]), 1, el)));
+                }
+
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 }

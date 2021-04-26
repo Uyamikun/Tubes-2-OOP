@@ -146,4 +146,34 @@ public class InventoryEngimon extends AbstractInventory<Engimon> {
         writer.close();
     }
 
+    public void load(String path){
+        try{
+            Scanner input = new Scanner(new File(path + "/Engimons.txt"));
+            while (input.hasNextLine()) {
+                Engimon e = Engimon.makeEngimon(input.nextLine());
+                String[] infos = input.nextLine().split(";");
+                e.setName(infos[0]);
+                e.setLife(Integer.parseInt(infos[1]));
+                e.setLevel(Integer.parseInt(infos[2]));
+                e.setExp(Integer.parseInt(infos[3]));
+                e.setCumExp(Integer.parseInt(infos[4]));
+                ArrayList<String> parent = new ArrayList<>();
+                for (int i = 5; i <= 8; i++) {
+                    parent.add(infos[i]);
+                }
+                e.setParentInfo(parent);
+                for (int i = 8; i < infos.length; i++) {
+                    String[] skill = infos[i].split(" / ");
+                    String[] elements = infos[3].replaceAll("/", "").split(" ");
+                    ArrayList<String> el = new ArrayList<>();
+                    Collections.addAll(el, elements);
+                    e.setEngimonSkill(new Skill(skill[0], Integer.parseInt(skill[1]), Integer.parseInt(skill[2]), el));
+                }
+            }
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

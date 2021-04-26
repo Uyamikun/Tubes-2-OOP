@@ -195,5 +195,42 @@ public abstract class Engimon implements Comparable<Engimon> {
 //================= ABSTRACT METHOD ====================
     // Sound
     public abstract String getSound();
+
+    public static Engimon makeEngimon(String species){
+        Engimon eg;
+        switch (species) {
+            case "Blastoise" :
+                eg = new Blastoise();
+                break;
+            case "Cyndaquil" :
+                eg = new Cyndaquil();
+                break;
+            case "Amaura" :
+                eg = new Amaura();
+                break;
+            case "Earthshaker" :
+                eg = new Earthshaker();
+                break;
+            case "Pikachu" :
+                eg = new Pikachu();
+                break;
+            case "Wynter" :
+                eg = new Wynter();
+                break;
+            case "KataraToph" :
+                eg = new KataraToph();
+                break;
+            case "Hu_Tao" :
+                eg = new Hu_Tao();
+                break;
+            default :
+                eg = null;
+                break;
+        }
+        return eg;
+    }
 }
+
+
+
     

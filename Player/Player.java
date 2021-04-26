@@ -1,4 +1,7 @@
 package Player;
+import java.io.File;
+import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.*;
 
 import Battle.Battle;
@@ -195,6 +198,78 @@ public class Player {
     public void save(String path) throws  Exception{
         this.engimon_as_object.save(path);
         this.skill_as_object.save(path);
+        this.saveActiveEngimon(path);
+    }
+
+    public void load(String path){
+        this.engimon_as_object.load(path);
+        this.skill_as_object.load(path);
+        this.loadActiveEngimon(path);
+    }
+
+    public void saveActiveEngimon(String path ) throws  Exception{
+        File directory = new File(path);
+        directory.mkdirs();
+        StringBuilder s = new StringBuilder();
+        Engimon e = this.getActive_engimon();
+        s.append(e.getSpecies() + "\n");
+        s.append(e.getName());
+        s.append(";");
+        s.append(e.getLife());
+        s.append(";");
+        s.append(e.getLevel());
+        s.append(";");
+        s.append(e.getExp());
+        s.append(";");
+        s.append(e.getCumExp());
+        s.append(";");
+        s.append(e.getParentInfo().get(0));
+        s.append(";");
+        s.append(e.getParentInfo().get(1));
+        s.append(";");
+        s.append(e.getParentInfo().get(2));
+        s.append(";");
+        s.append(e.getParentInfo().get(3));
+        s.append(";");
+        for (Skill sk : e.getEngimonSkill()){
+            s.append(sk.printSkillDetail());
+            s.deleteCharAt(s.length()-1);
+            s.append(";");
+        }
+        s.append("\n");
+
+        PrintWriter writer = new PrintWriter(path + "/ActiveEngimon.txt", "UTF-8");
+        writer.print(s);
+        writer.close();
+    }
+
+    public void loadActiveEngimon(String path){
+        try{
+            Scanner input = new Scanner(new File(path + "/ActiveEngimon.txt"));
+            Engimon e = Engimon.makeEngimon(input.nextLine());
+            String[] infos = input.nextLine().split(";");
+            e.setName(infos[0]);
+            e.setLife(Integer.parseInt(infos[1]));
+            e.setLevel(Integer.parseInt(infos[2]));
+            e.setExp(Integer.parseInt(infos[3]));
+            e.setCumExp(Integer.parseInt(infos[4]));
+            ArrayList<String> parent = new ArrayList<>();
+            for (int i = 5; i<=8;i++){
+                parent.add(infos[i]);
+            }
+            e.setParentInfo(parent);
+            for (int i =8; i< infos.length; i++){
+                String[] skill = infos[i].split(" / ");
+                String[] elements = infos[3].replaceAll("/", "").split(" ");
+                ArrayList<String> el = new ArrayList<>();
+                Collections.addAll(el, elements);
+                e.setEngimonSkill(new Skill(skill[0], Integer.parseInt(skill[1]), Integer.parseInt(skill[2]), el));
+            }
+            this.active_engimon = e;
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
 

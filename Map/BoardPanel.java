@@ -16,6 +16,7 @@ public class BoardPanel extends JLayeredPane{
     }
 
     public void load(String Path){
+        this.peta.getPlayer().load("Saves/"+Path);
         this.peta.load("Saves/"+Path);
         this.playerUI.setPlayerPos();
         repaint();
