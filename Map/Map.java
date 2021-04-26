@@ -290,11 +290,17 @@ public class Map
 
     public void load(String path){
         try {
+            this.setActiveEngimon(null);
+            this.getCell(PlayerPos).setPlayer(false);
+            this.getCell(ActivePos).setActive(false);
             Scanner input = new Scanner(new File(path + "/mapStatus.txt"));
             String[] Player = input.nextLine().split(" ");
             this.PlayerPos = new Point(Integer.parseInt(Player[0]), Integer.parseInt(Player[1]));
             String[] Active = input.nextLine().split(" ");
             this.ActivePos = new Point(Integer.parseInt(Active[0]), Integer.parseInt(Active[1]));
+            this.getCell(PlayerPos).setPlayer(true);
+            this.getCell(ActivePos).setActive(true);
+            this.setActiveEngimon(player.getActive_engimon());
             while (input.hasNextLine()){
                 Engimon eg;
                 String[] engimon = input.nextLine().split(" ");

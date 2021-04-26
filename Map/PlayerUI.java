@@ -24,6 +24,12 @@ public class PlayerUI {
         boundY = (peta.getMap().size()-1)*Tile.SIZE;
     }
 
+    public void setPlayerPos(){
+        posX = peta.getPlayerPos().get_x()*Tile.SIZE;
+        posY = peta.getPlayerPos().get_y()*Tile.SIZE;
+    }
+
+
     public void kiri() throws Exception{
         if (posX==0){
             throw new Exception("Out of bounds");
