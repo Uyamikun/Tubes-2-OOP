@@ -136,7 +136,6 @@ public class InventoryEngimon extends AbstractInventory<Engimon> {
             for (Skill sk : e.getEngimonSkill()){
                 s.append(sk.printSkillDetail());
                 s.deleteCharAt(s.length()-1);
-                s.append(";");
             }
             s.append("\n");
         }
@@ -162,13 +161,17 @@ public class InventoryEngimon extends AbstractInventory<Engimon> {
                     parent.add(infos[i]);
                 }
                 e.setParentInfo(parent);
-                for (int i = 8; i < infos.length; i++) {
+                for (int i = 9; i < infos.length; i++) {
                     String[] skill = infos[i].split(" / ");
                     String[] elements = infos[3].replaceAll("/", "").split(" ");
+                    for (String s : skill){
+                        System.out.println(s);
+                    }
                     ArrayList<String> el = new ArrayList<>();
                     Collections.addAll(el, elements);
                     e.setEngimonSkill(new Skill(skill[0], Integer.parseInt(skill[1]), Integer.parseInt(skill[2]), el));
                 }
+                this.insert(e);
             }
 
         }catch(Exception e){

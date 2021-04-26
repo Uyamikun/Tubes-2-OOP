@@ -60,12 +60,15 @@ public class Player {
     }
     public Player(String nama) {
         this.nama = nama;
-        //this.position = new Point(5,5);
-        //this.position_active_engimon = new Point(5,4);
-        this.active_engimon = new Pikachu();
-        this.active_engimon.setLevel(1);
         this.engimon_as_object = new InventoryEngimon();
         this.skill_as_object = new InventorySkillItem();
+        //this.position = new Point(5,5);
+        //this.position_active_engimon = new Point(5,4);
+
+    }
+    public void newPlayer(){
+        this.active_engimon = new Pikachu();
+        this.active_engimon.setLevel(1);
         // Di bawah ini untuk nyoba driver (uncomment dulu)
 //        ArrayList<String> al = new ArrayList<String>(){{
 //            add("Fire");
@@ -98,6 +101,7 @@ public class Player {
 //        e5.setLevel(39);
 //        this.engimon_as_object.insert(e5);
     }
+
 
     public void switch_out_engimon_meninggal() {
         if(engimon_as_object.getNeff() != 0){
@@ -234,7 +238,6 @@ public class Player {
         for (Skill sk : e.getEngimonSkill()){
             s.append(sk.printSkillDetail());
             s.deleteCharAt(s.length()-1);
-            s.append(";");
         }
         s.append("\n");
 
@@ -248,6 +251,7 @@ public class Player {
             Scanner input = new Scanner(new File(path + "/ActiveEngimon.txt"));
             Engimon e = Engimon.makeEngimon(input.nextLine());
             String[] infos = input.nextLine().split(";");
+
             e.setName(infos[0]);
             e.setLife(Integer.parseInt(infos[1]));
             e.setLevel(Integer.parseInt(infos[2]));
@@ -258,7 +262,7 @@ public class Player {
                 parent.add(infos[i]);
             }
             e.setParentInfo(parent);
-            for (int i =8; i< infos.length; i++){
+            for (int i =9; i< infos.length; i++){
                 String[] skill = infos[i].split(" / ");
                 String[] elements = infos[3].replaceAll("/", "").split(" ");
                 ArrayList<String> el = new ArrayList<>();

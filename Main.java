@@ -16,6 +16,7 @@ public class Main {
         //To implement: BELUM INPUT NAMA
         //Construct player
         Player p = new Player("Hello world");
+        p.newPlayer();
         //Set Active Engimon
         //Note peta: memiliki player perlu edit player
 //        public Engimon getActive_engimon()

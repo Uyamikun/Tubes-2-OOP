@@ -1,5 +1,7 @@
 package Map;
 
+import Player.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -16,11 +18,17 @@ public class BoardPanel extends JLayeredPane{
     }
 
     public void load(String Path){
+        Player P = new Player("Traveller");
+        peta.setPlayer(P);
         this.peta.getPlayer().load("Saves/"+Path);
         this.peta.load("Saves/"+Path);
         this.playerUI.setPlayerPos();
+        int level = Math.max(peta.getPlayer().getActive_engimon().getLevel(), peta.getPlayer().getEngimon_as_object().getMaxLevel());
+        peta.setMinSpawnLevel(level);
         repaint();
     }
+
+
 
 
     @Override
