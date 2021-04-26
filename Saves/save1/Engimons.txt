@@ -1,0 +1,12 @@
+Pikachu
+PikaPika;3;4;0;0;PikaPika;Pikachu;PikaPika;Pikachu;Thunder God / 30 / 1 / ( Electric)
+Pikachu
+PikaPika;3;1;0;0;PikaPika;Pikachu;PikaPika;Pikachu;Thunder God / 30 / 1 / ( Electric)
+Hu_Tao
+Xin;3;7;0;300;Xin;Hu_Tao;Xin;Hu_Tao;Overload / 30 / 1 / ( Fire Electric)
+Earthshaker
+ES;3;4;0;0;Raigor;Earthshaker;Raigor;Earthshaker;Fissure / 30 / 1 / ( Ground)
+Amaura
+Ura;3;1;0;0;Ura;Amaura;Ura;Amaura;Freezing Field / 30 / 1 / ( Ice)
+Blastoise
+Blasto;3;1;50;50;Blasto;Blastoise;Blasto;Blastoise;Tsunami / 30 / 1 / ( Water)

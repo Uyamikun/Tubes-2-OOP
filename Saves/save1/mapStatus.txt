@@ -1,0 +1,5 @@
+8 5
+9 5
+Amaura 7 8 2
+Hu_Tao 24 11 6
+KataraToph 12 2 8

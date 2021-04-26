@@ -1,13 +1,40 @@
 # Tugas Besar 2 Object Oriented Programming 2021
 
 
-## Table of contents
-* [Dibuat](#dibuat)
-* [General info](#general-info)
-* [Setup](#setup)
-* [Penggunaan](#penggunaan)
-* [Status](#status)
-* [Inspiration](#inspiration)
+## General info
+Tugas besar 2 Object Oriented Programming IF2210 2019/2020
+
+## Setup
+- latest java jre
+- latest java jdk
+
+## How To Use
+Linux : 
+
+1. Download latest releases
+2. Extract zip/tar-gz
+3. Open terminal in the folder contain unzip file
+4. Run this
+
+```
+javac Main.java
+java Main
+```
+
+Windows :
+Recommended to compile & run with IDE
+For this, we will use Visual Studio Code
+
+1. Open Visual Studio Code
+2. Install java extension in extension tab
+3. Open folder contain unzip file
+4. Run this in Visual Studio Code terminal (Ctrl + `)
+
+
+```
+javac Main.java
+java Main
+```
 
 ## Dibuat
 Created by:
@@ -19,16 +46,8 @@ Created by:
 13519197 / Muhammad Jafar Gundari
 
 
-## General info
-
-
-## Setup
-
-## Penggunaan
-Cara menggunakan
-
 ## Status
-progress
+finished
 
-## Inspiration
-
+## Credit
+Please credit us if you use anything in this github.
