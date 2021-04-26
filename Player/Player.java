@@ -60,40 +60,40 @@ public class Player {
         //this.position = new Point(5,5);
         //this.position_active_engimon = new Point(5,4);
         this.active_engimon = new Pikachu();
-        this.active_engimon.setLevel(20);
+        this.active_engimon.setLevel(1);
         this.engimon_as_object = new InventoryEngimon();
         this.skill_as_object = new InventorySkillItem();
         // Di bawah ini untuk nyoba driver (uncomment dulu)
-        ArrayList<String> al = new ArrayList<String>(){{
-            add("Fire");
-            add("Water");
-        }};
-        Skill S = new Skill("Searing chain", 31, 2, al);
-        Skill Sk = new Skill("Fire gun", 30, 1, al);
-        Skill Sp = new Skill("Earthshock", 32, 3, al);
-        Skill So = new Skill("Tatap mata ojan", 100, 3, al);
-        this.skill_as_object.insert(new SkillItem(S));
-        this.skill_as_object.insert(new SkillItem(Sk));
-        this.skill_as_object.insert(new SkillItem(Sp));
-        this.skill_as_object.insert(new SkillItem(So));
-        this.skill_as_object.insert(new SkillItem(So));
-        this.skill_as_object.insert(new SkillItem(So));
-        this.skill_as_object.insert(new SkillItem(So));
-        Engimon e1 = new Amaura();
-        Engimon e2 = new Blastoise();
-        Engimon e3 = new Pikachu();
-        Engimon e4 = new Earthshaker();
-        e1.setLevel(35);
-        e2.setLevel(35);
-        e3.setLevel(35);
-        e4.setLevel(35);
-        this.engimon_as_object.insert(e1);
-        this.engimon_as_object.insert(e2);
-        this.engimon_as_object.insert(e3);
-        this.engimon_as_object.insert(e4);
-        Engimon e5 = new Earthshaker();
-        e5.setLevel(39);
-        this.engimon_as_object.insert(e5);
+//        ArrayList<String> al = new ArrayList<String>(){{
+//            add("Fire");
+//            add("Water");
+//        }};
+//        Skill S = new Skill("Searing chain", 31, 2, al);
+//        Skill Sk = new Skill("Fire gun", 30, 1, al);
+//        Skill Sp = new Skill("Earthshock", 32, 3, al);
+//        Skill So = new Skill("Tatap mata ojan", 100, 3, al);
+//        this.skill_as_object.insert(new SkillItem(S));
+//        this.skill_as_object.insert(new SkillItem(Sk));
+//        this.skill_as_object.insert(new SkillItem(Sp));
+//        this.skill_as_object.insert(new SkillItem(So));
+//        this.skill_as_object.insert(new SkillItem(So));
+//        this.skill_as_object.insert(new SkillItem(So));
+//        this.skill_as_object.insert(new SkillItem(So));
+//        Engimon e1 = new Amaura();
+//        Engimon e2 = new Blastoise();
+//        Engimon e3 = new Pikachu();
+//        Engimon e4 = new Earthshaker();
+//        e1.setLevel(35);
+//        e2.setLevel(35);
+//        e3.setLevel(35);
+//        e4.setLevel(35);
+//        this.engimon_as_object.insert(e1);
+//        this.engimon_as_object.insert(e2);
+//        this.engimon_as_object.insert(e3);
+//        this.engimon_as_object.insert(e4);
+//        Engimon e5 = new Earthshaker();
+//        e5.setLevel(39);
+//        this.engimon_as_object.insert(e5);
     }
 
     public void switch_out_engimon_meninggal() {
@@ -392,9 +392,11 @@ public class Player {
                 this.getActive_engimon().setLife(life-1);
             }else{
                 //bunuh engimon masih bingung
-                boolean ada = this.engimon_as_object.engimonMeninggal(1, this.active_engimon);
-                if (!ada){
-                    throw new Exception("dead");
+
+                if (this.engimon_as_object.isIdxValid(1)){
+                    this.active_engimon = this.engimon_as_object.engimonMeninggal(1);
+                }else{
+                    throw new Exception("Game Over");
                 }
 
             }
