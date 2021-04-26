@@ -79,18 +79,18 @@ public class Player {
 //        this.skill_as_object.insert(new SkillItem(So));
 //        this.skill_as_object.insert(new SkillItem(So));
 //        this.skill_as_object.insert(new SkillItem(So));
-//        Engimon e1 = new Amaura();
-//        Engimon e2 = new Blastoise();
-//        Engimon e3 = new Pikachu();
-//        Engimon e4 = new Earthshaker();
-//        e1.setLevel(35);
-//        e2.setLevel(35);
-//        e3.setLevel(35);
-//        e4.setLevel(35);
-//        this.engimon_as_object.insert(e1);
-//        this.engimon_as_object.insert(e2);
-//        this.engimon_as_object.insert(e3);
-//        this.engimon_as_object.insert(e4);
+        Engimon e1 = new Amaura();
+        Engimon e2 = new Blastoise();
+        Engimon e3 = new Pikachu();
+        Engimon e4 = new Earthshaker();
+        e1.setLevel(1);
+        e2.setLevel(1);
+        e3.setLevel(4);
+        e4.setLevel(4);
+        this.engimon_as_object.insert(e1);
+        this.engimon_as_object.insert(e2);
+        this.engimon_as_object.insert(e3);
+        this.engimon_as_object.insert(e4);
 //        Engimon e5 = new Earthshaker();
 //        e5.setLevel(39);
 //        this.engimon_as_object.insert(e5);
@@ -191,6 +191,12 @@ public class Player {
         str.append("14. 'help' untuk menampilkan perintah apa saja yang tersedia.\n");
         return str.toString();
     }
+
+    public void save(String path) throws  Exception{
+        this.engimon_as_object.save(path);
+        this.skill_as_object.save(path);
+    }
+
 
     // public void move(Map map, char direction) {
     //     // Di map belum ada getter untuk posisi player dan active engimon
@@ -391,7 +397,6 @@ public class Player {
             if (life > 1){
                 this.getActive_engimon().setLife(life-1);
             }else{
-                //bunuh engimon masih bingung
 
                 if (this.engimon_as_object.isIdxValid(1)){
                     this.active_engimon = this.engimon_as_object.engimonMeninggal(1);

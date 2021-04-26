@@ -1,5 +1,8 @@
 package Player;
 import Engimon.*;
+
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.*;
 
 // Kalo ada tambahan method yang khusus untuk inventory skill item tambah disini
@@ -97,5 +100,20 @@ public class InventorySkillItem extends AbstractInventory<SkillItem> {
         } else{
             return false;
         }
+    }
+
+    public void save (String path) throws Exception{
+        File directory = new File(path);
+        directory.mkdirs();
+        StringBuilder s = new StringBuilder();
+        for (SkillItem sk : this.object){
+            s.append(sk.printSkillItem());
+            s.deleteCharAt(s.length()-1);
+            s.append(";");
+        }
+
+        PrintWriter writer = new PrintWriter(path + "/Skills.txt", "UTF-8");
+        writer.print(s);
+        writer.close();
     }
 }

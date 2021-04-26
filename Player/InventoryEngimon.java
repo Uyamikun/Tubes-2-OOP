@@ -1,5 +1,8 @@
 package Player;
 import Engimon.*;
+
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.*;
 
 // Kalo ada tambahan method untuk khusus inventory engimon tambah disini
@@ -104,6 +107,43 @@ public class InventoryEngimon extends AbstractInventory<Engimon> {
             }
         }
         return max;
+    }
+
+    public void save (String path) throws Exception{
+        File directory = new File(path);
+        directory.mkdirs();
+        StringBuilder s = new StringBuilder();
+        for (Engimon e : this.object){
+            s.append(e.getSpecies() + "\n");
+            s.append(e.getName());
+            s.append(";");
+            s.append(e.getLife());
+            s.append(";");
+            s.append(e.getLevel());
+            s.append(";");
+            s.append(e.getExp());
+            s.append(";");
+            s.append(e.getCumExp());
+            s.append(";");
+            s.append(e.getParentInfo().get(0));
+            s.append(";");
+            s.append(e.getParentInfo().get(1));
+            s.append(";");
+            s.append(e.getParentInfo().get(2));
+            s.append(";");
+            s.append(e.getParentInfo().get(3));
+            s.append(";");
+            for (Skill sk : e.getEngimonSkill()){
+                s.append(sk.printSkillDetail());
+                s.deleteCharAt(s.length()-1);
+                s.append(";");
+            }
+            s.append("\n");
+        }
+
+        PrintWriter writer = new PrintWriter(path + "/Engimons.txt", "UTF-8");
+        writer.print(s);
+        writer.close();
     }
 
 }

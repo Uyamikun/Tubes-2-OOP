@@ -1021,6 +1021,7 @@ public class FrameUtama extends JFrame implements ActionListener {
                         // Save player state belum
                         try{
                             peta.save("Saves/"+tf1.getText());
+                            peta.getPlayer().save("Saves/"+tf1.getText());
                             labels3.add(new JLabel("Berhasil melakukan save"),gbc);
                         }catch (Exception err){
                             labels3.add(new JLabel(err.getMessage()),gbc);
