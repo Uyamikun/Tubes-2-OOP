@@ -1,4 +1,5 @@
 package Map;
+import Battle.Battle;
 import Engimon.Engimon;
 import Engimon.Breeding;
 import Engimon.BreedingInvalidException;
@@ -10,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Scanner;
 import javax.swing.border.EmptyBorder;
 
@@ -95,10 +97,16 @@ public class FrameUtama extends JFrame implements ActionListener {
                         labels4.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
                         labels4.setLayout(new BoxLayout(labels4, BoxLayout.Y_AXIS));
                         String[] arrListDetail = engimons.get(subPane.c1.getSelectedIndex()).printDetail().split("\n");
-                        for (String arg: arrListDetail) {
-                            System.out.println(arg);
-                            labels4.add(new JLabel(arg),gbc);
+                        labels4.add(new JLabel(arrListDetail[3]),gbc);
+                        labels4.add(new JLabel(arrListDetail[5]),gbc);
+                        for (int i=13;i<arrListDetail.length;i++) {
+                            labels4.add(new JLabel(arrListDetail[i]),gbc);
                         }
+                        labels4.add(new JLabel("================== Power ==================" ), gbc);
+
+                        Battle b = new Battle(peta.getPlayer().getActive_engimon(), engimons.get(subPane.c1.getSelectedIndex()));
+                        labels4.add(new JLabel("Your Power: " + b.calculatePowerPlayer()), gbc);
+                        labels4.add(new JLabel("Enemy Power: " + b.calculatePowerEnemy()), gbc);
                         //labels4.add(new JLabel(arg),gbc);
 
                         JButton buttonBattle = new JButton(new AbstractAction("Battle"){
@@ -116,7 +124,7 @@ public class FrameUtama extends JFrame implements ActionListener {
                                     try{
                                         win = peta.getPlayer().Battle(engimons.get(subPane.c1.getSelectedIndex()));
                                     }catch (Exception err){
-                                        if (err.getMessage().equals("dead")){
+                                        if (err.getMessage().equals("Game Over")){
                                             labels3.add(new JLabel("Anda tidak punya engimon lagi"));
                                             //game over
                                         }else {

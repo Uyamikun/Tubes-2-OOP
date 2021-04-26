@@ -104,6 +104,7 @@ public class Map
         int bound = (int) (minSpawnLevel*1.5);
         int level = rand.nextInt(bound);
         c.getEngimon().setLevel(minSpawnLevel + level);
+        c.getEngimon().setLife(1);
         //debug
         System.out.println("Spawned: " + c.getEngimon().getSpecies());
         EngimonCount++;
