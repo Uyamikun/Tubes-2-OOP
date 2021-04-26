@@ -56,21 +56,14 @@ public class InventoryEngimon extends AbstractInventory<Engimon> {
         }
     }
 
-    public boolean engimonMeninggal(int idx, Engimon e) {
-        for(int i = 0; i < this.getNeff(); i++){
-            if(i == idx-1){
-                Engimon temp = e;
-                e = this.object.get(i);
-                this.object.set(i,temp);
-                for(int j = i; j < this.getNeff()-1; j++){
-                    this.object.set(i,this.object.get(i+1));
-                }
-                this.neff--;
-                decTotal(1);
-                return true;
-            }
+    public Engimon engimonMeninggal(int idx) {
+        if(idx-1 < this.neff){
+            Engimon tempret = this.object.get(idx-1);
+            this.object.remove(idx-1);
+            return tempret;
+        } else{
+            return null;
         }
-        return false;
     }
 
     public boolean switchEngimon(int idx, Engimon e) {

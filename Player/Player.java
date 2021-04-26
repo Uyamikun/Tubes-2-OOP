@@ -96,24 +96,25 @@ public class Player {
         this.engimon_as_object.insert(e5);
     }
 
-    // public void switch_out_engimon_meninggal() {
-    //     if(engimon_as_object.getNeff() != 0){
-    //         System.out.println("Berikut adalah daftar engimon yang anda punya: ");
-    //         display_list_engimon();
-    //         System.out.print("Pilih engimon nomor berapa untuk menggantikan active engimon: ");
-    //         int idx;
-    //         Scanner S=new Scanner(System.in); 
-    //         idx=S.nextInt();
-    //         System.out.println("");
-    //         if(engimon_as_object.engimonMeninggal(idx, active_engimon)){
-    //             System.out.println("Berhasil menggantikan active engimon");
-    //         } else{
-    //             System.out.println("Gagal menggantikan active engimon");
-    //         }
-    //     } else{
-    //         System.out.println("Anda tidak mempunyai engimon pada inventory");
-    //     }
-    // }
+    public void switch_out_engimon_meninggal() {
+        if(engimon_as_object.getNeff() != 0){
+            System.out.print(display_list_engimon());
+            System.out.print("Pilih engimon nomor berapa untuk menggantikan active engimon: ");
+            int idx;
+            Scanner S = new Scanner(System.in); 
+            idx = S.nextInt();
+            System.out.println("");
+            // Menukar active engimon akan selalu berhasil jika idx valid
+            if(this.engimon_as_object.isIdxValid(idx)){
+                this.active_engimon = this.engimon_as_object.engimonMeninggal(idx);
+                System.out.println("Berhasil menggantikan active engimon\n");
+            } else{
+                System.out.println("Gagal menggantikan active engimon\n");
+            }
+        } else{
+            System.out.println("Anda tidak mempunyai engimon pada inventory, tidak dapat mengganti active engimon :(");
+        }
+    }
     
     public void setActiveEngimon(Engimon e) {
         this.active_engimon = e;

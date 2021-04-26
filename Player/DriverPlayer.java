@@ -50,5 +50,10 @@ public class DriverPlayer {
         // Engimon e = new Amaura();
         // SkillItem si = p.getFirstSkillEngimon(e);
         // System.out.println(si.printSkillItem());
+
+        // Test switchOutEngimonMeninggal
+        p.switch_out_engimon_meninggal();
+        System.out.println(p.display_list_engimon());
+        p.display_info_engimon();
     }
 }
