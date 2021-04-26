@@ -760,17 +760,14 @@ public class FrameUtama extends JFrame implements ActionListener {
                             JButton buttonForget = new JButton(new AbstractAction("Forget") {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
-                                    for(Component c : subPane.getComponents()){
-                                        //Find the components you want to remove
-                                        if(c instanceof JPanel || c instanceof JLabel){
-                                            //Remove it
-                                            subPane.remove(c);
-                                        }
-                                    }
+                                    subPane.remove(labels2);
+                                    JPanel labels4 = new JPanel();
+                                    labels4.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                                    labels4.setLayout(new BoxLayout(labels4, BoxLayout.Y_AXIS));
                                     peta.getPlayer().getEngimon_as_object().setObj(comboSkill2.getSelectedIndex()+1,temp);
                                     temp.setEngimonSkill(peta.getPlayer().getSkill_as_object().get(comboSkill.getSelectedIndex()+1));
-                                    labels2.add(new JLabel("Berhasil melakukan learn skill item ^_^"),gbc);
-                                    subPane.add(labels2,gbc);
+                                    labels4.add(new JLabel("Berhasil melakukan learn skill item ^_^"),gbc);
+                                    subPane.add(labels4,gbc);
                                     subPane.revalidate();
                                     subPane.repaint();
                                 }
