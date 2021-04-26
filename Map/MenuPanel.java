@@ -1,7 +1,9 @@
 package Map;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.*;
 
 public class MenuPanel extends JPanel {
@@ -12,12 +14,19 @@ public class MenuPanel extends JPanel {
     private int selected;
     private FrameMenu frameobj;
     private FrameUtama frameUtamaObj;
+    JPanel labelsLoad = new JPanel();
 
     public MenuPanel(FrameMenu menu, FrameUtama futama){
         this.optionsMenu = new String[]{START_GAME,LOAD_GAME,QUIT_GAME};
         this.selected = 0;
         this.frameobj = menu;
         this.frameUtamaObj = futama;
+
+        labelsLoad.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+        labelsLoad.setLayout(new BoxLayout(labelsLoad, BoxLayout.Y_AXIS));
+
+        this.add(labelsLoad);
+        labelsLoad.setVisible(false);
     }
 
     @Override
@@ -59,7 +68,24 @@ public class MenuPanel extends JPanel {
                     frameUtamaObj.getObjBoardPanel().requestFocusInWindow();
                     break;
                 case LOAD_GAME:
-                    JOptionPane.showMessageDialog(null, "Belum implemented :)");
+                    //JOptionPane.showMessageDialog(null, "Belum implemented :)");
+                    File f = new File("Saves");
+                    JComboBox cb = new JComboBox(f.list());
+                    JButton buttonLoad = new JButton(new AbstractAction("Load"){
+                        public void actionPerformed(ActionEvent e){
+                            frameobj.setVisible(false);
+                            frameUtamaObj.getObjBoardPanel().load(Objects.requireNonNull(cb.getSelectedItem()).toString());
+                            frameUtamaObj.setVisible(true);
+                            frameUtamaObj.getObjBoardPanel().requestFocusInWindow();
+                        }
+                    });
+
+                    labelsLoad.add(cb);
+                    labelsLoad.add(buttonLoad);
+                    labelsLoad.setVisible(true);
+                    this.revalidate();
+                    this.repaint();
+
                     break;
                 case QUIT_GAME:
                     System.exit(0);

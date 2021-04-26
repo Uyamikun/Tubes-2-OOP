@@ -15,6 +15,11 @@ public class BoardPanel extends JLayeredPane{
         this.setLayout(new GridBagLayout());
     }
 
+    public void load(String Path){
+        this.peta.load("Saves/"+Path);
+    }
+
+
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);

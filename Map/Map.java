@@ -290,7 +290,7 @@ public class Map
 
     public void load(String path){
         try {
-            Scanner input = new Scanner(new File(path + "mapStatus.txt"));
+            Scanner input = new Scanner(new File(path + "/mapStatus.txt"));
             String[] Player = input.nextLine().split(" ");
             this.PlayerPos = new Point(Integer.parseInt(Player[0]), Integer.parseInt(Player[1]));
             String[] Active = input.nextLine().split(" ");
