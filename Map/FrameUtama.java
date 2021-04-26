@@ -251,7 +251,9 @@ public class FrameUtama extends JFrame implements ActionListener {
                                         //menelantarkan tidak ada
                                     }
                                 }
-                                catch(BreedingInvalidException exce){}
+                                catch(BreedingInvalidException exce){
+                                    labels3.add(new JLabel("Maaf engimon untuk breeding invalid (level salah)"),gbc);
+                                }
                                 //peta.getPlayer().breeding(e1, e2, idx1, idx2);
                             }
                             else
@@ -751,10 +753,34 @@ public class FrameUtama extends JFrame implements ActionListener {
                         //JPanel labels2 = new JPanel(new GridBagLayout());
                         //System.out.println(peta.getPlayer().getActive_engimon().printDetail());
                         Engimon temp = peta.getPlayer().getActive_engimon();
-                        if(peta.getPlayer().getSkill_as_object().learnSkill(comboSkill.getSelectedIndex()+1,temp)){
-                            labels2.add(new JLabel("Berhasil melakukan learn skill item ^_^"),gbc); // Jika x > jumlah skill item, skill item tersebut akan dihapus
-                        } else{
-                            labels2.add(new JLabel("Gagal melakukan learn skill item :{ "),gbc);
+                        //punya 4 skill
+                        if(temp.getEngimonSkill().size()>=4){
+                            JComboBox comboSkill2 = new JComboBox(namaSkill.toArray());
+                            labels2.add(new JLabel("Harus melupakan salah satu skill"),gbc);
+                            JButton buttonForget = new JButton(new AbstractAction("Forget") {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    subPane.remove(labels2);
+                                    JPanel labels4 = new JPanel();
+                                    labels4.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                                    labels4.setLayout(new BoxLayout(labels4, BoxLayout.Y_AXIS));
+                                    peta.getPlayer().getEngimon_as_object().setObj(comboSkill2.getSelectedIndex()+1,temp);
+                                    temp.setEngimonSkill(peta.getPlayer().getSkill_as_object().get(comboSkill.getSelectedIndex()+1));
+                                    labels4.add(new JLabel("Berhasil melakukan learn skill item ^_^"),gbc);
+                                    subPane.add(labels4,gbc);
+                                    subPane.revalidate();
+                                    subPane.repaint();
+                                }
+                            });
+                            labels2.add(comboSkill2,gbc);
+                            labels2.add(buttonForget,gbc);
+                        }
+                        else{
+                            if(peta.getPlayer().getSkill_as_object().learnSkill(comboSkill.getSelectedIndex()+1,temp)){
+                                labels2.add(new JLabel("Berhasil melakukan learn skill item ^_^"),gbc);
+                            } else{
+                                labels2.add(new JLabel("Gagal melakukan learn skill item :{ "),gbc);
+                            }
                         }
                         subPane.add(labels2,gbc);
                         subPane.revalidate();
@@ -802,20 +828,41 @@ public class FrameUtama extends JFrame implements ActionListener {
                                 JPanel labels3 = new JPanel();
                                 labels3.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
                                 labels3.setLayout(new BoxLayout(labels3, BoxLayout.Y_AXIS));
-                                //debug
-                                System.out.println(subPane.c1.getSelectedIndex());
                                 Engimon temp = peta.getPlayer().getEngimon_as_object().get(subPane.c1.getSelectedIndex()+1);
-                                if(peta.getPlayer().getSkill_as_object().learnSkill(comboSkill.getSelectedIndex()+1,temp)){
-                                    labels3.add(new JLabel("Berhasil melakukan learn skill item ^_^"),gbc); // Jika x > jumlah skill item, skill item tersebut akan dihapus
-                                } else{
-                                    labels3.add(new JLabel("Gagal melakukan learn skill item :{ "),gbc);
+                                //punya 4 skill
+                                if(temp.getEngimonSkill().size()>=4){
+                                    JComboBox comboSkill2 = new JComboBox(namaSkill.toArray());
+                                    labels3.add(new JLabel("Harus melupakan salah satu skill"),gbc);
+                                    JButton buttonForget = new JButton(new AbstractAction("Forget") {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            subPane.remove(labels3);
+                                            JPanel labels4 = new JPanel();
+                                            labels4.setMaximumSize(new Dimension(75,Integer.MAX_VALUE));
+                                            labels4.setLayout(new BoxLayout(labels4, BoxLayout.Y_AXIS));
+                                            peta.getPlayer().getEngimon_as_object().setObj(comboSkill2.getSelectedIndex()+1,temp);
+                                            temp.setEngimonSkill(peta.getPlayer().getSkill_as_object().get(comboSkill.getSelectedIndex()+1));
+                                            labels4.add(new JLabel("Berhasil melakukan learn skill item ^_^"),gbc);
+                                            subPane.add(labels4,gbc);
+                                            subPane.revalidate();
+                                            subPane.repaint();
+                                        }
+                                    });
+                                    labels3.add(comboSkill2,gbc);
+                                    labels3.add(buttonForget,gbc);
+                                }
+                                else{
+                                    if(peta.getPlayer().getSkill_as_object().learnSkill(comboSkill.getSelectedIndex()+1,temp)){
+                                        labels3.add(new JLabel("Berhasil melakukan learn skill item ^_^"),gbc);
+                                    } else{
+                                        labels3.add(new JLabel("Gagal melakukan learn skill item :{ "),gbc);
+                                    }
                                 }
                                 subPane.add(labels3,gbc);
                                 subPane.revalidate();
                                 subPane.repaint();
                             }
                         });
-
                         labels2.add(subPane.l,gbc);
                         labels2.add(subPane.l2,gbc);
                         labels2.add(subPane.c1,gbc);
