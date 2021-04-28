@@ -16,7 +16,6 @@ Tugas besar 2 Object Oriented Programming IF2210 2019/2020
 Linux : 
 
 1. Open terminal in the folder contain unzip file
-2. Change directory to src folder
 3. Run this in terminal
 
 ```
@@ -31,10 +30,9 @@ Recommended to compile & run with IDE
 1. Open Visual Studio Code
 2. Install java extension in extension tab
 3. Open folder contain unzip file
-4. Run this in Visual Studio Code terminal (Ctrl + `)
-5. Change directory to src folder
+4. Open Visual Studio Code terminal (Ctrl + `)
+5. Change directory to unzipped file location
 6. Run this in terminal
-
 
 ```
 javac Main.java
